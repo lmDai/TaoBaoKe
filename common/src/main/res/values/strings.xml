@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Common</string>
+    <string name="NO_NET_CONNECTED">当前网络不可用，请检查网络情况</string>
+</resources>
