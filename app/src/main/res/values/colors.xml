@@ -3,4 +3,17 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="text_normal">#222222</color>
+    <color name="text_info">#020202</color>
+    <color name="text_input_title">#171717</color>
+    <color name="dialog_info">#4E4E4E</color>
+    <color name="dialog_cancel">#A7A7A7</color>
+    <color name="dialog_submit">#FF6200</color>
+    <color name="line_color">#EAEAEA</color>
+    <color name="text_hint">#9F9F9F</color>
+    <color name="text_info_bg">#F7F7F7</color>
+    <color name="text_yellow">#FFC72F</color>
+    <color name="translucent_white">#61FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

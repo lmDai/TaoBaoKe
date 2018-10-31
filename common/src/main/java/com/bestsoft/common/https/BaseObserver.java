@@ -1,19 +1,13 @@
 package com.bestsoft.common.https;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.bestsoft.common.R;
 import com.bestsoft.common.https.exception.ApiException;
 import com.bestsoft.common.https.exception.ExceptionUtil;
-import com.bestsoft.common.https.rxUtils.RxBus;
 import com.bestsoft.common.utils.Utils;
-import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.blankj.utilcode.utils.ToastUtils;
-
-import java.lang.ref.WeakReference;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -28,6 +22,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
         if (!NetworkUtils.isConnected(Utils.getContext())) {
+            ToastUtils.showShortToastSafe(Utils.getContext(), Utils.getString(R.string.NO_NET_CONNECTED));
             onComplete();
         }
     }
@@ -41,7 +36,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public void onError(@NonNull Throwable e) {
         String msg;
         int code = ExceptionUtil.exceptionHandler(e);
-        LogUtils.d("错误信息---" + e.getMessage() + "-----错误码: " + code);
         if (e instanceof ApiException) {
             msg = e.getMessage();
         } else {

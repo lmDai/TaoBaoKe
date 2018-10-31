@@ -42,6 +42,7 @@ public abstract class ProgressObserver<T> extends BaseObserver<T> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
+        super.onSubscribe(d);
         if (!d.isDisposed()) {
             showProgress();
         }

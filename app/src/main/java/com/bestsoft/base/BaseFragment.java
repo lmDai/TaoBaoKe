@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bestsoft.R;
+import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
@@ -27,6 +29,7 @@ public abstract class BaseFragment extends RxFragment {
     protected Unbinder unbinder;
     private boolean isViewPrepared; // 标识fragment视图已经初始化完毕
     private boolean hasFetchData; // 标识已经触发过懒加载数据
+    protected ImmersionBar mImmersionBar;
 
     @Override
     public void onAttach(Context context) {
@@ -90,8 +93,24 @@ public abstract class BaseFragment extends RxFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (view != null) {
+            View titleBar = view.findViewById(setTitleBar());
+            if (titleBar != null)
+                ImmersionBar.setTitleBar(mActivity, titleBar);
+            View statusBarView = view.findViewById(setStatusBarView());
+            if (statusBarView != null)
+                ImmersionBar.setStatusBarView(mActivity, statusBarView);
+        }
         isViewPrepared = true;
         lazyFetchDataIfPrepared();
+    }
+
+    protected int setTitleBar() {
+        return R.id.toolbar;
+    }
+
+    protected int setStatusBarView() {
+        return 0;
     }
 
     @Override
@@ -112,12 +131,20 @@ public abstract class BaseFragment extends RxFragment {
         isViewPrepared = false;
     }
 
+
+    private boolean isImmersionBarEnabled() {
+        return false;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (unbinder != null)
             unbinder.unbind();
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();
     }
+
 
     @Override
     public void onDetach() {
@@ -128,6 +155,11 @@ public abstract class BaseFragment extends RxFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
+            //如果要在Fragment单独使用沉浸式，请在onSupportVisible实现沉浸式
+            if (isImmersionBarEnabled()) {
+                mImmersionBar = ImmersionBar.with(this);
+                mImmersionBar.navigationBarWithKitkatEnable(false).init();
+            }
             lazyFetchDataIfPrepared();
         }
     }
@@ -140,12 +172,14 @@ public abstract class BaseFragment extends RxFragment {
         }
 
     }
+
     /**
      * 懒加载的方式获取数据，仅在满足fragment可见和视图已经准备好的时候调用一次
      */
     protected void lazyFetchData() {
 
     }
+
     protected abstract int getLayout();
 
     protected void initView(LayoutInflater inflater) {

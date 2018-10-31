@@ -54,5 +54,5 @@ dependencies {
     //生命周期管理
     api dependencie.rxlifecycle//处理rxjava内存泄露
     api dependencie.rxlifecycle_components
-
+    api dependencie.barlibrary
 }

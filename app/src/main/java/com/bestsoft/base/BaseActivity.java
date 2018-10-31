@@ -7,8 +7,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.bestsoft.utils.KeyboardUtils;
+import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -20,6 +22,7 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends RxAppCompatActivity {
     protected Activity mContext;
     protected Unbinder mUnBinder;
+    protected ImmersionBar mImmersionBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +31,11 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         if (getLayout() != 0) {
             setContentView(getLayout());
         }
+        mContext = this;
+        mUnBinder = ButterKnife.bind(this);
+        //初始化沉浸式
+        if (isImmersionBarEnabled())
+            initImmersionBar();
         getIntentData();
         initView(savedInstanceState);
         initEvent();
@@ -63,6 +71,24 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         super.onDestroy();
         if (mUnBinder != null)
             mUnBinder.unbind();
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();  //在BaseActivity里销毁
+    }
+
+    protected void initImmersionBar() {
+        //在BaseActivity里初始化
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.init();
+    }
+
+    /**
+     * 是否可以使用沉浸式
+     * Is immersion bar enabled boolean.
+     *
+     * @return the boolean
+     */
+    protected boolean isImmersionBarEnabled() {
+        return true;
     }
 
     protected abstract int getLayout();
