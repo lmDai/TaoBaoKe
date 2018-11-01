@@ -1,18 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:background="@drawable/bg_tab_bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_home"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_78"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/tab_home"
+                android:gravity="center"
+                android:text="去淘宝购物"
+                android:textColor="@color/tab_color"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/txt_order"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_78"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/tab_order_normal"
+                android:gravity="center"
+                android:text="去淘宝购物"
+                android:textColor="@color/tab_color"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/txt_skill"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_78"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/tab_skill_normal"
+                android:gravity="center"
+                android:text="去淘宝购物"
+                android:textColor="@color/tab_color"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.KeyboardUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -73,6 +74,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             mUnBinder.unbind();
         if (mImmersionBar != null)
             mImmersionBar.destroy();  //在BaseActivity里销毁
+        AppManager.getAppManager().finishActivity(this);
     }
 
     protected void initImmersionBar() {
@@ -99,7 +101,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      * 初始化
      */
     protected void init() {
-
+        AppManager.getAppManager().addActivity(this);
     }
 
     protected void initEvent() {

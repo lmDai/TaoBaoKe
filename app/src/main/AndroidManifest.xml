@@ -13,31 +13,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:theme="@style/AppTheme.Transparent">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--填写邀请码-->
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <!-- 填写邀请码 -->
         <activity
             android:name=".ui.activity.InputInvateInfoActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <!--填写手机号-->
+        <!-- 填写手机号 -->
         <activity
             android:name=".ui.activity.InputPhoneActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <!--填写手机号-->
+        <!-- 填写手机号 -->
         <activity
             android:name=".ui.activity.InputCodeActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activity.PersonalActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activity.MyAliPayActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activity.FeedbackActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />

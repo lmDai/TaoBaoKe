@@ -1,11 +1,14 @@
 package com.bestsoft.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.IBinder;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import com.bestsoft.ui.widget.MaterialRippleLayout;
 
 /**
  * @package: com.bestsoft.utils
@@ -41,5 +44,13 @@ public class KeyboardUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setRipper(View view) {
+        MaterialRippleLayout.on(view)
+                .rippleColor(Color.parseColor("#999999"))
+                .rippleAlpha(0.2f)
+                .rippleHover(true)
+                .create();
     }
 }

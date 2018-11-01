@@ -2,24 +2,19 @@ package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.telephony.PhoneNumberFormattingTextWatcher;
-import android.text.Editable;
-import android.text.Html;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.bestsoft.MainActivity;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.ui.widget.VerifyCodeView;
-import com.blankj.utilcode.utils.LogUtils;
+import com.bestsoft.utils.IntentUtils;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -83,7 +78,8 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
                 finish();
                 break;
             case R.id.btn_next:
-                LogUtils.d(verifyCodeView.getEditContent());
+                //todo 跳转首页
+                IntentUtils.get().goActivity(mContext, MainActivity.class);
                 break;
         }
     }

@@ -157,11 +157,18 @@ public abstract class BaseFragment extends RxFragment {
         if (isVisibleToUser) {
             //如果要在Fragment单独使用沉浸式，请在onSupportVisible实现沉浸式
             if (isImmersionBarEnabled()) {
-                mImmersionBar = ImmersionBar.with(this);
-                mImmersionBar.navigationBarWithKitkatEnable(false).init();
+                initImmersionBar();
             }
             lazyFetchDataIfPrepared();
         }
+    }
+
+    /**
+     * 初始化沉浸式
+     */
+    protected void initImmersionBar() {
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false).init();
     }
 
     private void lazyFetchDataIfPrepared() {
