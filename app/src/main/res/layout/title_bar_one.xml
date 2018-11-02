@@ -10,7 +10,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/bg_toolbar">
+        android:background="@drawable/bg_toolbar"
+        app:contentInsetStart="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +23,7 @@
                 android:id="@+id/img_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_me" />
 
             <TextView
@@ -40,7 +42,7 @@
                 android:id="@+id/img_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_10"
+                android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_message" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>

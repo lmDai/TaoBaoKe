@@ -59,5 +59,6 @@
     <dimen name="sp_32">32sp</dimen>
     <dimen name="sp_40">40sp</dimen>
     <dimen name="dp_56">56dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
 
 </resources>

@@ -7,6 +7,8 @@ package com.bestsoft;
  * @description:
  **/
 public class Constant {
+    public static final int PAGE_SIZE = 10;//每页条数
+
     public interface viewType {
         int typeBanner = 1;         //轮播图
         int typeGv = 2;             //九宫格

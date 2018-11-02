@@ -1,12 +1,13 @@
 package com.bestsoft.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.bestsoft.Constant;
 import com.bestsoft.R;
-import com.bestsoft.base.BaseFragment;
 import com.bestsoft.base.BaseMvpFragment;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.presenter.HomeFragmentPresenter;
+import com.bestsoft.ui.activity.MessageActivity;
 import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.widget.WrapContentHeightViewPager;
 import com.bestsoft.utils.IntentUtils;
-import com.blankj.utilcode.utils.LogUtils;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -57,6 +55,13 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
     ImageView imgMessage;
     @BindView(R.id.recycler_home)
     RecyclerView recyclerHome;
+    @BindView(R.id.tabs)
+    TabLayout tabs;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
+    @BindView(R.id.appbar_layout)
+    AppBarLayout appBarLayout;
+
     private List<DelegateAdapter.Adapter> mAdapters;
 
     @Override
@@ -86,13 +91,14 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
                 IntentUtils.get().goActivity(mContext, PersonalActivity.class);
                 break;
             case R.id.img_message:
+                IntentUtils.get().goActivity(mContext, MessageActivity.class);
                 break;
         }
     }
 
     private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = getMvpPresenter().initRecyclerView(recyclerHome);
 
+        DelegateAdapter delegateAdapter = getMvpPresenter().initRecyclerView(recyclerHome);
         //标题
         BaseDelegateAdapter titleAdapter = getMvpPresenter().initTitle();
         mAdapters.add(titleAdapter);
@@ -112,47 +118,58 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         BaseDelegateAdapter fastEntraceAdapter = getMvpPresenter().initFastEntrace();
         mAdapters.add(fastEntraceAdapter);
 
-        StickyLayoutHelper stickyLayoutHelper = new StickyLayoutHelper();
-        stickyLayoutHelper.setStickyStart(true);
+//        StickyLayoutHelper stickyLayoutHelper = new StickyLayoutHelper();
+//        stickyLayoutHelper.setStickyStart(true);
 
-        BaseDelegateAdapter stickyTab = new BaseDelegateAdapter(mContext, stickyLayoutHelper, R.layout.layout_home_sticky, 1, Constant.viewType.typeSticky) {
-            @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                TabLayout tabLayout = holder.getView(R.id.tab_layout);
-                WrapContentHeightViewPager viewPager = holder.getView(R.id.view_pager);
-                List<String> mTitleList = new ArrayList<>();
-                List<Fragment> mFragments = new ArrayList<>();
-                mTitleList.add("干货定制");
-                mTitleList.add("Android");
-                mTitleList.add("生活福利");
-                mTitleList.add("休息视频");
-                mFragments.add(new SkillFragment());
-                mFragments.add(new SkillFragment());
-                mFragments.add(new SkillFragment());
-                mFragments.add(new SkillFragment());
-                initTabViewPager(mFragments, mTitleList, tabLayout, viewPager);
-            }
-        };
-        mAdapters.add(stickyTab);
-        BaseDelegateAdapter foot = getMvpPresenter().initFragment();
-        mAdapters.add(foot);
+//        BaseDelegateAdapter stickyTab = new BaseDelegateAdapter(mContext, stickyLayoutHelper, R.layout.layout_home_sticky, 1, Constant.viewType.typeSticky) {
+//            @Override
+//            public void onBindViewHolder(BaseViewHolder holder, int position) {
+//                super.onBindViewHolder(holder, position);
+//                TabLayout tabLayout = holder.getView(R.id.tab_layout);
+//                WrapContentHeightViewPager viewPager = holder.getView(R.id.view_pager);
+//                List<String> mTitleList = new ArrayList<>();
+//                List<Fragment> mFragments = new ArrayList<>();
+//                mTitleList.add("干货定制");
+//                mTitleList.add("Android");
+//                mTitleList.add("生活福利");
+//                mTitleList.add("休息视频");
+//                mFragments.add(new SkillFragment());
+//                mFragments.add(new SkillFragment());
+//                mFragments.add(new SkillFragment());
+//                mFragments.add(new SkillFragment());
+//                initTabViewPager(mFragments, mTitleList, tabLayout, viewPager);
+//            }
+//        };
+//        mAdapters.add(stickyTab);
+//        BaseDelegateAdapter foot = getMvpPresenter().initFragment();
+//        mAdapters.add(foot);
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
-        recyclerHome.requestLayout();
 
+        recyclerHome.requestLayout();
+        List<String> mTitleList = new ArrayList<>();
+        List<Fragment> mFragments = new ArrayList<>();
+        mTitleList.add("干货定制");
+        mTitleList.add("Android");
+        mTitleList.add("生活福利");
+        mTitleList.add("休息视频");
+        mFragments.add(new ProductListFragment());
+        mFragments.add(new ProductListFragment());
+        mFragments.add(new ProductListFragment());
+        mFragments.add(new ProductListFragment());
+        initTabViewPager(mFragments, mTitleList);
 
     }
 
-    private void initTabViewPager(List<Fragment> mFragments, List<String> mTitleList, TabLayout tabLayout, ViewPager viewPager) {
+    private void initTabViewPager(List<Fragment> mFragments, List<String> mTitleList) {
         FragmentManager supportFragmentManager = getChildFragmentManager();
         BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
-        viewPager.setAdapter(myAdapter);
+        viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
-        viewPager.setOffscreenPageLimit(4);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewpager.setOffscreenPageLimit(4);
+        tabs.setTabMode(TabLayout.MODE_FIXED);
+        tabs.setupWithViewPager(viewpager);
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -174,4 +191,5 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
     public void setOnclick(int position) {
 
     }
+
 }

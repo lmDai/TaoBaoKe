@@ -28,10 +28,12 @@ import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.model.LoginModel;
+import com.bestsoft.ui.activity.IntroductionActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
 import com.bestsoft.ui.fragment.HomeFragment;
+import com.bestsoft.utils.IntentUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -53,6 +55,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
         //初始化
         //创建VirtualLayoutManager对象
         VirtualLayoutManager layoutManager = new VirtualLayoutManager(getView().getContext());
+        layoutManager.setAutoMeasureEnabled(true);
         recyclerView.setLayoutManager(layoutManager);
 
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
@@ -72,7 +75,12 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-
+                holder.getView(R.id.ll_know).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        IntentUtils.get().goActivity(getView().getContext(), IntroductionActivity.class);
+                    }
+                });
             }
         };
     }
