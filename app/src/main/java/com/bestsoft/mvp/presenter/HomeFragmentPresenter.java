@@ -33,11 +33,14 @@ import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
 import com.bestsoft.ui.fragment.HomeFragment;
+import com.bestsoft.ui.widget.GlideImageLoader;
 import com.bestsoft.utils.IntentUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -135,7 +138,14 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+                Banner banner = holder.getView(R.id.banner);
+                String[] urls = getView().getContext().getResources().getStringArray(R.array.url);
 
+                List list = Arrays.asList(urls);
+                List<?> images = new ArrayList(list);
+                banner.setImages(images)
+                        .setImageLoader(new GlideImageLoader())
+                        .start();
             }
         };
     }

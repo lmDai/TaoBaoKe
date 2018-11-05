@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/dp_58"
             android:background="@drawable/bg_tab_bottom"
             android:orientation="horizontal">
 
@@ -28,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_78"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_5"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/tab_home"
                 android:gravity="center"
@@ -41,7 +41,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_78"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_5"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/tab_order_normal"
                 android:gravity="center"
@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_78"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_5"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/tab_skill_normal"
                 android:gravity="center"

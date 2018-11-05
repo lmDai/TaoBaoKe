@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -49,7 +50,6 @@ public class MainActivity extends BaseActivity {
     protected int getLayout() {
         return R.layout.activity_main;
     }
-
     @Override
     protected void initView(Bundle savedInstanceState) {
         tabFragment = new ArrayList<>();
