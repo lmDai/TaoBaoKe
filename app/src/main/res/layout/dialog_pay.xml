@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_white"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_20">
+
+    <LinearLayout
+        android:id="@+id/dialog_zhifubao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="@dimen/dp_48">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_weixin_pay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="微信"
+            android:textColor="@color/text_withdraw_way"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="预计3个工作日到账"
+            android:textColor="@color/text_withdraw_day"
+            android:textSize="@dimen/sp_12" />
+
+        <ImageView
+            android:id="@+id/recharge_zhifubao_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pay_selector" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_wechat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:minHeight="@dimen/dp_48">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_alipay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="微信"
+            android:textColor="@color/text_withdraw_way"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="预计3个工作日到账"
+            android:textColor="@color/text_withdraw_day"
+            android:textSize="@dimen/sp_12" />
+
+        <ImageView
+            android:id="@+id/recharge_wechat_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pay_selector" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48" />
+</LinearLayout>

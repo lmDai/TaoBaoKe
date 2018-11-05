@@ -118,31 +118,6 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         BaseDelegateAdapter fastEntraceAdapter = getMvpPresenter().initFastEntrace();
         mAdapters.add(fastEntraceAdapter);
 
-//        StickyLayoutHelper stickyLayoutHelper = new StickyLayoutHelper();
-//        stickyLayoutHelper.setStickyStart(true);
-
-//        BaseDelegateAdapter stickyTab = new BaseDelegateAdapter(mContext, stickyLayoutHelper, R.layout.layout_home_sticky, 1, Constant.viewType.typeSticky) {
-//            @Override
-//            public void onBindViewHolder(BaseViewHolder holder, int position) {
-//                super.onBindViewHolder(holder, position);
-//                TabLayout tabLayout = holder.getView(R.id.tab_layout);
-//                WrapContentHeightViewPager viewPager = holder.getView(R.id.view_pager);
-//                List<String> mTitleList = new ArrayList<>();
-//                List<Fragment> mFragments = new ArrayList<>();
-//                mTitleList.add("干货定制");
-//                mTitleList.add("Android");
-//                mTitleList.add("生活福利");
-//                mTitleList.add("休息视频");
-//                mFragments.add(new SkillFragment());
-//                mFragments.add(new SkillFragment());
-//                mFragments.add(new SkillFragment());
-//                mFragments.add(new SkillFragment());
-//                initTabViewPager(mFragments, mTitleList, tabLayout, viewPager);
-//            }
-//        };
-//        mAdapters.add(stickyTab);
-//        BaseDelegateAdapter foot = getMvpPresenter().initFragment();
-//        mAdapters.add(foot);
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
 

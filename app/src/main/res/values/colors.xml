@@ -31,4 +31,17 @@
     <color name="item_color_title">#1F1F1F</color>
     <color name="item_color_stroke">#FC428F</color>
     <color name="item_color_hint">#C3C3C3</color>
+    <color name="item_fan_name">#2E2E2E</color>
+    <color name="item_fan_tag">#FFCF40</color>
+    <color name="item_fan_in">#B2B2B2</color>
+    <color name="text_balance">#919191</color>
+    <color name="text_income">#454545</color>
+    <color name="text_income_detail">#989898</color>
+    <color name="item_income_title">#FF3B00</color>
+    <color name="item_income_name">#343434</color>
+    <color name="item_income_time">#BFBFBF</color>
+    <color name="text_withdraw_info">#A5A5A5</color>
+    <color name="text_withdraw_way">#2B2B2B</color>
+    <color name="text_withdraw_day">#959595</color>
+    <color name="text_apply">#9B9B9B</color>
 </resources>

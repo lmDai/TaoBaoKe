@@ -1,9 +1,12 @@
 package com.bestsoft.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 
 import com.bestsoft.R;
 import com.bestsoft.ui.widget.CommonDialog;
+import com.bestsoft.ui.widget.PayWayDialog;
+import com.bestsoft.ui.widget.WithdrawDialog;
 
 /**
  * @package: com.bestsoft.utils
@@ -31,4 +34,21 @@ public class DialogUtils {
         }).setTitle(title).setPositiveButton(positive).setNegativeButton(negative).show();
     }
 
+    public static void showDialogWithDrawInfo(Context mContext, String content, String title, String positive, DialogListener listener) {
+        new WithdrawDialog(mContext, R.style.common_dialog, content, (dialog, confirm) -> {
+            if (confirm) {
+                dialog.dismiss();
+            }
+            listener.onClick(confirm);
+        }).setTitle(title).setPositiveButton(positive).show();
+    }
+
+    public static void showDialogPayWay(Context mContext, DialogListener listener) {
+        new PayWayDialog(mContext, R.style.common_dialog, new PayWayDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, boolean confirm) {
+                listener.onClick(confirm);
+            }
+        }).show();
+    }
 }
