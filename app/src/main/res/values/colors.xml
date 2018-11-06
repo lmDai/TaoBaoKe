@@ -43,4 +43,12 @@
     <color name="text_withdraw_way">#2B2B2B</color>
     <color name="text_withdraw_day">#959595</color>
     <color name="text_apply">#9B9B9B</color>
+    <color name="text_member">#121212</color>
+    <color name="item_fast_entrance">#FFF4EA</color>
+    <color name="item_popular_account">#FF3100</color>
+    <color name="item_popular_user">#141414</color>
+    <color name="item_circle_title">#363636</color>
+    <color name="item_circle_money">#FF9300</color>
+    <color name="item_circle_time">#6F6F6F</color>
+    <color name="color_share_title">#747474</color>
 </resources>

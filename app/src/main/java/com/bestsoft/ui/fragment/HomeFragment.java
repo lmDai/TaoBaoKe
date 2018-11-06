@@ -115,10 +115,12 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         recyclerHome.requestLayout();
         List<String> mTitleList = new ArrayList<>();
         List<Fragment> mFragments = new ArrayList<>();
-        mTitleList.add("干货定制");
-        mTitleList.add("Android");
-        mTitleList.add("生活福利");
-        mTitleList.add("休息视频");
+        mTitleList.add("他们都在买");
+        mTitleList.add("猜你喜欢");
+        mTitleList.add("女装");
+        mTitleList.add("母婴");
+        mTitleList.add("居家");
+        mFragments.add(new PopularProductFragment());
         mFragments.add(new ProductListFragment());
         mFragments.add(new ProductListFragment());
         mFragments.add(new ProductListFragment());
@@ -133,7 +135,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
         viewpager.setOffscreenPageLimit(4);
-        tabs.setTabMode(TabLayout.MODE_FIXED);
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabs.setupWithViewPager(viewpager);
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

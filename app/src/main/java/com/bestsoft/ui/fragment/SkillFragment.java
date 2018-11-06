@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
 import com.bestsoft.ui.activity.BanlanceActivity;
+import com.bestsoft.ui.activity.HairCircleCenterActivity;
 import com.bestsoft.ui.activity.WithdrawActivity;
 import com.bestsoft.utils.IntentUtils;
 
@@ -52,7 +53,7 @@ public class SkillFragment extends BaseFragment {
                 .init();
     }
 
-    @OnClick({R.id.img_me, R.id.img_message, R.id.txt_withdraw, R.id.rl_balance})
+    @OnClick({R.id.img_me, R.id.ll_center, R.id.img_message, R.id.txt_withdraw, R.id.rl_balance})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_me:
@@ -64,6 +65,9 @@ public class SkillFragment extends BaseFragment {
                 break;
             case R.id.rl_balance:
                 IntentUtils.get().goActivity(mContext, BanlanceActivity.class);
+                break;
+            case R.id.ll_center:
+                IntentUtils.get().goActivity(mContext, HairCircleCenterActivity.class);
                 break;
         }
     }

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.bestsoft.R;
 import com.bestsoft.ui.widget.CommonDialog;
 import com.bestsoft.ui.widget.PayWayDialog;
+import com.bestsoft.ui.widget.ShareDialog;
 import com.bestsoft.ui.widget.WithdrawDialog;
 
 /**
@@ -45,6 +46,14 @@ public class DialogUtils {
 
     public static void showDialogPayWay(Context mContext, DialogListener listener) {
         new PayWayDialog(mContext, R.style.common_dialog, new PayWayDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, boolean confirm) {
+                listener.onClick(confirm);
+            }
+        }).show();
+    }
+    public static void showDialogShare(Context mContext, DialogListener listener) {
+        new ShareDialog(mContext, R.style.common_dialog, new ShareDialog.OnCloseListener() {
             @Override
             public void onClick(Dialog dialog, boolean confirm) {
                 listener.onClick(confirm);

@@ -14,4 +14,14 @@
         <attr name="mrl_rippleInAdapter" format="boolean" localization="suggested" />
         <attr name="mrl_rippleRoundedCorners" format="dimension" localization="suggested" />
     </declare-styleable>
+    <declare-styleable name="GridLayout">
+        <!--一列有多少个Item-->
+        <attr name="gridSpan" format="integer" />
+        <!--水平间距-->
+        <attr name="gridHorizontalSpace" format="dimension" />
+        <!--垂直间距-->
+        <attr name="gridVerticalSpace" format="dimension" />
+        <!--最大子View的个数-->
+        <attr name="gridMaxItem" format="integer" />
+    </declare-styleable>
 </resources>

@@ -24,6 +24,7 @@ import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
 import com.bestsoft.ui.widget.GlideImageLoader;
 import com.bestsoft.utils.IntentUtils;
+import com.bestsoft.utils.SpacesItemDecoration;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.youth.banner.Banner;
 
@@ -48,6 +49,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
         VirtualLayoutManager layoutManager = new VirtualLayoutManager(getView().getContext());
         layoutManager.setAutoMeasureEnabled(true);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(20));
 
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
@@ -187,6 +189,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getView().getContext());
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.addItemDecoration(new SpacesItemDecoration(20));
                     List<String> fruitList = new ArrayList<>();
                     for (int i = 0; i < 10; i++) {
                         fruitList.add(i + "");

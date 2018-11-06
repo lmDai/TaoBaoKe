@@ -18,7 +18,7 @@ public class FastEntranceAdapter extends BaseQuickAdapter<String, BaseViewHolder
 
 
     public FastEntranceAdapter(@Nullable List<String> data) {
-        super(R.layout.item_vp_grid_iv, data);
+        super(R.layout.item_fast_entrance, data);
     }
 
     @Override
