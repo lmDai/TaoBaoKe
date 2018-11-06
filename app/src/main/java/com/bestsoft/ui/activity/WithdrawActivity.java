@@ -13,7 +13,6 @@ import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.IntentUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

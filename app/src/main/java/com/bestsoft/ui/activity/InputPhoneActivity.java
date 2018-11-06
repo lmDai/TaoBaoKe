@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,11 +71,7 @@ public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.
         editCode.addTextChangedListener(new PhoneNumberFormattingTextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (after == 1) {
-                    isUserInput = true;
-                } else {
-                    isUserInput = false;
-                }
+                isUserInput = after == 1;
             }
 
             @Override

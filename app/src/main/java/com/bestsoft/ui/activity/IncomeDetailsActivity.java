@@ -6,9 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.bean.IncomeDetailModel;
-import com.bestsoft.bean.PotentialFanModel;
 import com.bestsoft.ui.adapter.IncomeDetailAdapter;
-import com.bestsoft.ui.adapter.PotentialFanAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package com.bestsoft.ui.adapter;
 
-import com.bestsoft.bean.MessageModel;
 import com.bestsoft.bean.PotentialFanModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

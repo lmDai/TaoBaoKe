@@ -1,7 +1,5 @@
 package com.bestsoft.ui.fragment;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
@@ -10,13 +8,8 @@ import com.bestsoft.base.BaseFragment;
 import com.bestsoft.bean.ProductModel;
 import com.bestsoft.ui.adapter.ProductAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
-import com.bestsoft.utils.SpacesItemDecoration;
-import com.blankj.utilcode.utils.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.scwang.smartrefresh.layout.util.DesignUtil;
 
 import java.util.ArrayList;
 import java.util.List;

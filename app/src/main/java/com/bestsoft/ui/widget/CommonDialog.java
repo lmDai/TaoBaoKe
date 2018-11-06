@@ -16,10 +16,6 @@ import com.bestsoft.R;
  * @description: 自定义dialog
  **/
 public class CommonDialog extends Dialog implements View.OnClickListener {
-    private TextView contentTxt;
-    private TextView titleTxt;
-    private TextView submitTxt;
-    private TextView cancelTxt;
 
     private Context mContext;
     private String content;
@@ -27,7 +23,6 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
     private String positiveName;
     private String negativeName;
     private String title;
-    private View view;
     private boolean showNegativeButton = true;
 
     public CommonDialog(Context context) {
@@ -82,13 +77,13 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
     }
 
     private void initView() {
-        contentTxt = findViewById(R.id.content);
-        titleTxt = findViewById(R.id.title);
-        submitTxt = findViewById(R.id.submit);
+        TextView contentTxt = findViewById(R.id.content);
+        TextView titleTxt = findViewById(R.id.title);
+        TextView submitTxt = findViewById(R.id.submit);
         submitTxt.setOnClickListener(this);
-        cancelTxt = findViewById(R.id.cancel);
+        TextView cancelTxt = findViewById(R.id.cancel);
         cancelTxt.setOnClickListener(this);
-        view = findViewById(R.id.view);
+        View view = findViewById(R.id.view);
 
         contentTxt.setText(content);
         if (!TextUtils.isEmpty(positiveName)) {

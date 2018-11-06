@@ -5,13 +5,9 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.bestsoft.MainActivity;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
-
-
-import java.util.List;
 
 /**
  * 首页

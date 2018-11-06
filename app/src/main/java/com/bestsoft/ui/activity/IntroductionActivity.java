@@ -9,9 +9,7 @@ import android.widget.TextView;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.bean.IntroductionModel;
-import com.bestsoft.bean.ProductModel;
 import com.bestsoft.ui.adapter.IntroductionAdapter;
-import com.bestsoft.ui.adapter.ProductAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 介绍

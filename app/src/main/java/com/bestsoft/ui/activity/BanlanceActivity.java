@@ -11,7 +11,6 @@ import com.bestsoft.base.BaseActivity;
 import com.bestsoft.utils.IntentUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

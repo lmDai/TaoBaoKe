@@ -4,7 +4,6 @@ import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
-import com.bestsoft.mvp.contract.LoginContract;
 import com.bestsoft.mvp.model.LoginModel;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.bestsoft.ui.adapter;
 
 import com.bestsoft.bean.IntroductionModel;
-import com.bestsoft.bean.ProductModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 

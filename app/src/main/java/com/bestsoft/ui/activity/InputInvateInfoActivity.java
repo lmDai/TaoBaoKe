@@ -2,13 +2,11 @@ package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
@@ -18,7 +16,6 @@ import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.utils.IntentUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

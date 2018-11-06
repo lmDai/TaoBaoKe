@@ -2,7 +2,6 @@ package com.bestsoft.utils;
 
 import android.graphics.Color;
 
-import com.bestsoft.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;

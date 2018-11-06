@@ -38,8 +38,4 @@
         <item name="android:textSize">@dimen/sp_20</item>
         <item name="android:textStyle">bold</item>
     </style>
-     <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetStartWithNavigation">0dp</item>
-    </style>
 </resources>

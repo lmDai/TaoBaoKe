@@ -15,7 +15,6 @@ import com.bestsoft.ui.widget.ClearEditText;
 import com.bestsoft.utils.KeyboardUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

@@ -26,7 +26,6 @@
     <color name="text_hint">#9F9F9F</color>
     <color name="text_info_bg">#F7F7F7</color>
     <color name="text_yellow">#FFC72F</color>
-    <color name="translucent_white">#61FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="item_color_title">#1F1F1F</color>
     <color name="item_color_stroke">#FC428F</color>

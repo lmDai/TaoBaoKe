@@ -4,10 +4,8 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,7 +36,7 @@ public class VerifyCodeView extends RelativeLayout {
         View.inflate(context, R.layout.item_password, this);
 
         textViews = new TextView[MAX];
-        textViews[0] = (TextView) findViewById(R.id.tv_0);
+        textViews[0] = findViewById(R.id.tv_0);
         textViews[1] = (TextView) findViewById(R.id.tv_1);
         textViews[2] = (TextView) findViewById(R.id.tv_2);
         textViews[3] = (TextView) findViewById(R.id.tv_3);
