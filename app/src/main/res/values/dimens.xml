@@ -39,5 +39,6 @@
     <dimen name="dp_58">58dp</dimen>
     <dimen name="sp_13">13sp</dimen>
     <dimen name="sp_28">28sp</dimen>
+    <dimen name="dp_25">25dp</dimen>
 
 </resources>

@@ -5,17 +5,21 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.fragment.OrderListFragment;
+import com.bestsoft.ui.fragment.TeamDataHomeFragment;
 import com.bestsoft.utils.IntentUtils;
+import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +31,10 @@ import butterknife.OnClick;
  * 团队数据
  */
 public class TeamDataActivity extends BaseActivity {
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabs)
-    TabLayout tabs;
+    SlidingTabLayout tabs;
     @BindView(R.id.appbar_layout)
     AppBarLayout appbarLayout;
     @BindView(R.id.viewpager)
@@ -42,6 +45,8 @@ public class TeamDataActivity extends BaseActivity {
     Button btnMyteam;
     @BindView(R.id.btn_invite_fans)
     Button btnInviteFans;
+    @BindView(R.id.txt_title)
+    TextView txtTitle;
 
     @Override
     protected int getLayout() {
@@ -50,16 +55,16 @@ public class TeamDataActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        toolbar.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_toolbar));
+        txtTitle.setText(mContext.getString(R.string.title_team_data));
         List<String> mTitleList = new ArrayList<>();
         List<Fragment> mFragments = new ArrayList<>();
-        mTitleList.add("干货定制");
-        mTitleList.add("Android");
-        mTitleList.add("生活福利");
-        mTitleList.add("休息视频");
-        mFragments.add(new OrderListFragment());
-        mFragments.add(new OrderListFragment());
-        mFragments.add(new OrderListFragment());
-        mFragments.add(new OrderListFragment());
+        mTitleList.add(mContext.getString(R.string.tab_all));//全部
+        mTitleList.add(mContext.getString(R.string.tab_promotion_order));//推广订单
+        mTitleList.add(mContext.getString(R.string.tab_natural_order));//自然订单
+        mFragments.add(new TeamDataHomeFragment().newInstance(0));
+        mFragments.add(new TeamDataHomeFragment().newInstance(1));
+        mFragments.add(new TeamDataHomeFragment().newInstance(2));
         initTabViewPager(mFragments, mTitleList);
     }
 
@@ -76,8 +81,7 @@ public class TeamDataActivity extends BaseActivity {
         viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
         viewpager.setOffscreenPageLimit(4);
-        tabs.setTabMode(TabLayout.MODE_FIXED);
-        tabs.setupWithViewPager(viewpager);
+        tabs.setViewPager(viewpager);
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -101,6 +105,7 @@ public class TeamDataActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
+                finish();
                 break;
             case R.id.btn_myteam:
                 IntentUtils.get().goActivity(mContext, MyTeamActivity.class);

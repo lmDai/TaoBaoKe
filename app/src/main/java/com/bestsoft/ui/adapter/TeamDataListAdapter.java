@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.bean.OrderModel;
+import com.bestsoft.bean.TeamDataListModel;
 import com.bestsoft.utils.MagicTextViewUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -13,19 +14,18 @@ import com.chad.library.adapter.base.BaseViewHolder;
  * @package: com.bestsoft.ui.adapter
  * @user:xhkj
  * @date:2018/11/2
- * @description: 商品列表
+ * @description: 团队数据列表
  **/
-public class OrderListAdapter extends BaseQuickAdapter<OrderModel, BaseViewHolder> {
-    private int type;
+public class TeamDataListAdapter extends BaseQuickAdapter<TeamDataListModel, BaseViewHolder> {
 
-    public OrderListAdapter(int layoutResId, int type) {
+
+    public TeamDataListAdapter(int layoutResId) {
         super(layoutResId);
-        this.type = type;
+
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, OrderModel item) {
-        helper.getView(R.id.ll_bottom).setVisibility(type == 0 ? View.GONE : View.VISIBLE);
+    protected void convert(BaseViewHolder helper, TeamDataListModel item) {
         TextView mTextView = helper.getView(R.id.txt_title);
         MagicTextViewUtil.getInstance(mTextView)
                 .append(R.drawable.ic_order_tag)

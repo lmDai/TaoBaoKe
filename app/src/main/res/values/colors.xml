@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFE464</color>
-    <color name="colorPrimaryDark">#FFCA34</color>
+    <color name="colorPrimary">#FFE05E</color>
+    <color name="colorPrimaryDark">#FFCA36</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBg">#F8F8F8</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -51,4 +51,14 @@
     <color name="item_circle_money">#FF9300</color>
     <color name="item_circle_time">#6F6F6F</color>
     <color name="color_share_title">#747474</color>
+    <color name="color_vip">#BEA474</color>
+    <color name="color_fast">#101010</color>
+    <color name="color_scan_team">#E8AF0E</color>
+    <color name="tab_underline_color">#FFCD3B</color>
+    <color name="color_order_head">#585858</color>
+    <color name="color_order_wrong">#FC6519</color>
+    <color name="color_order_right">#888888</color>
+    <color name="team_data_select">#FFC832</color>
+    <color name="tem_data_list_head">#F7E1D7</color>
+    <color name="team_head_text_color">#FF783C</color>
 </resources>

@@ -153,7 +153,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:text="潜在粉丝"
+                            android:text="@string/tab_potential_fan"
                             android:textColor="@drawable/text_selector"
                             android:textSize="@dimen/sp_12" />
 
@@ -186,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:text="潜在粉丝"
+                            android:text="@string/tab_once_fan"
                             android:textColor="@drawable/text_selector"
                             android:textSize="@dimen/sp_12" />
 
@@ -219,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:text="潜在粉丝"
+                            android:text="@string/tab_second_fan"
                             android:textColor="@drawable/text_selector"
                             android:textSize="@dimen/sp_12" />
 

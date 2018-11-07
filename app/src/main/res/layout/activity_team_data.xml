@@ -31,31 +31,38 @@
                     android:orientation="vertical"
                     app:layout_scrollFlags="scroll">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:text="累计为你省钱"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_12" />
+                        android:background="@drawable/bg_team_head"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="累计为你省钱"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_12" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="18.13254557"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_30" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="18.13254557"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_30" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_30"
+                        android:layout_marginTop="-10dp"
                         android:minWidth="@dimen/dp_180"
                         android:text="待到账订单298.00元"
                         android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_18" />
+                        android:textSize="@dimen/sp_22" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -135,9 +142,11 @@
 
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
                         android:background="@drawable/bg_team"
                         android:gravity="center">
 
@@ -213,43 +222,51 @@
 
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
                         android:gravity="center">
 
                         <Button
                             android:id="@+id/btn_myteam"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="我的团队"
+                            android:layout_weight="1"
                             android:background="@drawable/bg_team"
+                            android:text="我的团队"
                             android:textColor="@color/text_normal"
                             android:textSize="@dimen/sp_20" />
+
                         <Button
                             android:id="@+id/btn_invite_fans"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="邀请粉丝"
+                            android:layout_weight="1"
                             android:background="@drawable/bg_team"
+                            android:text="邀请粉丝"
                             android:textColor="@color/text_normal"
                             android:textSize="@dimen/sp_20" />
                     </LinearLayout>
                 </LinearLayout>
 
 
-                <android.support.design.widget.TabLayout
+                <com.flyco.tablayout.SlidingTabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_alignParentBottom="true"
                     android:background="@color/colorWhite"
-                    app:tabIndicatorColor="@color/colorPrimaryDark"
-                    app:tabIndicatorHeight="@dimen/dp_2"
-                    app:tabSelectedTextColor="#000"
-                    app:tabTextColor="#000" />
+                    app:tl_indicator_color="@color/tab_underline_color"
+                    app:tl_indicator_height="@dimen/dp_4"
+                    app:tl_indicator_margin_bottom="@dimen/dp_6"
+                    app:tl_indicator_margin_top="@dimen/dp_4"
+                    app:tl_tab_space_equal="true"
+                    app:tl_textBold="SELECT"
+                    app:tl_textSelectColor="@color/team_data_select"
+                    app:tl_textUnselectColor="@color/colorBlack"
+                    app:tl_textsize="@dimen/sp_14" />
 
             </android.support.design.widget.AppBarLayout>
 

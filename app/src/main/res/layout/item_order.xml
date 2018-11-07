@@ -21,12 +21,13 @@
                 android:src="@drawable/ic_order_zhanwei" />
 
             <TextView
+                android:id="@+id/txt_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_order_tag"
                 android:gravity="start|center|top"
+                android:lineSpacingExtra="@dimen/dp_2"
                 android:lines="2"
                 android:text="@string/appbar_scrolling_view_behavior"
                 android:textSize="@dimen/sp_12" />
@@ -72,20 +73,27 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/bg_item_order_bottom"
         android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="下单方式错误" />
+            android:text="下单方式错误"
+            android:textColor="@color/color_order_wrong"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="正确下单预计获得收益2.56元" />
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="正确下单预计获得收益2.56元"
+            android:textColor="@color/color_order_right"
+            android:textSize="@dimen/sp_12" />
 
         <ImageView
             android:layout_width="wrap_content"

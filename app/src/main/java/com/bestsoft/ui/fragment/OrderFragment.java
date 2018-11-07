@@ -4,6 +4,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,9 +15,12 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
+import com.bestsoft.ui.activity.MessageActivity;
+import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.activity.TeamDataActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.utils.IntentUtils;
+import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +44,7 @@ public class OrderFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabs)
-    TabLayout tabs;
+    SlidingTabLayout tabs;
     @BindView(R.id.appbar_layout)
     AppBarLayout appbarLayout;
     @BindView(R.id.viewpager)
@@ -56,16 +60,17 @@ public class OrderFragment extends BaseFragment {
     @Override
     protected void initView(LayoutInflater inflater) {
         super.initView(inflater);
+        txtTitle.setText(mContext.getText(R.string.order));
         List<String> mTitleList = new ArrayList<>();
         List<Fragment> mFragments = new ArrayList<>();
-        mTitleList.add("干货定制");
-        mTitleList.add("Android");
-        mTitleList.add("生活福利");
-        mTitleList.add("休息视频");
-        mFragments.add(new OrderListFragment());
-        mFragments.add(new OrderListFragment());
-        mFragments.add(new OrderListFragment());
-        mFragments.add(new OrderListFragment());
+        mTitleList.add(mContext.getString(R.string.tab_all_orders));//全部订单
+        mTitleList.add(mContext.getString(R.string.tab_paid));//已付款
+        mTitleList.add(mContext.getString(R.string.tab_settled));//已结算
+        mTitleList.add(mContext.getString(R.string.tab_expired));//已失效
+        mFragments.add(new OrderListFragment().newInstance(0));
+        mFragments.add(new OrderListFragment().newInstance(1));
+        mFragments.add(new OrderListFragment().newInstance(2));
+        mFragments.add(new OrderListFragment().newInstance(3));
         initTabViewPager(mFragments, mTitleList);
     }
 
@@ -81,9 +86,8 @@ public class OrderFragment extends BaseFragment {
         BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
         viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
-        viewpager.setOffscreenPageLimit(4);
-        tabs.setTabMode(TabLayout.MODE_FIXED);
-        tabs.setupWithViewPager(viewpager);
+        viewpager.setOffscreenPageLimit(mFragments.size());
+        tabs.setViewPager(viewpager);
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -106,11 +110,13 @@ public class OrderFragment extends BaseFragment {
     @OnClick({R.id.img_me, R.id.img_message, R.id.btn_team_data})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.img_me:
+            case R.id.img_me://个人中心
+                IntentUtils.get().goActivity(mContext, PersonalActivity.class);
                 break;
-            case R.id.img_message:
+            case R.id.img_message://消息中心
+                IntentUtils.get().goActivity(mContext, MessageActivity.class);
                 break;
-            case R.id.btn_team_data:
+            case R.id.btn_team_data://团队数据
                 IntentUtils.get().goActivity(mContext, TeamDataActivity.class);
                 break;
         }

@@ -49,7 +49,6 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
         VirtualLayoutManager layoutManager = new VirtualLayoutManager(getView().getContext());
         layoutManager.setAutoMeasureEnabled(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(20));
 
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
@@ -205,14 +204,10 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
     @Override
     public BaseDelegateAdapter initStickyTab() {
-        return new BaseDelegateAdapter(getView().getContext(), new StickyLayoutHelper(), R.layout.layout_home_sticky, 1, Constant.viewType.typeSticky) {
+        return new BaseDelegateAdapter(getView().getContext(), new StickyLayoutHelper(true), R.layout.layout_home_sticky, 1, Constant.viewType.typeSticky) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                tab = holder.getView(R.id.tab_layout);
-                if (holder.itemView instanceof TabLayout) {
-                    HomeFragmentPresenter.this.tab = (TabLayout) holder.itemView;
-                }
             }
         };
     }
@@ -229,14 +224,5 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
                 }
             }
         };
-    }
-
-
-    public TabLayout getTab() {
-        return tab;
-    }
-
-    public ViewPager getViewPager() {
-        return viewPager;
     }
 }

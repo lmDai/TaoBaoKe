@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -29,42 +30,52 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/dp_30"
                     app:layout_scrollFlags="scroll">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:text="累计为你省钱"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_12" />
+                        android:background="@drawable/bg_order_head"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="18.13254557"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_30" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_20"
+                            android:text="累计为你省钱"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_12" />
 
-                    <Button
-                        android:id="@+id/btn_team_data"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_30"
-                        android:background="@drawable/bg_scan_tame"
-                        android:minHeight="@dimen/dp_36"
-                        android:paddingLeft="@dimen/dp_20"
-                        android:paddingRight="@dimen/dp_20"
-                        android:text="查看团队数据"
-                        android:textColor="@color/text_yellow"
-                        android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="18.13254557"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_36" />
+
+                        <Button
+                            android:id="@+id/btn_team_data"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:background="@drawable/bg_scan_tame"
+                            android:minHeight="@dimen/dp_36"
+                            android:paddingLeft="@dimen/dp_20"
+                            android:paddingRight="@dimen/dp_20"
+                            android:paddingBottom="@dimen/dp_10"
+                            android:text="查看团队数据"
+                            android:textColor="@color/color_scan_team"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_60"
+                        android:layout_marginTop="-10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -73,7 +84,7 @@
                             android:minWidth="@dimen/dp_180"
                             android:text="待到账订单298.00元"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_18" />
+                            android:textSize="@dimen/sp_22" />
 
                         <Button
                             android:layout_width="wrap_content"
@@ -89,16 +100,23 @@
                 </LinearLayout>
 
 
-                <android.support.design.widget.TabLayout
+                <com.flyco.tablayout.SlidingTabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_alignParentBottom="true"
                     android:background="@color/colorWhite"
-                    app:tabIndicatorColor="@color/colorPrimaryDark"
-                    app:tabIndicatorHeight="@dimen/dp_2"
-                    app:tabSelectedTextColor="#000"
-                    app:tabTextColor="#000" />
+                    app:tl_indicator_color="@color/tab_underline_color"
+                    app:tl_indicator_height="@dimen/dp_4"
+                    app:tl_indicator_margin_bottom="@dimen/dp_6"
+                    app:tl_indicator_margin_top="@dimen/dp_4"
+                    app:tl_indicator_width="@dimen/dp_25"
+                    app:tl_indicator_width_equal_title="false"
+                    app:tl_tab_space_equal="true"
+                    app:tl_textBold="SELECT"
+                    app:tl_textSelectColor="@color/colorBlack"
+                    app:tl_textUnselectColor="@color/colorBlack"
+                    app:tl_textsize="@dimen/sp_16" />
 
             </android.support.design.widget.AppBarLayout>
 

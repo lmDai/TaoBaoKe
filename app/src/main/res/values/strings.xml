@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">TaoBaoKe</string>
+    <string name="title_up_skill">涨技能</string>
+    <string name="title_team_data">团队数据</string>
+    <string name="tab_all_orders">全部订单</string>
+    <string name="tab_paid">已付款</string>
+    <string name="tab_settled">已结算</string>
+    <string name="tab_expired">已失效</string>
+    <string name="tab_all">全部</string>
+    <string name="tab_comprehensive">综合</string>
+    <string name="tab_promotion_order">推广订单</string>
+    <string name="tab_natural_order">自然订单</string>
+    <string name="tab_potential_fan">潜在粉丝</string>
+    <string name="tab_once_fan">一度粉丝</string>
+    <string name="tab_second_fan">二度粉丝</string>
+    <!--我要涨技能-->
+    <string name="hair_circle_center">发圈中心</string>
+    <string name="core_member">核心会员</string>
+    <string name="withdraw">提现</string>
+    <string name="my_balance">我的余额</string>
+    <string name="order">订单</string>
+    <string name="order_head">下单没有看到订单？试试找回订单包</string>
+    <string name="team_list_head">推广订单是你分享的商品在巨折外成交的订单；自然订单是你粉丝从巨折购买或者分享的商品成交。</string>
+
+
 </resources>

@@ -3,6 +3,7 @@ package com.bestsoft.ui.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -10,6 +11,9 @@ import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
 import com.bestsoft.ui.activity.BanlanceActivity;
 import com.bestsoft.ui.activity.HairCircleCenterActivity;
+import com.bestsoft.ui.activity.MemberActivity;
+import com.bestsoft.ui.activity.MessageActivity;
+import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.activity.WithdrawActivity;
 import com.bestsoft.utils.IntentUtils;
 
@@ -34,6 +38,8 @@ public class SkillFragment extends BaseFragment {
     TextView txtWithdraw;
     @BindView(R.id.rl_balance)
     RelativeLayout rlBalance;
+    @BindView(R.id.ll_core_member)
+    LinearLayout llCoreMember;
     Unbinder unbinder;
 
     @Override
@@ -44,6 +50,7 @@ public class SkillFragment extends BaseFragment {
     @Override
     protected void initView(LayoutInflater inflater) {
         super.initView(inflater);
+        txtTitle.setText(mContext.getString(R.string.title_up_skill));
     }
 
     @Override
@@ -53,12 +60,14 @@ public class SkillFragment extends BaseFragment {
                 .init();
     }
 
-    @OnClick({R.id.img_me, R.id.ll_center, R.id.img_message, R.id.txt_withdraw, R.id.rl_balance})
+    @OnClick({R.id.img_me, R.id.ll_core_member, R.id.ll_center, R.id.img_message, R.id.txt_withdraw, R.id.rl_balance})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_me:
+                IntentUtils.get().goActivity(mContext, PersonalActivity.class);
                 break;
             case R.id.img_message:
+                IntentUtils.get().goActivity(mContext, MessageActivity.class);
                 break;
             case R.id.txt_withdraw:
                 IntentUtils.get().goActivity(mContext, WithdrawActivity.class);
@@ -68,6 +77,9 @@ public class SkillFragment extends BaseFragment {
                 break;
             case R.id.ll_center:
                 IntentUtils.get().goActivity(mContext, HairCircleCenterActivity.class);
+                break;
+            case R.id.ll_core_member://核心会员
+                IntentUtils.get().goActivity(mContext, MemberActivity.class);
                 break;
         }
     }

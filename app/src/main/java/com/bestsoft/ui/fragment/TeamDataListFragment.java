@@ -8,7 +8,9 @@ import android.view.View;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
 import com.bestsoft.bean.OrderModel;
+import com.bestsoft.bean.TeamDataListModel;
 import com.bestsoft.ui.adapter.OrderListAdapter;
+import com.bestsoft.ui.adapter.TeamDataListAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -24,17 +26,17 @@ import butterknife.BindView;
  * @date:2018/11/2
  * @description: 订单列表
  **/
-public class OrderListFragment extends BaseFragment {
+public class TeamDataListFragment extends BaseFragment {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
-    private OrderListAdapter orderAdapter;
+    private TeamDataListAdapter teamDataAdapter;
     private static final String TYPE = "type";
     public int tag;//0 全部订单，1 已付款，2 已结算，3 已失效
 
-    public OrderListFragment newInstance(int tag) {
-        OrderListFragment orderListFragment = new OrderListFragment();
+    public TeamDataListFragment newInstance(int tag) {
+        TeamDataListFragment orderListFragment = new TeamDataListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(TYPE, tag);
         orderListFragment.setArguments(bundle);
@@ -43,7 +45,7 @@ public class OrderListFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_order_list;
+        return R.layout.fragment_team_data_list;
     }
 
 
@@ -54,39 +56,39 @@ public class OrderListFragment extends BaseFragment {
         if (bundle != null) {
             tag = bundle.getInt(TYPE);
         }
-        orderAdapter = new OrderListAdapter(R.layout.item_order, tag);
+        teamDataAdapter = new TeamDataListAdapter(R.layout.item_team_data);
         addHeader();//添加头部
-        RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
-        recyclerView.setAdapter(orderAdapter);
+        RecyclerViewUtils.initLinerLayoutRecyclerViewPadding(recyclerView, mContext);
+        recyclerView.setAdapter(teamDataAdapter);
         initData();
     }
 
     private void initData() {
-        List<OrderModel> modelList = new ArrayList<>();
+        List<TeamDataListModel> modelList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            modelList.add(new OrderModel());
+            modelList.add(new TeamDataListModel());
         }
-        orderAdapter.setNewData(modelList);
+        teamDataAdapter.setNewData(modelList);
     }
 
     @Override
     protected void initEvent() {
         super.initEvent();
-        orderAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        teamDataAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 //todo 加载更多
-                List<OrderModel> modelList = new ArrayList<>();
+                List<TeamDataListModel> modelList = new ArrayList<>();
                 for (int i = 0; i < 10; i++) {
-                    modelList.add(new OrderModel());
+                    modelList.add(new TeamDataListModel());
                 }
-                RecyclerViewUtils.handleNormalAdapter(orderAdapter, modelList, false);
+                RecyclerViewUtils.handleNormalAdapter(teamDataAdapter, modelList, false);
             }
         }, recyclerView);
     }
 
     private void addHeader() {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.order_list_head, null, false);
-        orderAdapter.addHeaderView(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.team_data_list_head, null, false);
+        teamDataAdapter.addHeaderView(view);
     }
 }

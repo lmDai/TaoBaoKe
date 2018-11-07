@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.ui.fragment.Home1Fragment;
 import com.bestsoft.ui.fragment.HomeFragment;
 import com.bestsoft.ui.fragment.OrderFragment;
 import com.bestsoft.ui.fragment.SkillFragment;
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         tabFragment = new ArrayList<>();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        tabFragment.add(new HomeFragment());//首页
+        tabFragment.add(new Home1Fragment());//首页
         tabFragment.add(new OrderFragment());//礼包中心
         tabFragment.add(new SkillFragment());//个人中心
         transaction.add(R.id.frame_container, tabFragment.get(1));
@@ -72,7 +73,6 @@ public class MainActivity extends BaseActivity {
                 ContextCompat.getDrawable(this, R.drawable.tab_skill)};
 
     }
-
 
     @OnClick({R.id.txt_home, R.id.txt_order, R.id.txt_skill})
     public void onViewClicked(View view) {

@@ -23,7 +23,9 @@ public class RecyclerViewUtils {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.addItemDecoration(new SpacesItemDecoration(SizeUtils.dp2px(mContext, 10)));
     }
-
+    public static void initLinerLayoutRecyclerViewPadding(RecyclerView recyclerView, Context mContext) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+    }
     public static void handleNormalAdapter(BaseQuickAdapter adapter, List<?> data, boolean isRefresh) {
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {

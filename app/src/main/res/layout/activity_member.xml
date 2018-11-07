@@ -19,52 +19,91 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_zhanwei_potential_img" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="普通会员" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="您已获得升级VIP资格" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:background="@drawable/bg_head_member"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="升级至VIP每月权益预估 " />
+                        android:src="@drawable/ic_zhanwei_potential_img" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/bg_normal_member"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_normal_member"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:text="普通会员"
+                            android:textColor="@color/text_hint"
+                            android:textSize="@dimen/sp_14" />
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="*根据巨折用户大数据估算" />
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="您已获得升级VIP资格"
+                        android:textColor="@color/color_vip"
+                        android:textSize="@dimen/sp_12" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:background="@drawable/bg_equity_estimate"
+                        android:gravity="center|top"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/dp_10">
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="开通VIP" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="升级至VIP每月权益预估 "
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_18" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_6"
+                            android:text="*根据巨折用户大数据估算"
+                            android:textColor="@color/item_fan_in"
+                            android:textSize="@dimen/sp_12" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_open_vip"
+                        android:text="开通VIP" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="快速入口" />
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="快速入口"
+                    android:textColor="@color/color_fast"
+                    android:textSize="@dimen/sp_16" />
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
