@@ -40,5 +40,7 @@
     <dimen name="sp_13">13sp</dimen>
     <dimen name="sp_28">28sp</dimen>
     <dimen name="dp_25">25dp</dimen>
+    <dimen name="sp_15">15sp</dimen>
+    <dimen name="dp_28">28dp</dimen>
 
 </resources>

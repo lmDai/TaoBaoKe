@@ -38,4 +38,9 @@
         <item name="android:textSize">@dimen/sp_20</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <!-- 带边框ImageView -->
+    <declare-styleable name="MyImageView">
+        <attr name="border_thickness" format="dimension"/>
+        <attr name="border_outside_color" format="color"/>
+    </declare-styleable>
 </resources>

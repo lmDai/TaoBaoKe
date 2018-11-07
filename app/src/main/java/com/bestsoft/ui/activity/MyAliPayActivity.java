@@ -41,6 +41,7 @@ public class MyAliPayActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        txtTitle.setText(mContext.getString(R.string.title_alipay));
         KeyboardUtils.setRipper(btnSave);
     }
 

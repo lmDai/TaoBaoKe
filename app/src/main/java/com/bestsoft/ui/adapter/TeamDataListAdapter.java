@@ -1,10 +1,8 @@
 package com.bestsoft.ui.adapter;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.bestsoft.R;
-import com.bestsoft.bean.OrderModel;
 import com.bestsoft.bean.TeamDataListModel;
 import com.bestsoft.utils.MagicTextViewUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;

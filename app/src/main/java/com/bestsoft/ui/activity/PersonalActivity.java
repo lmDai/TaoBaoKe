@@ -50,6 +50,7 @@ public class PersonalActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        txtTitle.setText(mContext.getString(R.string.title_personal));
         KeyboardUtils.setRipper(llShare);
         KeyboardUtils.setRipper(llAuth);
         KeyboardUtils.setRipper(llCenter);

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.IntentUtils;
 
 import butterknife.BindView;
@@ -37,6 +38,7 @@ public class BanlanceActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         txtRight.setVisibility(View.VISIBLE);
         txtRight.setText("明细");
+        txtTitle.setText(mContext.getString(R.string.title_balance));
     }
 
     @Override
@@ -53,11 +55,14 @@ public class BanlanceActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
+                AppManager.getAppManager().removeActivity(this);
+                finish();
                 break;
             case R.id.txt_right:
                 IntentUtils.get().goActivity(mContext, IncomeDetailsActivity.class);
                 break;
             case R.id.btn_logout:
+                IntentUtils.get().goActivity(mContext, WithdrawActivity.class);
                 break;
         }
     }

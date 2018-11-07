@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_four" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlEnableLoadMore="false">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_20">
+
+                    <TextView
+                        android:id="@+id/txt_position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选择主题1/"
+                        android:textColor="@color/item_circle_time"
+                        android:textSize="@dimen/sp_18" />
+
+                    <TextView
+                        android:id="@+id/txt_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:textColor="@color/item_circle_time"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager_theme"
+                    android:layout_width="240dp"
+                    android:layout_height="360dp"
+                    android:layout_gravity="center"
+                    android:clipChildren="false" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_20"
+                    android:paddingBottom="@dimen/dp_30">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_light"
+                        android:text="成功邀请的好友每下一单，你都能从中获得收益"
+                        android:textColor="@color/item_circle_time"
+                        android:textSize="@dimen/sp_15" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/bg_btn_share"
+                        android:text="分享专属海报"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/sp_18" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="我的邀请码:IM0009"
+                            android:textColor="@color/color_invite_code"
+                            android:textSize="@dimen/sp_18" />
+
+                        <Button
+                            android:layout_width="@dimen/dp_60"
+                            android:layout_height="@dimen/dp_28"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:background="@drawable/bg_copy_stroke"
+                            android:text="复制"
+                            android:textColor="@color/color_copy"
+                            android:textSize="@dimen/sp_18" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:drawableRight="@drawable/ic_next"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:text="累计成功邀请：1000"
+                        android:textColor="@color/color_invite_number"
+                        android:textSize="@dimen/sp_16" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="邀请规则" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

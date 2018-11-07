@@ -1,15 +1,8 @@
 package com.bestsoft.ui.fragment;
 
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.bestsoft.R;
@@ -17,19 +10,13 @@ import com.bestsoft.base.BaseMvpFragment;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.presenter.HomeFragmentPresenter;
-import com.bestsoft.ui.activity.MessageActivity;
-import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
-import com.bestsoft.ui.adapter.BasePagerAdapter;
-import com.bestsoft.ui.widget.OutRecyclerView;
-import com.bestsoft.utils.IntentUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @package: com.bestsoft.ui.fragment

@@ -5,24 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
-import com.bestsoft.bean.OrderModel;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
-import com.bestsoft.ui.adapter.OrderListAdapter;
-import com.bestsoft.utils.RecyclerViewUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @package: com.bestsoft.ui.fragment

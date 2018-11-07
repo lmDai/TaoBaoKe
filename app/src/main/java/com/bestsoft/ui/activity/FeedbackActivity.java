@@ -41,6 +41,7 @@ public class FeedbackActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        txtTitle.setText(mContext.getString(R.string.title_feed_back));
         KeyboardUtils.setRipper(btnCommit);
     }
 

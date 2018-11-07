@@ -2,7 +2,6 @@ package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
-import com.bestsoft.ui.fragment.OrderListFragment;
 import com.bestsoft.ui.fragment.TeamDataHomeFragment;
 import com.bestsoft.utils.IntentUtils;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -111,6 +109,7 @@ public class TeamDataActivity extends BaseActivity {
                 IntentUtils.get().goActivity(mContext, MyTeamActivity.class);
                 break;
             case R.id.btn_invite_fans:
+                IntentUtils.get().goActivity(mContext, InviteActivity.class);
                 break;
         }
     }

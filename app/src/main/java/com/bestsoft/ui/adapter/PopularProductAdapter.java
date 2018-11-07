@@ -1,11 +1,8 @@
 package com.bestsoft.ui.adapter;
 
-import android.graphics.Color;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bestsoft.R;
-import com.bestsoft.bean.IntroductionModel;
 import com.bestsoft.bean.PopularProductModel;
 import com.bestsoft.utils.MagicTextViewUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;

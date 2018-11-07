@@ -9,15 +9,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import com.bestsoft.Constant;
 import com.bestsoft.R;
 
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

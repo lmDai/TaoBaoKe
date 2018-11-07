@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TaoBaoKe</string>
+    <string name="title_my_team">我的团队</string>
     <string name="title_up_skill">涨技能</string>
     <string name="title_team_data">团队数据</string>
     <string name="tab_all_orders">全部订单</string>
@@ -21,6 +22,11 @@
     <string name="order">订单</string>
     <string name="order_head">下单没有看到订单？试试找回订单包</string>
     <string name="team_list_head">推广订单是你分享的商品在巨折外成交的订单；自然订单是你粉丝从巨折购买或者分享的商品成交。</string>
+    <string name="title_personal">个人中心</string>
+    <string name="title_alipay">我的支付宝</string>
+    <string name="title_feed_back">用户反馈</string>
+    <string name="title_balance">余额</string>
+    <string name="title_invite">邀请</string>
 
 
 </resources>

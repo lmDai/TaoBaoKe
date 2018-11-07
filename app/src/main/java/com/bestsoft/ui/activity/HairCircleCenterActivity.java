@@ -1,23 +1,19 @@
 package com.bestsoft.ui.activity;
 
-import android.support.design.widget.AppBarLayout;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.fragment.CircleCenterFragment;
-import com.bestsoft.ui.fragment.OrderListFragment;
-import com.bestsoft.utils.IntentUtils;
+import com.bestsoft.utils.AppManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +30,12 @@ public class HairCircleCenterActivity extends BaseActivity {
     TabLayout tabs;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
+    @BindView(R.id.img_me)
+    ImageView imgMe;
+    @BindView(R.id.txt_title)
+    TextView txtTitle;
+    @BindView(R.id.img_message)
+    ImageView imgMessage;
 
 
     @Override
@@ -43,6 +45,7 @@ public class HairCircleCenterActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        txtTitle.setText(mContext.getString(R.string.title_invite));
         List<String> mTitleList = new ArrayList<>();
         List<Fragment> mFragments = new ArrayList<>();
         mTitleList.add("商品推荐");
@@ -85,5 +88,18 @@ public class HairCircleCenterActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @OnClick({R.id.img_me, R.id.img_message})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_me:
+                finish();
+                AppManager.getAppManager().removeActivity(this);
+                break;
+            case R.id.img_message:
+                break;
+        }
     }
 }

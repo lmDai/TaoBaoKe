@@ -7,9 +7,7 @@ import android.view.View;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
-import com.bestsoft.bean.OrderModel;
 import com.bestsoft.bean.TeamDataListModel;
-import com.bestsoft.ui.adapter.OrderListAdapter;
 import com.bestsoft.ui.adapter.TeamDataListAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
