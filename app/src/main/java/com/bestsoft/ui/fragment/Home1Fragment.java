@@ -171,7 +171,6 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
                 int[] location = new int[2];
                 magicIndicator.getLocationOnScreen(location);
                 int yPosition = location[1];
-                Log.i("single", yPosition + "::::::" + toolBarPositionY);
                 if (yPosition < toolBarPositionY) {
                     magicIndicatorTitle.setVisibility(View.VISIBLE);
                     scrollView.setNeedScroll(false);
