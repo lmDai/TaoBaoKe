@@ -7,9 +7,9 @@ package com.bestsoft.common.https;
  * @description: 获取地址
  **/
 public class BaseApi {
-    public final static String BASE_HOST = "http://tt.api.v1.317youxi.com/";
-    public final static String VERSION_HOST = "http://tt.api.v1.317youxi.com/";
-    public final static String OTHER_HOST = "http://tt.api.v1.317youxi.com/";
+    public final static String BASE_HOST = "http://test.bestsoft.channel.cqjjsms.com/";
+    public final static String VERSION_HOST = "http://test.bestsoft.channel.cqjjsms.com/";
+    public final static String OTHER_HOST = "http://test.bestsoft.channel.cqjjsms.com/";
 
     public enum HostType {
         BASE_TYPE,

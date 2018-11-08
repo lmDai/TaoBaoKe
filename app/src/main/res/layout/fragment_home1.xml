@@ -4,16 +4,17 @@
     android:id="@+id/fl_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
-
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlEnableLoadMore="false"
         app:srlEnablePreviewInEditMode="false"
-        app:srlEnablePureScrollMode="true">
+        app:srlEnableRefresh="false">
 
         <com.bestsoft.ui.widget.JudgeNestedScrollView
             android:id="@+id/scrollView"
@@ -26,17 +27,36 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_home"
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/collapse"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:titleEnabled="false">
 
-                <net.lucode.hackware.magicindicator.MagicIndicator
-                    android:id="@+id/magic_indicator"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </android.support.design.widget.CollapsingToolbarLayout>
+
+                <com.flyco.tablayout.SlidingTabLayout
+                    android:id="@+id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
+                    android:layout_height="48dp"
                     android:layout_gravity="bottom"
-                    android:background="@color/colorWhite" />
+                    android:background="@color/dialog_submit"
+                    app:tl_indicator_color="@color/tab_underline_color"
+                    app:tl_indicator_height="@dimen/dp_4"
+                    app:tl_indicator_margin_bottom="@dimen/dp_6"
+                    app:tl_indicator_margin_top="@dimen/dp_4"
+                    app:tl_indicator_width_equal_title="true"
+                    app:tl_tab_space_equal="true"
+                    app:tl_textBold="SELECT"
+                    app:tl_textSelectColor="@color/colorBlack"
+                    app:tl_textUnselectColor="@color/colorBlack"
+                    app:tl_textsize="@dimen/sp_16" />
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/view_pager"
@@ -44,7 +64,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
         </com.bestsoft.ui.widget.JudgeNestedScrollView>
-
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
@@ -58,6 +77,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_marginBottom="0dp"
             android:background="@drawable/bg_toolbar"
+            android:visibility="gone"
             app:layout_collapseMode="pin">
 
             <LinearLayout
@@ -103,13 +123,26 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <net.lucode.hackware.magicindicator.MagicIndicator
-            android:id="@+id/magic_indicator_title"
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tabs_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
+            android:layout_height="48dp"
             android:layout_below="@+id/toolbar"
-            android:background="@color/colorWhite"
+            android:layout_gravity="bottom"
+            android:background="@color/color_tag_end"
             android:visibility="gone"
-            app:layout_collapseMode="pin" />
+            app:layout_collapseMode="pin"
+            app:tl_indicator_color="@color/tab_underline_color"
+            app:tl_indicator_height="@dimen/dp_4"
+            app:tl_indicator_margin_bottom="@dimen/dp_6"
+            app:tl_indicator_margin_top="@dimen/dp_4"
+            app:tl_indicator_width="@dimen/dp_25"
+            app:tl_indicator_width_equal_title="false"
+            app:tl_tab_space_equal="true"
+            app:tl_textBold="SELECT"
+            app:tl_textSelectColor="@color/colorBlack"
+            app:tl_textUnselectColor="@color/colorBlack"
+            app:tl_textsize="@dimen/sp_16" />
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

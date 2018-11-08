@@ -1,10 +1,13 @@
 package com.bestsoft.ui.widget;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.alibaba.android.vlayout.VirtualLayoutManager;
 
 /**
  * @package: com.bestsoft.ui.widget
@@ -16,20 +19,20 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
 
     private static final String TAG = MyLinearLayoutManager.class.getSimpleName();
 
-    public MyLinearLayoutManager(Context context) {
+    private int[] mMeasuredDimension = new int[2];
+
+    public MyLinearLayoutManager(@NonNull Context context) {
         super(context);
     }
 
-    public MyLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
+
+    public MyLinearLayoutManager(@NonNull Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
-
-    private int[] mMeasuredDimension = new int[2];
 
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
                           int widthSpec, int heightSpec) {
-
         final int widthMode = View.MeasureSpec.getMode(widthSpec);
         final int heightMode = View.MeasureSpec.getMode(heightSpec);
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
@@ -67,7 +70,6 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
             case View.MeasureSpec.AT_MOST:
             case View.MeasureSpec.UNSPECIFIED:
         }
-
         setMeasuredDimension(width, height);
     }
 

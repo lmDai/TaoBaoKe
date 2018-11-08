@@ -8,6 +8,6 @@ package com.bestsoft.api;
  **/
 public class TaoBaoKeApi {
     //全部标签
-    public final static String TAG = "app/tag/list";
+    public final static String TAG = "app/icon/classify";
 
 }

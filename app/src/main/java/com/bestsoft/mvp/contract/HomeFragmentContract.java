@@ -19,7 +19,6 @@ public interface HomeFragmentContract {
 
         void setOnclick(int position);
 
-
         Context getContext();
     }
 
@@ -39,9 +38,7 @@ public interface HomeFragmentContract {
 
         public abstract BaseDelegateAdapter initFastEntrace();//初始化快速入口内容
 
-        public abstract BaseDelegateAdapter initStickyTab();//初始化吸顶内容
-
-        public abstract BaseDelegateAdapter initFragment();//初始化底部
+        public abstract void getIconClassify();//获取所有标签
 
     }
 

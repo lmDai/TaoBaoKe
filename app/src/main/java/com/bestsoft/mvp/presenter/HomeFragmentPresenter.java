@@ -13,12 +13,18 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.bestsoft.Constant;
 import com.bestsoft.R;
+import com.bestsoft.common.https.ProgressObserver;
+import com.bestsoft.common.https.rxUtils.RxUtil;
+import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
+import com.bestsoft.mvp.model.LoginModel;
+import com.bestsoft.mvp.model.MainModel;
 import com.bestsoft.ui.activity.IntroductionActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
@@ -40,19 +46,17 @@ import java.util.List;
  * @description:
  **/
 public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
-    private TabLayout tab;
-    private ViewPager viewPager;
 
     @Override
     public DelegateAdapter initRecyclerView(RecyclerView recyclerView) {
         //初始化
         //创建VirtualLayoutManager对象
-        VirtualLayoutManager layoutManager = new VirtualLayoutManager(getView().getContext());
+//        VirtualLayoutManager layoutManager = new VirtualLayoutManager(getView().getContext());
+        MyLinearLayoutManager layoutManager = new MyLinearLayoutManager(getView().getContext(), LinearLayoutManager.VERTICAL, false);
         layoutManager.setSmoothScrollbarEnabled(true);
         layoutManager.setAutoMeasureEnabled(true);
-        recyclerView.setLayoutManager(new MyLinearLayoutManager(getView().getContext()));
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
 
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
@@ -60,7 +64,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
         viewPool.setMaxRecycledViews(0, 20);
 
         //设置适配器
-        DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager, true);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(new VirtualLayoutManager(getView().getContext()), true);
         recyclerView.setAdapter(delegateAdapter);
         return delegateAdapter;
     }
@@ -92,12 +96,9 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
             images.add(proPic.getResourceId(a, R.drawable.ic_me));
         }
         proPic.recycle();
-        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(5);
-        gridLayoutHelper.setPadding(0, 10, 0, 10);
-        gridLayoutHelper.setVGap(16);
-        gridLayoutHelper.setHGap(0);
-        gridLayoutHelper.setBgColor(Color.WHITE);
-        return new BaseDelegateAdapter(getView().getContext(), gridLayoutHelper, R.layout.item_vp_grid_iv, 10, Constant.viewType.typeGv) {
+        ColumnLayoutHelper columnLayoutHelper = new ColumnLayoutHelper();
+        columnLayoutHelper.setItemCount(3);
+        return new BaseDelegateAdapter(getView().getContext(), columnLayoutHelper, R.layout.item_vp_grid_iv, 5, Constant.viewType.typeGv) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
@@ -116,11 +117,10 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
     @Override
     public BaseDelegateAdapter initSearch() {
-        return new BaseDelegateAdapter(getView().getContext(), new LinearLayoutHelper(), R.layout.layout_home_search, 1, Constant.viewType.typeTitle) {
+        return new BaseDelegateAdapter(getView().getContext(), new LinearLayoutHelper(), R.layout.item_search, 1, Constant.viewType.typeTitle) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-
             }
         };
     }
@@ -207,26 +207,16 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
     }
 
     @Override
-    public BaseDelegateAdapter initStickyTab() {
-        return new BaseDelegateAdapter(getView().getContext(), new StickyLayoutHelper(true), R.layout.layout_home_sticky, 1, Constant.viewType.typeSticky) {
-            @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-            }
-        };
+    public void getIconClassify() {
+        MainModel.getInstance(Utils.getContext()).getIconClassify()
+                .compose(RxUtil.observableIO2Main(getView()))
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<List<String>>(this, true) {
+                    @Override
+                    public void onSuccess(List<String> result) {
+
+                    }
+                });
     }
 
-    @Override
-    public BaseDelegateAdapter initFragment() {
-        return new BaseDelegateAdapter(getView().getContext(), new LinearLayoutHelper(), R.layout.layout_home_viewpager, 1, Constant.viewType.typeFooter) {
-            @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                viewPager = holder.getView(R.id.view_pager);
-                if (holder.itemView instanceof ViewPager) {
-                    HomeFragmentPresenter.this.viewPager = (ViewPager) holder.itemView;
-                }
-            }
-        };
-    }
 }
