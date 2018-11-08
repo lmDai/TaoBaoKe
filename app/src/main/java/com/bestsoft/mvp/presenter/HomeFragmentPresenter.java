@@ -23,6 +23,7 @@ import com.bestsoft.ui.activity.IntroductionActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
 import com.bestsoft.ui.widget.GlideImageLoader;
+import com.bestsoft.ui.widget.MyLinearLayoutManager;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.SpacesItemDecoration;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -47,8 +48,11 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
         //初始化
         //创建VirtualLayoutManager对象
         VirtualLayoutManager layoutManager = new VirtualLayoutManager(getView().getContext());
+        layoutManager.setSmoothScrollbarEnabled(true);
         layoutManager.setAutoMeasureEnabled(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new MyLinearLayoutManager(getView().getContext()));
+        recyclerView.setHasFixedSize(true);
+
 
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
