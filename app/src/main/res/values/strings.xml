@@ -27,6 +27,7 @@
     <string name="title_feed_back">用户反馈</string>
     <string name="title_balance">余额</string>
     <string name="title_invite">邀请</string>
+    <string name="loading">加载中</string>
 
 
 </resources>

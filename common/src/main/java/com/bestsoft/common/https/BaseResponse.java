@@ -9,16 +9,16 @@ package com.bestsoft.common.https;
 public class BaseResponse<T> {
 
 
-    private int code;
+    private int errorcode;
     private String msg;
     private T data;
 
-    public int getCode() {
-        return code;
+    public int getErrorcode() {
+        return errorcode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setErrorcode(int errorcode) {
+        this.errorcode = errorcode;
     }
 
     public String getMsg() {

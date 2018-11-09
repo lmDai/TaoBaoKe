@@ -20,7 +20,7 @@ public interface IBaseView {
     /**
      * 显示正在加载
      */
-    void showProgress();
+    void showProgress(String message);
 
     /**
      * 隐藏正在加载

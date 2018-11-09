@@ -3,10 +3,13 @@ package com.bestsoft.mvp.model;
 import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
+import com.bestsoft.bean.CodeModel;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
+import com.bestsoft.common.https.intercept.InterceptUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -36,4 +39,30 @@ public class LoginModel {
         return book;
     }
 
+    public Observable<BaseResponse<CodeModel>> validateInviteCode(String inviteCode) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("invite_code", inviteCode);
+        Observable<BaseResponse<CodeModel>> codeInfo = mApiService.validateInviteCode(requestMap);
+        return codeInfo;
+    }
+
+    public Observable<BaseResponse<String>> sendSmsCode(String phone, int type) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("phone", phone);
+        requestMap.put("type", type);
+        Observable<BaseResponse<String>> codeInfo = mApiService.sendSmsCode(requestMap);
+        return codeInfo;
+    }
+
+    public Observable<BaseResponse<String>> userRegister(String phone, String smscode, String user_chanel_id, String pid, String device_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("phone", phone);
+        requestMap.put("smscode", smscode);
+        requestMap.put("user_chanel_id", user_chanel_id);
+        requestMap.put("pid", pid);
+        requestMap.put("device_id", device_id);
+
+        Observable<BaseResponse<String>> register = mApiService.userRegister(requestMap);
+        return register;
+    }
 }

@@ -11,11 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
+import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.presenter.HomeFragmentPresenter;
@@ -60,13 +62,13 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.ll_title)
+    LinearLayout llTitle;
     private Runnable trigger;
     int toolBarPositionY = 0;
     private int mOffset = 0;
     private int mScrollY = 0;
-
     private List<DelegateAdapter.Adapter> mAdapters;
-    private ArrayList<String> mTitleList = new ArrayList<>();
     private BasePagerAdapter mAdapter;
 
     @Override
@@ -79,13 +81,6 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
         super.initView(inflater);
         mAdapters = new LinkedList<>();
         initRecyclerView();
-        mTitleList = new ArrayList<>();
-        mTitleList.add("他们都在买");
-        mTitleList.add("猜你喜欢");
-        mTitleList.add("女装");
-        mTitleList.add("母婴");
-        mTitleList.add("居家");
-        initViewPager();
     }
 
     @Override
@@ -139,6 +134,22 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
 
     }
 
+    /**
+     * 分类列表
+     *
+     * @param classfiy
+     */
+    @Override
+    public void setClassfiy(List<ClassfyModel> classfiy) {
+        List<Fragment> mFragments = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
+        for (ClassfyModel classfyModel : classfiy) {
+            titles.add(classfyModel.getName());
+            mFragments.add(new ProductListFragment());
+        }
+        initViewPager(mFragments, titles);
+    }
+
     @Override
     protected void initEvent() {
         super.initEvent();
@@ -166,10 +177,10 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
                 tabs.getLocationOnScreen(location);
                 int yPosition = location[1];
                 if (yPosition < toolBarPositionY) {
-                    tabTitle.setVisibility(View.VISIBLE);
+                    llTitle.setVisibility(View.VISIBLE);
                     scrollView.setNeedScroll(false);
                 } else {
-                    tabTitle.setVisibility(View.GONE);
+                    llTitle.setVisibility(View.GONE);
                     scrollView.setNeedScroll(true);
                 }
                 if (lastScrollY < h) {
@@ -181,8 +192,6 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
             }
         });
         toolbar.setBackgroundColor(0);
-        initMagicIndicator();
-        initMagicIndicatorTitle();
     }
 
 
@@ -193,27 +202,12 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
         viewPager.setLayoutParams(params);
     }
 
-    private List<Fragment> getFragments() {
-        List<Fragment> mFragments = new ArrayList<>();
-        mFragments.add(new PopularProductFragment());
-        mFragments.add(new ProductListFragment());
-        mFragments.add(new ProductListFragment());
-        mFragments.add(new ProductListFragment());
-        mFragments.add(new ProductListFragment());
-        return mFragments;
-    }
 
-    private void initMagicIndicator() {
-        tabs.setViewPager(viewPager);
-    }
-
-    private void initMagicIndicatorTitle() {
-        tabTitle.setViewPager(viewPager);
-    }
-
-    private void initViewPager() {
-        mAdapter = new BasePagerAdapter(getChildFragmentManager(), getFragments(), mTitleList);
+    private void initViewPager(List<Fragment> mFragments, List<String> mTitles) {
+        mAdapter = new BasePagerAdapter(getChildFragmentManager(), mFragments, mTitles);
         viewPager.setAdapter(mAdapter);
+        tabs.setViewPager(viewPager);
+        tabTitle.setViewPager(viewPager);
     }
 
     private OnePlusAdapter onePlusAdapter(int type) {

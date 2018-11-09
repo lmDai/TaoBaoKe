@@ -19,6 +19,7 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.bestsoft.Constant;
 import com.bestsoft.R;
+import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
@@ -206,15 +207,18 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
         };
     }
 
+    /**
+     * 分类列表
+     */
     @Override
     public void getIconClassify() {
-        MainModel.getInstance(Utils.getContext()).getIconClassify()
+        MainModel.getInstance(Utils.getContext()).getIconClassify(Constant.channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
-                .subscribe(new ProgressObserver<List<String>>(this, true) {
+                .subscribe(new ProgressObserver<List<ClassfyModel>>(this, true, "加载中...") {
                     @Override
-                    public void onSuccess(List<String> result) {
-
+                    public void onSuccess(List<ClassfyModel> result) {
+                        getView().setClassfiy(result);
                     }
                 });
     }

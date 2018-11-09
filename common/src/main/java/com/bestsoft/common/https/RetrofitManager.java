@@ -71,6 +71,7 @@ public class RetrofitManager {
                 .connectTimeout(DEFAULT_MILLISECONDS, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.SECONDS)
                 .addNetworkInterceptor(InterceptUtils.getRequestHeader())
+//                .addInterceptor(InterceptUtils.commonParamsInterceptor())
                 .addInterceptor(InterceptUtils.getHttpLoggingInterceptor(true))//添加日志拦截器
                 .addInterceptor(InterceptUtils.getCacheInterceptor())
                 .cache(cache)

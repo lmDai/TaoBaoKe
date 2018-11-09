@@ -7,6 +7,7 @@
     <color name="color_tag_end">#E30000</color>
     <color name="item_income_title">#FF3B00</color>
     <color name="item_popular_account">#FF3100</color>
+    <color name="color_indicator">#FE4524</color>
     <color name="dialog_submit">#FF6200</color>
     <color name="color_tag_start">#FF8D5A</color>
     <color name="color_order_wrong">#FC6519</color>

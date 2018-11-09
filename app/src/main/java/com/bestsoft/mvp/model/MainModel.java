@@ -3,6 +3,7 @@ package com.bestsoft.mvp.model;
 import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
+import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
 
@@ -31,9 +32,15 @@ public class MainModel {
         return musicModel;
     }
 
-    public Observable<BaseResponse<List<String>>> getIconClassify() {
-        Observable<BaseResponse<List<String>>> book = mApiService.getIconClassify("2");
-        return book;
+    /**
+     * 分类列表
+     *
+     * @param channel_id
+     * @return
+     */
+    public Observable<BaseResponse<List<ClassfyModel>>> getIconClassify(String channel_id) {
+        Observable<BaseResponse<List<ClassfyModel>>> classify = mApiService.getIconClassify(channel_id);
+        return classify;
     }
 
 }

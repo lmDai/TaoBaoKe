@@ -5,6 +5,8 @@ import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.NetworkUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.CacheControl;
 import okhttp3.HttpUrl;
@@ -81,8 +83,8 @@ public class InterceptUtils {
                 Request originRequest = chain.request();
                 Request request;
                 HttpUrl httpUrl = originRequest.url().newBuilder()
-                        .addQueryParameter("paltform", "android")
-                        .addQueryParameter("version", "1.0.0")
+                        .addQueryParameter("channel_id", "2")
+                        .addQueryParameter("client", "Android")
                         .build();
                 request = originRequest.newBuilder()
                         .url(httpUrl)
@@ -134,5 +136,12 @@ public class InterceptUtils {
             }
         };
         return commonParams;
+    }
+
+    public static final Map<String, Object> getRequstMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("channel_id", "2");
+        map.put("client", "Android");
+        return map;
     }
 }

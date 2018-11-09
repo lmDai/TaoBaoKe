@@ -40,7 +40,12 @@
     </style>
     <!-- 带边框ImageView -->
     <declare-styleable name="MyImageView">
-        <attr name="border_thickness" format="dimension"/>
-        <attr name="border_outside_color" format="color"/>
+        <attr name="border_thickness" format="dimension" />
+        <attr name="border_outside_color" format="color" />
     </declare-styleable>
+
+    <style name="LoadingDialog" parent="@android:style/Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

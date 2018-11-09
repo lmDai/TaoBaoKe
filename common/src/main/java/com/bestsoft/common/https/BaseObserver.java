@@ -23,7 +23,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public void onSubscribe(Disposable d) {
         if (!NetworkUtils.isConnected(Utils.getContext())) {
             ToastUtils.showShortToastSafe(Utils.getContext(), Utils.getString(R.string.NO_NET_CONNECTED));
-            onComplete();
+//            onComplete();
         }
     }
 

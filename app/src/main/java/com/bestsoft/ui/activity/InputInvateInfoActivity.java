@@ -1,6 +1,7 @@
 package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.ripple.RippleUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -10,10 +11,12 @@ import android.widget.ImageView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.bean.CodeModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.utils.IntentUtils;
+import com.bestsoft.utils.KeyboardUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,8 +25,7 @@ import butterknife.OnClick;
  * 输入邀请信息
  */
 @CreatePresenterAnnotation(InputInvateInfoPresenter.class)
-public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoContract.Presenter> implements InputInvateInfoContract.View {
-
+public  class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoPresenter> implements InputInvateInfoContract.View {
 
     @BindView(R.id.img_back)
     ImageView imgBack;
@@ -31,7 +33,7 @@ public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCont
     Button btnNext;
     @BindView(R.id.edit_code)
     EditText editCode;
-
+    private CodeModel codeModel;
 
     @Override
     protected int getLayout() {
@@ -40,7 +42,7 @@ public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCont
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        getMvpPresenter().getInvateInfo();
+        KeyboardUtils.setRipper(btnNext);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCont
         editCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                btnNext.setEnabled(false);
             }
 
             @Override
@@ -68,7 +70,9 @@ public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCont
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (s.length() > 6 && s.length() < 9) {
+                    getMvpPresenter().getInvateInfo(s.toString());
+                }
             }
         });
     }
@@ -80,9 +84,30 @@ public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCont
                 finish();
                 break;
             case R.id.btn_next:
-                IntentUtils.get().goActivity(mContext, InputPhoneActivity.class);
+                IntentUtils.get().goActivityKill(mContext, InputPhoneActivity.class, codeModel);
                 break;
         }
     }
 
+    @Override
+    public void setCodeInfo(CodeModel codeInfo) {
+        this.codeModel = codeInfo;
+        btnNext.setEnabled(true);
+    }
+
+    @Override
+    public void sendCodeSuccess() {
+
+    }
+
+    @Override
+    public void registerSuccess() {
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

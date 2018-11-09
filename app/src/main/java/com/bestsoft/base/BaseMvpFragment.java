@@ -13,6 +13,7 @@ import com.bestsoft.common.mvp_senior.factory.IMvpPresenterFactroy;
 import com.bestsoft.common.mvp_senior.factory.IPresenterProxyFactroy;
 import com.bestsoft.common.mvp_senior.factory.MvpPresenterFactroyImpl;
 import com.bestsoft.common.mvp_senior.factory.PresenterProxyFactroyImpl;
+import com.bestsoft.ui.widget.LoadingDialog;
 
 import io.reactivex.ObservableTransformer;
 
@@ -29,7 +30,7 @@ public abstract class BaseMvpFragment<V extends IBaseView, P extends BasePresent
      */
     private PresenterProxyFactroyImpl<V, P> mProxy = new PresenterProxyFactroyImpl<>(MvpPresenterFactroyImpl.<V, P>creater(getClass()));
 
-//    private LoadingDialog mLoadingDialog;
+    private LoadingDialog mLoadingDialog;
 
     @Nullable
     @Override
@@ -37,7 +38,7 @@ public abstract class BaseMvpFragment<V extends IBaseView, P extends BasePresent
         if (savedInstanceState != null) {
             mProxy.onRestoreInstanceState(savedInstanceState.getBundle(PRESENTER_SAVE_KEY));
         }
-//        mLoadingDialog = new LoadingDialog(getContext());
+        mLoadingDialog = new LoadingDialog(mContext);
         mProxy.onCreate((V) this);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -82,17 +83,17 @@ public abstract class BaseMvpFragment<V extends IBaseView, P extends BasePresent
     }
 
     @Override
-    public void showProgress() {
-//        if (mLoadingDialog != null) {
-//            mLoadingDialog.show();
-//        }
+    public void showProgress(String message) {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.setMessage(message).show();
+        }
     }
 
     @Override
     public void hideProgress() {
-//        if (mLoadingDialog != null) {
-//            mLoadingDialog.dismiss();
-//        }
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
     }
 
     @Override

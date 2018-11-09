@@ -5,9 +5,12 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
+
+import java.util.List;
 
 /**
  * 首页
@@ -20,6 +23,8 @@ public interface HomeFragmentContract {
         void setOnclick(int position);
 
         Context getContext();
+
+        void setClassfiy(List<ClassfyModel> classfiy);
     }
 
 

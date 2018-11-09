@@ -12,6 +12,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class ProgressObserver<T> extends BaseObserver<T> {
     private BasePresenter mBasePresenter;
     private boolean isShowProgress = false;
+    private String message = "";
 
     protected ProgressObserver(BasePresenter basePresenter) {
         this.mBasePresenter = basePresenter;
@@ -22,12 +23,18 @@ public abstract class ProgressObserver<T> extends BaseObserver<T> {
         this.isShowProgress = isShowProgress;
     }
 
+    public ProgressObserver(BasePresenter mBasePresenter, boolean isShowProgress, String message) {
+        this.mBasePresenter = mBasePresenter;
+        this.isShowProgress = isShowProgress;
+        this.message = message;
+    }
+
     /**
      * 展示进度框
      */
     private void showProgress() {
         if (isShowProgress) {
-            mBasePresenter.getView().showProgress();
+            mBasePresenter.getView().showProgress(message);
         }
     }
 

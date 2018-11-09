@@ -11,6 +11,7 @@ import com.bestsoft.common.mvp_senior.factory.IMvpPresenterFactroy;
 import com.bestsoft.common.mvp_senior.factory.IPresenterProxyFactroy;
 import com.bestsoft.common.mvp_senior.factory.MvpPresenterFactroyImpl;
 import com.bestsoft.common.mvp_senior.factory.PresenterProxyFactroyImpl;
+import com.bestsoft.ui.widget.LoadingDialog;
 
 import io.reactivex.ObservableTransformer;
 
@@ -38,7 +39,7 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
      * 创建被代理对象,传入默认Presenter的工厂
      */
     private PresenterProxyFactroyImpl<V, P> mProxy = new PresenterProxyFactroyImpl<>(MvpPresenterFactroyImpl.<V, P>creater(getClass()));
-    private Dialog mLoadingDialog;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
         if (savedInstanceState != null) {
             mProxy.onRestoreInstanceState(savedInstanceState.getBundle(PRESENTER_SAVE_KEY));
         }
-//        mLoadingDialog = DialogUtils.showDialogForLoading(mContext);
+        mLoadingDialog = new LoadingDialog(this);
     }
 
     @Override
@@ -89,10 +90,10 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
 
 
     @Override
-    public void showProgress() {
+    public void showProgress(String message) {
         Log.e("single", "showProgress");
         if (mLoadingDialog != null) {
-            mLoadingDialog.show();
+            mLoadingDialog.setMessage(message).show();
         }
     }
 

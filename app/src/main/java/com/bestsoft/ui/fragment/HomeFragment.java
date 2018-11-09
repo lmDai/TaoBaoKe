@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
+import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.presenter.HomeFragmentPresenter;
@@ -157,6 +158,11 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
 
     @Override
     public void setOnclick(int position) {
+
+    }
+
+    @Override
+    public void setClassfiy(List<ClassfyModel> classfiy) {
 
     }
 

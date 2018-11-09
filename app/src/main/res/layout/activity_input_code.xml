@@ -47,7 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_20"
-            android:background="@drawable/bg_code_unselected"
+            android:background="@drawable/bg_code_selector"
+            android:enabled="false"
             android:text="确定"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sp_20" />

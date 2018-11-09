@@ -9,11 +9,15 @@ import android.widget.ImageView;
 import com.bestsoft.MainActivity;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.bean.CodeModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.ui.widget.VerifyCodeView;
+import com.bestsoft.utils.DeviceUtil;
 import com.bestsoft.utils.IntentUtils;
+import com.blankj.utilcode.utils.PhoneUtils;
+import com.blankj.utilcode.utils.ToastUtils;
 
 
 import butterknife.BindView;
@@ -32,6 +36,8 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
     Button btnNext;
     @BindView(R.id.verify_code_view)
     VerifyCodeView verifyCodeView;
+    private String phone;//手机号
+    private CodeModel codeModel;
 
     @Override
     protected int getLayout() {
@@ -40,8 +46,18 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        getMvpPresenter().getInvateInfo();
 
+
+    }
+
+    @Override
+    protected void getIntentData() {
+        super.getIntentData();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            phone = bundle.getString("phone");
+            codeModel = bundle.getParcelable("codeModel");
+        }
     }
 
     @Override
@@ -59,12 +75,12 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
         verifyCodeView.setInputCompleteListener(new VerifyCodeView.InputCompleteListener() {
             @Override
             public void inputComplete() {
-                btnNext.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_code_selected));
+                btnNext.setEnabled(true);
             }
 
             @Override
             public void invalidContent() {
-                btnNext.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_code_unselected));
+                btnNext.setEnabled(false);
             }
         });
 
@@ -79,8 +95,33 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
                 break;
             case R.id.btn_next:
                 //todo 跳转首页
-                IntentUtils.get().goActivity(mContext, MainActivity.class);
+                if (codeModel == null) {
+                    ToastUtils.showShortToastSafe(mContext, "邀请码不正确");
+                    return;
+                }
+                getMvpPresenter().userRegister(phone, verifyCodeView.getEditContent(), codeModel.getUser_channel_id()
+                        , codeModel.getPid(), PhoneUtils.getIMEI(mContext));
                 break;
         }
+    }
+
+    @Override
+    public void setCodeInfo(CodeModel codeInfo) {
+
+    }
+
+    @Override
+    public void sendCodeSuccess() {
+
+    }
+
+    @Override
+    public void registerSuccess() {
+        IntentUtils.get().goActivityKill(mContext, LoginActivity.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

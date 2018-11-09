@@ -52,7 +52,6 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        getMvpPresenter().getTag();
         txtCannotLogin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         txtCannotLogin.getPaint().setAntiAlias(true);//抗锯齿
     }

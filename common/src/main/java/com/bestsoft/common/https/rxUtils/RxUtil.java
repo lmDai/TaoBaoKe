@@ -29,10 +29,10 @@ public class RxUtil {
 
     public static <T> ObservableTransformer<BaseResponse<T>, T> hanResult() {
         return upstream -> upstream.flatMap((Function<BaseResponse<T>, ObservableSource<T>>) tBaseResponse -> {
-            if (tBaseResponse.getCode() == 1) {
+            if (tBaseResponse.getErrorcode() == 0) {
                 return createData(tBaseResponse.getData());
             } else if (!TextUtils.isEmpty(tBaseResponse.getMsg())) {
-                return Observable.error(new ApiException(tBaseResponse.getMsg(), tBaseResponse.getCode()));
+                return Observable.error(new ApiException(tBaseResponse.getMsg(), tBaseResponse.getErrorcode()));
             } else {
                 return Observable.error(new ApiException("*" + "服务器返回error", 10000));
             }
