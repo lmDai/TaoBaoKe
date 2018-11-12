@@ -22,8 +22,8 @@ public interface InputInvateInfoContract {
     abstract class Presenter extends BasePresenter<View> {
         public abstract void getInvateInfo(String invite_code);
 
-        public abstract void sendSmsCode(String phone, int type);
+        public abstract void sendSmsCode(String phone, int type,String user_channel_id);
 
-        public abstract void userRegister(String phone, String smscode, String user_chanel_id, String pid, String device_id);
+        public abstract void userRegister(String phone, String smscode, String user_chanel_id, String pid);
     }
 }

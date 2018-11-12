@@ -46,21 +46,21 @@ public class LoginModel {
         return codeInfo;
     }
 
-    public Observable<BaseResponse<String>> sendSmsCode(String phone, int type) {
+    public Observable<BaseResponse<String>> sendSmsCode(String phone, int type, String user_channel_id) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("phone", phone);
         requestMap.put("type", type);
+        requestMap.put("user_channel_id", user_channel_id);
         Observable<BaseResponse<String>> codeInfo = mApiService.sendSmsCode(requestMap);
         return codeInfo;
     }
 
-    public Observable<BaseResponse<String>> userRegister(String phone, String smscode, String user_chanel_id, String pid, String device_id) {
+    public Observable<BaseResponse<String>> userRegister(String phone, String smscode, String user_chanel_id, String pid) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("phone", phone);
         requestMap.put("smscode", smscode);
         requestMap.put("user_chanel_id", user_chanel_id);
         requestMap.put("pid", pid);
-        requestMap.put("device_id", device_id);
 
         Observable<BaseResponse<String>> register = mApiService.userRegister(requestMap);
         return register;

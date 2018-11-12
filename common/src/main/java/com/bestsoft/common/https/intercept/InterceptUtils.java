@@ -3,6 +3,7 @@ package com.bestsoft.common.https.intercept;
 import com.bestsoft.common.utils.Utils;
 import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.NetworkUtils;
+import com.blankj.utilcode.utils.PhoneUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -142,6 +143,7 @@ public class InterceptUtils {
         Map<String, Object> map = new HashMap<>();
         map.put("channel_id", "2");
         map.put("client", "Android");
+        map.put("device_id", PhoneUtils.getIMEI(Utils.getContext()));
         return map;
     }
 }

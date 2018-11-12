@@ -173,7 +173,7 @@ public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.
                 finish();
                 break;
             case R.id.btn_next://发送短信验证码
-                getMvpPresenter().sendSmsCode(editCode.getText().toString().replace(" ", ""), 1);
+                getMvpPresenter().sendSmsCode(editCode.getText().toString().replace(" ", ""), 1, codeModel.getUser_channel_id());
                 break;
         }
     }
@@ -185,9 +185,9 @@ public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.
 
     @Override
     public void sendCodeSuccess() {
-        Bundle bundle=new Bundle();
-        bundle.putParcelable("codeMode",codeModel);
-        bundle.putString("phone",editCode.getText().toString().replace(" ", ""));
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("codeMode", codeModel);
+        bundle.putString("phone", editCode.getText().toString().replace(" ", ""));
         IntentUtils.get().goActivity(mContext, InputCodeActivity.class, bundle);
     }
 

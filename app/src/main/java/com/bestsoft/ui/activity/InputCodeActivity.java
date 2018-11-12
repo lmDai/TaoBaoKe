@@ -100,7 +100,7 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
                     return;
                 }
                 getMvpPresenter().userRegister(phone, verifyCodeView.getEditContent(), codeModel.getUser_channel_id()
-                        , codeModel.getPid(), PhoneUtils.getIMEI(mContext));
+                        , codeModel.getPid());
                 break;
         }
     }

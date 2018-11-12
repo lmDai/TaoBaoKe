@@ -28,8 +28,8 @@ public class InputInvateInfoPresenter extends InputInvateInfoContract.Presenter 
     }
 
     @Override
-    public void sendSmsCode(String phone, int type) {
-        LoginModel.getInstance(Utils.getContext()).sendSmsCode(phone, type)
+    public void sendSmsCode(String phone, int type,String user_channel_id) {
+        LoginModel.getInstance(Utils.getContext()).sendSmsCode(phone, type,user_channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
                 .subscribe(new ProgressObserver<String>(this, true, "发送中...") {
@@ -41,8 +41,8 @@ public class InputInvateInfoPresenter extends InputInvateInfoContract.Presenter 
     }
 
     @Override
-    public void userRegister(String phone, String smscode, String user_chanel_id, String pid, String device_id) {
-        LoginModel.getInstance(Utils.getContext()).userRegister(phone, smscode, user_chanel_id, pid, device_id)
+    public void userRegister(String phone, String smscode, String user_chanel_id, String pid) {
+        LoginModel.getInstance(Utils.getContext()).userRegister(phone, smscode, user_chanel_id, pid)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
                 .subscribe(new ProgressObserver<String>(this, true, "请稍后...") {
