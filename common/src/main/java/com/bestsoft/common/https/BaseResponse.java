@@ -7,7 +7,8 @@ package com.bestsoft.common.https;
  * @description:返回的基础类型数据
  **/
 public class BaseResponse<T> {
-
+    public static final int SUCCESS = 0;
+    public static final int FAILURE = 1;
 
     private int errorcode;
     private String msg;
@@ -35,5 +36,9 @@ public class BaseResponse<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Optional<T> transform() {
+        return new Optional<>(data);
     }
 }

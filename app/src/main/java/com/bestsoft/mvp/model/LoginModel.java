@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
 import com.bestsoft.common.https.intercept.InterceptUtils;
@@ -46,23 +48,30 @@ public class LoginModel {
         return codeInfo;
     }
 
-    public Observable<BaseResponse<String>> sendSmsCode(String phone, int type, String user_channel_id) {
+    public Observable<BaseNoDataResponse> sendSmsCode(String phone, int type, String user_channel_id) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("phone", phone);
         requestMap.put("type", type);
         requestMap.put("user_channel_id", user_channel_id);
-        Observable<BaseResponse<String>> codeInfo = mApiService.sendSmsCode(requestMap);
+        Observable<BaseNoDataResponse> codeInfo = mApiService.sendSmsCode(requestMap);
         return codeInfo;
     }
 
-    public Observable<BaseResponse<String>> userRegister(String phone, String smscode, String user_chanel_id, String pid) {
+    public Observable<BaseNoDataResponse> userRegister(String phone, String smscode, String user_chanel_id, String pid) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("phone", phone);
         requestMap.put("smscode", smscode);
-        requestMap.put("user_chanel_id", user_chanel_id);
+        requestMap.put("user_channel_id", user_chanel_id);
         requestMap.put("pid", pid);
-
-        Observable<BaseResponse<String>> register = mApiService.userRegister(requestMap);
+        Observable<BaseNoDataResponse> register = mApiService.userRegister(requestMap);
         return register;
+    }
+
+    public Observable<BaseResponse<UserModel>> login(String phone, String smscode) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("phone", phone);
+        requestMap.put("smscode", smscode);
+        Observable<BaseResponse<UserModel>> loinModel = mApiService.login(requestMap);
+        return loinModel;
     }
 }

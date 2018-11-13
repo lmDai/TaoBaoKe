@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
  * 输入邀请信息
  */
 @CreatePresenterAnnotation(InputInvateInfoPresenter.class)
-public  class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoPresenter> implements InputInvateInfoContract.View {
+public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoPresenter> implements InputInvateInfoContract.View {
 
     @BindView(R.id.img_back)
     ImageView imgBack;
@@ -96,15 +97,9 @@ public  class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCon
     }
 
     @Override
-    public void sendCodeSuccess() {
+    public void sendCodeSuccess(BaseNoDataResponse result) {
 
     }
-
-    @Override
-    public void registerSuccess() {
-
-    }
-
 
     @Override
     protected void onDestroy() {

@@ -1,6 +1,5 @@
 package com.bestsoft.base;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -43,12 +42,12 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mProxy.onCreate((V) this);
-        super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mProxy.onRestoreInstanceState(savedInstanceState.getBundle(PRESENTER_SAVE_KEY));
         }
         mLoadingDialog = new LoadingDialog(this);
+        mProxy.onCreate((V) this);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -91,7 +90,6 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
 
     @Override
     public void showProgress(String message) {
-        Log.e("single", "showProgress");
         if (mLoadingDialog != null) {
             mLoadingDialog.setMessage(message).show();
         }

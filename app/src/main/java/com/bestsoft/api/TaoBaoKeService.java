@@ -2,6 +2,10 @@ package com.bestsoft.api;
 
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.OrderConfirmModel;
+import com.bestsoft.bean.ProductModel;
+import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BaseResponse;
 
 import java.util.List;
@@ -25,6 +29,11 @@ public interface TaoBaoKeService {
     @POST(TaoBaoKeApi.TAG)
     Observable<BaseResponse<List<String>>> getTagList();
 
+    //登录
+    @POST(TaoBaoKeApi.LOGIN)
+    @FormUrlEncoded
+    Observable<BaseResponse<UserModel>> login(@FieldMap Map<String, Object> requestMap);
+
     //全部标签
     @POST(TaoBaoKeApi.TAG)
     @FormUrlEncoded
@@ -34,12 +43,34 @@ public interface TaoBaoKeService {
     @POST(TaoBaoKeApi.CODE)
     @FormUrlEncoded
     Observable<BaseResponse<CodeModel>> validateInviteCode(@FieldMap Map<String, Object> map);
+
     //发送短信验证码
     @POST(TaoBaoKeApi.SEND_SMS_CODE)
     @FormUrlEncoded
-    Observable<BaseResponse<String>> sendSmsCode(@FieldMap Map<String, Object> map);
+    Observable<BaseNoDataResponse> sendSmsCode(@FieldMap Map<String, Object> map);
+
     //会员注册
     @POST(TaoBaoKeApi.USER_REGISTER)
     @FormUrlEncoded
-    Observable<BaseResponse<String>> userRegister(@FieldMap Map<String, Object> map);
+    Observable<BaseNoDataResponse> userRegister(@FieldMap Map<String, Object> map);
+
+    //类目商品列表
+    @POST(TaoBaoKeApi.HAO_LIST)
+    @FormUrlEncoded
+    Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(@FieldMap Map<String, Object> map);
+
+    //商品详情
+    @POST(TaoBaoKeApi.HAO_DETAIL)
+    @FormUrlEncoded
+    Observable<BaseResponse<ProductModel>> getGoodDetail(@FieldMap Map<String, Object> map);
+
+    //会员信息
+    @POST(TaoBaoKeApi.USER_INFO)
+    @FormUrlEncoded
+    Observable<BaseResponse<UserModel>> getUserInfo(@FieldMap Map<String, Object> map);
+
+    //下单
+    @POST(TaoBaoKeApi.ORDER_CONFIRM)
+    @FormUrlEncoded
+    Observable<BaseResponse<OrderConfirmModel>> orderConfirm(@FieldMap Map<String, Object> map);
 }

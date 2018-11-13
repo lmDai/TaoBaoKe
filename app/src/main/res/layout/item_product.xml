@@ -11,8 +11,10 @@
         android:paddingBottom="@dimen/dp_10">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/img_pic"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_zhanwei_product" />
 
         <LinearLayout
@@ -29,6 +31,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/txt_resource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_tag"
@@ -41,6 +44,7 @@
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
+                    android:id="@+id/txt_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -57,6 +61,7 @@
                 android:layout_marginTop="@dimen/dp_6">
 
                 <TextView
+                    android:id="@+id/txt_couponmoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_item_stroke"
@@ -69,6 +74,7 @@
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/txt_sale"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -78,6 +84,7 @@
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/txt_collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_item_stroke"

@@ -7,10 +7,12 @@ package com.bestsoft;
  * @description:
  **/
 public class Constant {
-    public static final int PAGE_SIZE = 10;//每页条数
+    public static final int PAGE_SIZE = 20;//每页条数
     public static final int MY_WALLET = 0;
     public static final int ZHI_FU_BAO = 1;
     public static final String channel_id = "2";
+    public final static String USER = "user";//用户信息
+    public final static String isLOGIN = "is_login";//是否登录
 
     public interface viewType {
         int typeBanner = 1;         //轮播图

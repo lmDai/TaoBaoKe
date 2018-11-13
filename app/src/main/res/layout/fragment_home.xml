@@ -27,23 +27,48 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_home"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_round_white"
                     app:layout_scrollFlags="scroll" />
 
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tabs"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/colorWhite"
+                    android:layout_gravity="bottom"
+                    android:background="@color/color_gray">
 
-                    app:tabIndicatorColor="@color/colorPrimaryDark"
-                    app:tabIndicatorHeight="@dimen/dp_2"
-                    app:tabSelectedTextColor="@color/colorBlack"
-                    app:tabTextColor="@color/colorBlack" />
+                    <com.flyco.tablayout.SlidingTabLayout
+                        android:id="@+id/tabs"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_48"
+                        android:layout_weight="1"
+                        android:background="@color/color_gray"
+                        app:tl_indicator_color="@color/color_indicator"
+                        app:tl_indicator_height="@dimen/dp_2"
+                        app:tl_indicator_margin_bottom="@dimen/dp_6"
+                        app:tl_indicator_margin_top="@dimen/dp_4"
+                        app:tl_indicator_width_equal_title="true"
+                        app:tl_tab_padding="@dimen/dp_10"
+                        app:tl_tab_space_equal="false"
+                        app:tl_textSelectColor="@color/color_indicator"
+                        app:tl_textUnselectColor="@color/colorBlack"
+                        app:tl_textsize="@dimen/sp_16" />
+
+                    <View
+                        android:layout_width="@dimen/dp_2"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_white_round" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:padding="@dimen/dp_10"
+                        android:src="@drawable/ic_more_classify" />
+                </LinearLayout>
 
             </android.support.design.widget.AppBarLayout>
 

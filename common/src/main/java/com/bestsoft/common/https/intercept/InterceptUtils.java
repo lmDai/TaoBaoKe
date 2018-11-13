@@ -1,11 +1,16 @@
 package com.bestsoft.common.https.intercept;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.v4.content.ContextCompat;
+
 import com.bestsoft.common.utils.Utils;
 import com.blankj.utilcode.utils.LogUtils;
 import com.blankj.utilcode.utils.NetworkUtils;
 import com.blankj.utilcode.utils.PhoneUtils;
 
 import java.io.IOException;
+import java.security.Permission;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -143,7 +148,16 @@ public class InterceptUtils {
         Map<String, Object> map = new HashMap<>();
         map.put("channel_id", "2");
         map.put("client", "Android");
-        map.put("device_id", PhoneUtils.getIMEI(Utils.getContext()));
+        map.put("device_id", checkPermission() ? PhoneUtils.getIMEI(Utils.getContext()) : "");
         return map;
+    }
+
+    private static boolean checkPermission() {
+        if (ContextCompat.checkSelfPermission(Utils.getContext(), Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

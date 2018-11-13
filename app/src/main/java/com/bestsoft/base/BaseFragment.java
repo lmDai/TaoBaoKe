@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bestsoft.MyApplication;
 import com.bestsoft.R;
+import com.bestsoft.bean.UserModel;
 import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -30,6 +32,7 @@ public abstract class BaseFragment extends RxFragment {
     private boolean isViewPrepared; // 标识fragment视图已经初始化完毕
     private boolean hasFetchData; // 标识已经触发过懒加载数据
     protected ImmersionBar mImmersionBar;
+    protected UserModel userModel;
 
     @Override
     public void onAttach(Context context) {
@@ -190,6 +193,7 @@ public abstract class BaseFragment extends RxFragment {
     protected abstract int getLayout();
 
     protected void initView(LayoutInflater inflater) {
+        userModel = MyApplication.mApplication.getUser();
     }
 
     protected void initEvent() {

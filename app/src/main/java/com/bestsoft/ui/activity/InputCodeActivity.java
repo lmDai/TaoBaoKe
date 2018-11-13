@@ -10,9 +10,12 @@ import com.bestsoft.MainActivity;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
+import com.bestsoft.mvp.contract.RegisterContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
+import com.bestsoft.mvp.presenter.RegisterPresenter;
 import com.bestsoft.ui.widget.VerifyCodeView;
 import com.bestsoft.utils.DeviceUtil;
 import com.bestsoft.utils.IntentUtils;
@@ -26,8 +29,8 @@ import butterknife.OnClick;
 /**
  * 输入邀请信息
  */
-@CreatePresenterAnnotation(InputInvateInfoPresenter.class)
-public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoContract.Presenter> implements InputInvateInfoContract.View {
+@CreatePresenterAnnotation(RegisterPresenter.class)
+public class InputCodeActivity extends BaseMvpActivity<RegisterContract.View, RegisterPresenter> implements RegisterContract.View {
 
 
     @BindView(R.id.img_back)
@@ -53,10 +56,10 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
     @Override
     protected void getIntentData() {
         super.getIntentData();
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getBundleExtra("bundle");
         if (bundle != null) {
             phone = bundle.getString("phone");
-            codeModel = bundle.getParcelable("codeModel");
+            codeModel = bundle.getParcelable("codeMode");
         }
     }
 
@@ -106,18 +109,12 @@ public class InputCodeActivity extends BaseMvpActivity<InputInvateInfoContract.V
     }
 
     @Override
-    public void setCodeInfo(CodeModel codeInfo) {
-
-    }
-
-    @Override
-    public void sendCodeSuccess() {
-
-    }
-
-    @Override
-    public void registerSuccess() {
-        IntentUtils.get().goActivityKill(mContext, LoginActivity.class);
+    public void registerSuccess(BaseNoDataResponse result) {
+        ToastUtils.showShortToastSafe(mContext, result.getMsg());
+        // IntentUtils.get().goActivityKill(mContext, LoginActivity.class);
+        if (result.getErrorcode() == 0) {
+            IntentUtils.get().goActivityKill(mContext, MainActivity.class);
+        }
     }
 
     @Override

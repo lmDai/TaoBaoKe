@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
 import com.bestsoft.bean.ClassfyModel;
@@ -22,7 +23,10 @@ import com.bestsoft.ui.activity.MessageActivity;
 import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
+import com.bestsoft.ui.adapter.MenuAdapter;
+import com.bestsoft.ui.adapter.OnePlusAdapter;
 import com.bestsoft.utils.IntentUtils;
+import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -48,7 +52,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
     @BindView(R.id.recycler_home)
     RecyclerView recyclerHome;
     @BindView(R.id.tabs)
-    TabLayout tabs;
+    SlidingTabLayout tabs;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     @BindView(R.id.appbar_layout)
@@ -67,6 +71,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         txtTitle.setText("¥200000");
         mAdapters = new LinkedList<>();
         initRecyclerView();
+        getMvpPresenter().getIconClassify();//获取分类列表
     }
 
     @Override
@@ -89,45 +94,29 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
     }
 
     private void initRecyclerView() {
-
+        recyclerHome.setNestedScrollingEnabled(false);
         DelegateAdapter delegateAdapter = getMvpPresenter().initRecyclerView(recyclerHome);
-        //标题
-        BaseDelegateAdapter titleAdapter = getMvpPresenter().initTitle();
-        mAdapters.add(titleAdapter);
-        //搜索框
-        BaseDelegateAdapter searchAdapter = getMvpPresenter().initSearch();
-        mAdapters.add(searchAdapter);
-        //初始化九宫格
-        BaseDelegateAdapter menuAdapter = getMvpPresenter().initGvMenu();
-        mAdapters.add(menuAdapter);
-        //初始化banner
         BaseDelegateAdapter bannerAdapter = getMvpPresenter().initBanner();
         mAdapters.add(bannerAdapter);
+        BaseDelegateAdapter searchAdapter = getMvpPresenter().initSearch();
+        mAdapters.add(searchAdapter);
+        mAdapters.add(onePlusAdapter(1));
+        mAdapters.add(onePlusAdapter(2));
+        mAdapters.add(onePlusAdapter(3));
+        mAdapters.add(menuAdapter(1));
+        mAdapters.add(menuAdapter(2));
+        mAdapters.add(onePlusAdapter(1));
+        mAdapters.add(onePlusAdapter(2));
+        mAdapters.add(onePlusAdapter(3));
+        mAdapters.add(menuAdapter(1));
+        mAdapters.add(menuAdapter(2));
         //初始化快速入口标题
         BaseDelegateAdapter fastEntrceTitleAdapter = getMvpPresenter().initFastEntrceTitle();
         mAdapters.add(fastEntrceTitleAdapter);
         //初始化快速入口标题
         BaseDelegateAdapter fastEntraceAdapter = getMvpPresenter().initFastEntrace();
         mAdapters.add(fastEntraceAdapter);
-
-        //设置适配器
         delegateAdapter.setAdapters(mAdapters);
-
-        recyclerHome.requestLayout();
-        List<String> mTitleList = new ArrayList<>();
-        List<Fragment> mFragments = new ArrayList<>();
-        mTitleList.add("他们都在买");
-        mTitleList.add("猜你喜欢");
-        mTitleList.add("女装");
-        mTitleList.add("母婴");
-        mTitleList.add("居家");
-        mFragments.add(new PopularProductFragment());
-        mFragments.add(new ProductListFragment());
-        mFragments.add(new ProductListFragment());
-        mFragments.add(new ProductListFragment());
-        mFragments.add(new ProductListFragment());
-        initTabViewPager(mFragments, mTitleList);
-
     }
 
     private void initTabViewPager(List<Fragment> mFragments, List<String> mTitleList) {
@@ -136,8 +125,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
         viewpager.setOffscreenPageLimit(4);
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.setupWithViewPager(viewpager);
+        tabs.setViewPager(viewpager);
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -163,7 +151,28 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
 
     @Override
     public void setClassfiy(List<ClassfyModel> classfiy) {
+        List<Fragment> mFragments = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
+        for (ClassfyModel classfyModel : classfiy) {
+            titles.add(classfyModel.getName());
+            mFragments.add(new ProductListFragment().newInstance(classfyModel.getKey()));
+        }
+        initTabViewPager(mFragments, titles);
+    }
 
+
+    private OnePlusAdapter onePlusAdapter(int type) {
+        return new OnePlusAdapter(mContext, new LinearLayoutHelper(), 1, type);
+    }
+
+    /**
+     * 菜单
+     *
+     * @param type
+     * @return
+     */
+    private MenuAdapter menuAdapter(int type) {
+        return new MenuAdapter(mContext, new LinearLayoutHelper(), 1, type);
     }
 
 }

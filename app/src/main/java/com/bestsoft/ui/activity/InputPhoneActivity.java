@@ -17,12 +17,14 @@ import android.widget.TextView;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.utils.IntentUtils;
 import com.blankj.utilcode.utils.RegexUtils;
 import com.blankj.utilcode.utils.StringUtils;
+import com.blankj.utilcode.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,7 +35,7 @@ import static com.bestsoft.utils.IntentUtils.OPEN_ACTIVITY_KEY;
  * 输入邀请信息
  */
 @CreatePresenterAnnotation(InputInvateInfoPresenter.class)
-public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoContract.Presenter> implements InputInvateInfoContract.View {
+public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.View, InputInvateInfoPresenter> implements InputInvateInfoContract.View {
 
 
     @BindView(R.id.img_back)
@@ -131,8 +133,6 @@ public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.i("single", s.length() + s.toString());
-
                 if (s.length() == 13) {
                     if (RegexUtils.isMobileExact(s.toString().replace(" ", "")))
                         btnNext.setEnabled(true);
@@ -184,16 +184,14 @@ public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.
     }
 
     @Override
-    public void sendCodeSuccess() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("codeMode", codeModel);
-        bundle.putString("phone", editCode.getText().toString().replace(" ", ""));
-        IntentUtils.get().goActivity(mContext, InputCodeActivity.class, bundle);
-    }
-
-    @Override
-    public void registerSuccess() {
-
+    public void sendCodeSuccess(BaseNoDataResponse result) {
+        ToastUtils.showShortToastSafe(mContext, result.getMsg());
+        if (result.getErrorcode() == 0) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("codeMode", codeModel);
+            bundle.putString("phone", editCode.getText().toString().replace(" ", ""));
+            IntentUtils.get().goActivity(mContext, InputCodeActivity.class, bundle);
+        }
     }
 
     @Override

@@ -28,6 +28,10 @@
     <string name="title_balance">余额</string>
     <string name="title_invite">邀请</string>
     <string name="loading">加载中</string>
-
-
+    <string name="message_permission_always_failed">请在设置中设置权限:\\n\\n%1$s</string>
+    <string name="title_dialog">提示</string>
+    <string name="setting">设置</string>
+    <string name="cancel">取消</string>
+    <string name="message_permission_rationale">同意此权限以方便使用:\n\n%1$s</string>
+    <string name="resume">同意</string>
 </resources>

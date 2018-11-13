@@ -4,10 +4,14 @@ import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.OrderConfirmModel;
+import com.bestsoft.bean.ProductModel;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
+import com.bestsoft.common.https.intercept.InterceptUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -43,4 +47,52 @@ public class MainModel {
         return classify;
     }
 
+    /**
+     * 类目商品列表
+     *
+     * @param channel_id
+     * @return
+     */
+    public Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(String key, String sort, String page, String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("key", key);
+        requestMap.put("sort", sort);
+        requestMap.put("page", page);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<List<ProductModel>>> classify = mApiService.getGoodHaoList(requestMap);
+        return classify;
+    }
+
+    /**
+     * 类目商品详情
+     *
+     * @param channel_id
+     * @return
+     */
+    public Observable<BaseResponse<ProductModel>> getHaoDetail(String item_id, String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("item_id", item_id);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<ProductModel>> detail = mApiService.getGoodDetail(requestMap);
+        return detail;
+    }
+
+    public Observable<BaseResponse<OrderConfirmModel>> orderConfirm(String item_id, String item_title,
+                                                                    String item_price,String item_end_price,
+                                                                    String tkrates,String tkmoney,
+                                                                    String user_id,String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("item_id", item_id);
+        requestMap.put("item_title", item_title);
+        requestMap.put("item_price", item_price);
+        requestMap.put("item_end_price", item_end_price);
+        requestMap.put("tkrates", tkrates);
+        requestMap.put("tkmoney", tkmoney);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<OrderConfirmModel>> orderConfirm = mApiService.orderConfirm(requestMap);
+        return orderConfirm;
+    }
 }

@@ -35,7 +35,7 @@ public class RecyclerViewUtils {
             adapter.addData(data);
         }
         if (size < Constant.PAGE_SIZE) {
-            adapter.loadMoreEnd(isRefresh);
+            adapter.loadMoreEnd(false);
         } else {
             adapter.loadMoreComplete();
         }

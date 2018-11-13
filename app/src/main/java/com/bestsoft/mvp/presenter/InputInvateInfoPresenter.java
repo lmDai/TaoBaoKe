@@ -1,6 +1,7 @@
 package com.bestsoft.mvp.presenter;
 
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
@@ -28,27 +29,14 @@ public class InputInvateInfoPresenter extends InputInvateInfoContract.Presenter 
     }
 
     @Override
-    public void sendSmsCode(String phone, int type,String user_channel_id) {
-        LoginModel.getInstance(Utils.getContext()).sendSmsCode(phone, type,user_channel_id)
+    public void sendSmsCode(String phone, int type, String user_channel_id) {
+        LoginModel.getInstance(Utils.getContext()).sendSmsCode(phone, type, user_channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
-                .compose(RxUtil.hanResult())
-                .subscribe(new ProgressObserver<String>(this, true, "发送中...") {
+                .compose(RxUtil.handNoResponseResult())
+                .subscribe(new ProgressObserver<BaseNoDataResponse>(this, true, "发送中...") {
                     @Override
-                    public void onSuccess(String result) {
-                        getView().sendCodeSuccess();//发送验证码成功
-                    }
-                });
-    }
-
-    @Override
-    public void userRegister(String phone, String smscode, String user_chanel_id, String pid) {
-        LoginModel.getInstance(Utils.getContext()).userRegister(phone, smscode, user_chanel_id, pid)
-                .compose(RxUtil.observableIO2Main(getView()))
-                .compose(RxUtil.hanResult())
-                .subscribe(new ProgressObserver<String>(this, true, "请稍后...") {
-                    @Override
-                    public void onSuccess(String result) {
-                        getView().registerSuccess();//注册成功
+                    public void onSuccess(BaseNoDataResponse result) {
+                        getView().sendCodeSuccess(result);//发送验证码成功
                     }
                 });
     }

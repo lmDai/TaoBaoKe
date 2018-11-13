@@ -9,14 +9,19 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.PersonalContract;
+import com.bestsoft.mvp.presenter.PersonalPresenter;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.KeyboardUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class PersonalActivity extends BaseActivity {
-
+@CreatePresenterAnnotation(PersonalPresenter.class)
+public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, PersonalPresenter> implements PersonalContract.View {
 
     @BindView(R.id.img_back)
     ImageView imgBack;
@@ -58,6 +63,7 @@ public class PersonalActivity extends BaseActivity {
         KeyboardUtils.setRipper(llCheckUpdate);
         KeyboardUtils.setRipper(llFeedback);
         KeyboardUtils.setRipper(btnLogout);
+        getMvpPresenter().getUserInfo(userModel.getId(), userModel.getChannel_id());
     }
 
     @Override
@@ -94,5 +100,11 @@ public class PersonalActivity extends BaseActivity {
             case R.id.btn_logout:
                 break;
         }
+    }
+
+    @Override
+    public void setUserModel(UserModel userModel) {
+        txtName.setText(userModel.getNickname());
+        txtId.setText(userModel.getId());
     }
 }
