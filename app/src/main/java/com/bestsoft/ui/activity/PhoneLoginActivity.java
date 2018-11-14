@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bestsoft.Constant;
 import com.bestsoft.MainActivity;
 import com.bestsoft.MyApplication;
 import com.bestsoft.R;
@@ -19,6 +20,7 @@ import com.bestsoft.mvp.contract.LoginContract;
 import com.bestsoft.mvp.presenter.LoginPresenter;
 import com.bestsoft.ui.widget.ClearEditText;
 import com.bestsoft.utils.IntentUtils;
+import com.bestsoft.utils.SpUtils;
 import com.blankj.utilcode.utils.RegexUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 
@@ -102,6 +104,7 @@ public class PhoneLoginActivity extends BaseMvpActivity<LoginContract.View, Logi
 
     @Override
     public void loginSuccess(UserModel userModel) {
+        SpUtils.setParam(mContext, Constant.isLOGIN, true);
         MyApplication.mApplication.setUserModel(userModel);
         IntentUtils.get().goActivityKill(mContext, MainActivity.class);//手机号登录
     }

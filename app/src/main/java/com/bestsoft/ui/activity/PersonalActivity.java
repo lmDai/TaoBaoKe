@@ -63,7 +63,7 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
         KeyboardUtils.setRipper(llCheckUpdate);
         KeyboardUtils.setRipper(llFeedback);
         KeyboardUtils.setRipper(btnLogout);
-        getMvpPresenter().getUserInfo(userModel.getId(), userModel.getChannel_id());
+        getMvpPresenter().getUserInfo(userModel.getId(), userModel.getUser_channel_id());
     }
 
     @Override

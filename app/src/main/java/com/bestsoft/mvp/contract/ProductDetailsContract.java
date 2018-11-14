@@ -25,6 +25,6 @@ public interface ProductDetailsContract {
         public abstract void orderConfirm(String item_id, String item_title,
                                           String item_price, String item_end_price,
                                           String tkrates, String tkmoney,
-                                          String user_id, String user_channel_id);
+                                          String user_id, String user_channel_id,String couponmoney);
     }
 }

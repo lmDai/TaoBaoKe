@@ -23,13 +23,14 @@ public class ProductListPresenter extends ProductListContract.Presenter {
     private int currentPage = 1;
 
     @Override
-    public void getGoodHaoList(String key, String sort, String user_id, String user_channel_id, boolean isRefresh) {
+    public void getGoodHaoList(String key, String sort, String user_id, String user_channel_id, int user_level, boolean isRefresh) {
         if (isRefresh) {
             currentPage = 1;
         } else {
             ++currentPage;
         }
-        MainModel.getInstance(Utils.getContext()).getGoodHaoList(key, sort, currentPage + "", user_id, user_channel_id)
+        MainModel.getInstance(Utils.getContext()).getGoodHaoList(key, sort, currentPage + "",
+                user_id, user_channel_id, user_level)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
                 .subscribe(new ProgressObserver<List<ProductModel>>(this, true, "请稍后...") {
@@ -41,6 +42,7 @@ public class ProductListPresenter extends ProductListContract.Presenter {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         super.onError(e);
+                        getView().showError(e, isRefresh);
                     }
                 });
     }

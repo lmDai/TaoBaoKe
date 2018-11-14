@@ -30,8 +30,8 @@ public interface TaoBaoKeService {
     Observable<BaseResponse<List<String>>> getTagList();
 
     //登录
-    @POST(TaoBaoKeApi.LOGIN)
     @FormUrlEncoded
+    @POST(TaoBaoKeApi.LOGIN)
     Observable<BaseResponse<UserModel>> login(@FieldMap Map<String, Object> requestMap);
 
     //全部标签
@@ -70,7 +70,7 @@ public interface TaoBaoKeService {
     Observable<BaseResponse<UserModel>> getUserInfo(@FieldMap Map<String, Object> map);
 
     //下单
-    @POST(TaoBaoKeApi.ORDER_CONFIRM)
     @FormUrlEncoded
+    @POST(TaoBaoKeApi.ORDER_CONFIRM)
     Observable<BaseResponse<OrderConfirmModel>> orderConfirm(@FieldMap Map<String, Object> map);
 }

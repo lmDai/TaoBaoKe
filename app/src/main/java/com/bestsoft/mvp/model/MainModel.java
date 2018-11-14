@@ -53,13 +53,15 @@ public class MainModel {
      * @param channel_id
      * @return
      */
-    public Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(String key, String sort, String page, String user_id, String user_channel_id) {
+    public Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(String key, String sort, String page
+            , String user_id, String user_channel_id, int user_level) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("key", key);
         requestMap.put("sort", sort);
         requestMap.put("page", page);
         requestMap.put("user_id", user_id);
         requestMap.put("user_channel_id", user_channel_id);
+        requestMap.put("user_level", user_level);
         Observable<BaseResponse<List<ProductModel>>> classify = mApiService.getGoodHaoList(requestMap);
         return classify;
     }
@@ -80,9 +82,10 @@ public class MainModel {
     }
 
     public Observable<BaseResponse<OrderConfirmModel>> orderConfirm(String item_id, String item_title,
-                                                                    String item_price,String item_end_price,
-                                                                    String tkrates,String tkmoney,
-                                                                    String user_id,String user_channel_id) {
+                                                                    String item_price, String item_end_price,
+                                                                    String tkrates, String tkmoney,
+                                                                    String user_id, String user_channel_id,
+                                                                    String couponmoney) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("item_id", item_id);
         requestMap.put("item_title", item_title);
@@ -92,6 +95,7 @@ public class MainModel {
         requestMap.put("tkmoney", tkmoney);
         requestMap.put("user_id", user_id);
         requestMap.put("user_channel_id", user_channel_id);
+        requestMap.put("couponmoney", couponmoney);
         Observable<BaseResponse<OrderConfirmModel>> orderConfirm = mApiService.orderConfirm(requestMap);
         return orderConfirm;
     }

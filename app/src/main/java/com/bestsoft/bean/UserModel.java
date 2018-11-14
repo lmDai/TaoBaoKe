@@ -27,14 +27,14 @@ public class UserModel {
     private int balance;
     private int discount;
     private String invite_code;
-    private String channel_id;
+    private String user_channel_id;
 
-    public String getChannel_id() {
-        return channel_id;
+    public String getUser_channel_id() {
+        return user_channel_id;
     }
 
-    public void setChannel_id(String channel_id) {
-        this.channel_id = channel_id;
+    public void setUser_channel_id(String user_channel_id) {
+        this.user_channel_id = user_channel_id;
     }
 
     public String getId() {

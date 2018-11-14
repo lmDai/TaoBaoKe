@@ -40,6 +40,7 @@
     <color name="item_popular_user">#141414</color>
     <color name="item_circle_title">#363636</color>
     <color name="color_fast">#101010</color>
+    <color name="filter_tab_color">#0F0F0F</color>
     <color name="color_order_head">#585858</color>
     <color name="item_circle_time">#6F6F6F</color>
     <color name="color_share_title">#747474</color>
@@ -65,4 +66,6 @@
     <color name="item_fast_entrance">#FFF4EA</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="color_33000000">#33000000</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
 </resources>

@@ -23,9 +23,11 @@ public class RecyclerViewUtils {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.addItemDecoration(new SpacesItemDecoration(SizeUtils.dp2px(mContext, 10)));
     }
+
     public static void initLinerLayoutRecyclerViewPadding(RecyclerView recyclerView, Context mContext) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }
+
     public static void handleNormalAdapter(BaseQuickAdapter adapter, List<?> data, boolean isRefresh) {
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
@@ -40,6 +42,7 @@ public class RecyclerViewUtils {
             adapter.loadMoreComplete();
         }
     }
+
     public static void handleAdapter(BaseQuickAdapter adapter, SmartRefreshLayout refreshLayout, List<?> data, boolean isRefresh) {
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
@@ -55,6 +58,14 @@ public class RecyclerViewUtils {
             adapter.loadMoreEnd(isRefresh);
         } else {
             adapter.loadMoreComplete();
+        }
+    }
+
+    public static void handError(BaseQuickAdapter adapter, boolean isRefresh) {
+        if (isRefresh) {
+            adapter.setEnableLoadMore(true);
+        } else {
+            adapter.loadMoreEnd(false);
         }
     }
 }

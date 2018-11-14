@@ -48,4 +48,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+    <!-- popwindow动画 -->
+    <style name="popwin_anim_style">
+        <item name="android:windowEnterAnimation">@anim/pop_arrow_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_arrow_out</item>
+    </style>
 </resources>

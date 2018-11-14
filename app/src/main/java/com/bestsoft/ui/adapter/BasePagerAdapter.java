@@ -15,7 +15,7 @@ import java.util.List;
 public class BasePagerAdapter extends FragmentPagerAdapter {
 
     private List<?> mFragment;
-    private List<String> mTitleList;
+    public List<String> mTitleList;
 
     /**
      * 普通，主页使用

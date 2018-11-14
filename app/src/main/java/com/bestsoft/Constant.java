@@ -13,6 +13,9 @@ public class Constant {
     public static final String channel_id = "2";
     public final static String USER = "user";//用户信息
     public final static String isLOGIN = "is_login";//是否登录
+    public static final int HOME_REFRESH = 0x001;//首页刷新
+    public static final int HOME_END_REFRESH = 0x002;//首页结束
+    public static final String REFRESH = "refresh";
 
     public interface viewType {
         int typeBanner = 1;         //轮播图

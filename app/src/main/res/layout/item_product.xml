@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,18 +100,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center|start">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_6"
                     android:text="¥"
                     android:textColor="@color/item_color_stroke"
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/txt_end_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="20"
@@ -118,6 +121,7 @@
                     android:textSize="@dimen/sp_20" />
 
                 <TextView
+                    android:id="@+id/txt_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -131,6 +135,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/txt_estimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_tag_red"
@@ -138,11 +143,12 @@
                     android:paddingTop="@dimen/dp_2"
                     android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_2"
-                    android:text="预计赚¥2.56"
+                    tools:text="预计赚¥2.56"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
+                    android:id="@+id/txt_upgrade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -151,7 +157,7 @@
                     android:paddingTop="@dimen/dp_2"
                     android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_2"
-                    android:text="升级赚¥2.56 "
+                    tools:text="升级赚¥2.56 "
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/sp_10" />
             </LinearLayout>
