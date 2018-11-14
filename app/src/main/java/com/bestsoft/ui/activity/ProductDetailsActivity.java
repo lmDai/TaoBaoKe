@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.baichuan.android.trade.AlibcTrade;
-import com.alibaba.baichuan.android.trade.adapter.login.AlibcLogin;
-import com.alibaba.baichuan.android.trade.callback.AlibcLoginCallback;
 import com.alibaba.baichuan.android.trade.callback.AlibcTradeCallback;
 import com.alibaba.baichuan.android.trade.constants.AlibcConstants;
 import com.alibaba.baichuan.android.trade.model.AlibcShowParams;
@@ -24,11 +22,14 @@ import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.OrderConfirmModel;
 import com.bestsoft.bean.ProductModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.ProductDetailsContract;
 import com.bestsoft.mvp.presenter.ProductDetailsPresenter;
 import com.bestsoft.ui.widget.GlideImageLoader;
 import com.bestsoft.utils.GlideUtil;
+import com.blankj.utilcode.utils.ToastUtils;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.youth.banner.Banner;
 
 import java.util.HashMap;
@@ -74,11 +75,16 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
     @BindView(R.id.txt_seller_nick)
     TextView txtSellerNick;
     @BindView(R.id.img_pic)
-    ImageView imgPic;
+    SubsamplingScaleImageView imgPic;
     @BindView(R.id.txt_title_product)
     TextView txtTitleProduct;
+    @BindView(R.id.btn_buy)
+    Button btnBuy;
+    @BindView(R.id.btn_share)
+    Button btnShare;
     private String itemId;
     private ProductModel result;
+    private int type = 0;//0立即领券，1 立即购买
 
     @Override
     protected int getLayout() {
@@ -129,45 +135,34 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
         txtCouponmoney.setText(result.getCouponmoney() + "元优惠券");
         txtTime.setText("使用时间:" + result.getCouponstarttime() + "-" + result.getCouponendtime());
         txtSellerNick.setText(result.getSellernick());
-        GlideUtil.into(mContext, result.getItem_pic_copy(), imgPic);
+        GlideUtil.intoLongImagView(mContext, result.getItem_pic_copy(), imgPic);
     }
 
     @Override
     public void orderConfirm(OrderConfirmModel orderConfirmModel) {
-//        login();
+        Log.i("single", orderConfirmModel.getTaobao_pid());
 //提供给三方传递配置参数
         Map<String, String> exParams = new HashMap<>();
         exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
-
-        //商品详情page
-        AlibcBasePage detailPage = new AlibcDetailPage(itemId);
-
-//        //实例化店铺打开page
-//        AlibcBasePage shopPage = new AlibcShopPage(shopId);
-//
-//        //实例化添加购物车打开page
-//        AlibcBasePage addCardPage = new AlibcAddCartPage(itemId);
-//
-//        //实例化我的订单打开page
-//        AlibcBasePage ordersPage = new AlibcMyOrdersPage(status, allOrder);
-//
-//        //实例化我的购物车打开page
-//        AlibcBasePage myCartsPage = new AlibcMyCartsPage();
-//
-        //实例化URL打开page
-//        AlibcBasePage page = new AlibcPage(result.getCouponurl());
-
+        AlibcBasePage alibcBasePage = null;
+        if (type == 0) {//立即领券
+            alibcBasePage = new AlibcPage(result.getCouponurl());
+        } else if (type == 1) {//立即购买
+            alibcBasePage = new AlibcDetailPage(itemId);
+        }
         //设置页面打开方式
-        AlibcShowParams showParams = new AlibcShowParams(OpenType.H5, false);
+        AlibcShowParams showParams = new AlibcShowParams(OpenType.Native, false);
         AlibcTaokeParams taokeParams = new AlibcTaokeParams(orderConfirmModel.getTaobao_pid(), orderConfirmModel.getTaobao_pid(), null);
 
         //使用百川sdk提供默认的Activity打开detail
-        AlibcTrade.show(mContext, detailPage, showParams, taokeParams, exParams,
+        AlibcTrade.show(mContext, alibcBasePage, showParams, taokeParams, exParams,
                 new AlibcTradeCallback() {
                     @Override
                     public void onTradeSuccess(TradeResult tradeResult) {
                         //打开电商组件，用户操作中成功信息回调。tradeResult：成功信息（结果类型：加购，支付；支付结果）
                         Log.i("single", "onTradeSuccess");
+                        Log.i("single", String.valueOf(tradeResult.payResult.paySuccessOrders));
+                        getMvpPresenter().oderPayConfirm(orderConfirmModel.getOrder_id(), String.valueOf(tradeResult.payResult.paySuccessOrders), userModel.getId(), userModel.getUser_channel_id());
                     }
 
                     @Override
@@ -178,26 +173,36 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
                 });
     }
 
-
-    @OnClick(R.id.txt_confirm)
-    public void onViewClicked() {
-        getMvpPresenter().orderConfirm(result.getItem_id(), result.getItem_title(), result.getItem_price()
-                , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
-                , result.getCouponmoney());
+    @Override
+    public void orderPayConfirm(BaseNoDataResponse response) {
+        ToastUtils.showShortToastSafe(mContext, response.getMsg());
     }
 
-    public void login() {
-        final AlibcLogin alibcLogin = AlibcLogin.getInstance();
-        alibcLogin.showLogin(mContext, new AlibcLoginCallback() {
-            @Override
-            public void onSuccess() {
-                Log.i("single", "onSuccessdengludfasdfds");
-            }
+    @OnClick({R.id.img_back, R.id.txt_confirm, R.id.btn_buy, R.id.btn_share})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                finish();
+                break;
+            case R.id.txt_confirm:
+                type = 0;
+                getMvpPresenter().orderConfirm(result.getItem_id(), result.getItem_title(), result.getItem_price()
+                        , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
+                        , result.getCouponmoney());
+                break;
+            case R.id.btn_buy:
+                type = 1;
+                getMvpPresenter().orderConfirm(result.getItem_id(), result.getItem_title(), result.getItem_price()
+                        , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
+                        , result.getCouponmoney());
+                break;
+            case R.id.btn_share:
+                break;
+        }
+    }
 
-            @Override
-            public void onFailure(int i, String s) {
-                Log.i("single", "onFailure" + s);
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -10,6 +10,16 @@ public class OrderConfirmModel {
     private String taobao_pid;
     private String order_id;
 
+    private String coupon_click_url;
+
+    public String getCoupon_click_url() {
+        return coupon_click_url;
+    }
+
+    public void setCoupon_click_url(String coupon_click_url) {
+        this.coupon_click_url = coupon_click_url;
+    }
+
     public String getTaobao_pid() {
         return taobao_pid;
     }

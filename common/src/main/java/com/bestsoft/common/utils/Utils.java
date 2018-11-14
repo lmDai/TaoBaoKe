@@ -3,8 +3,10 @@ package com.bestsoft.common.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.util.TypedValue;
 import android.view.View;
 
 /**
@@ -45,18 +47,18 @@ public class Utils {
             }
             context = ((ContextWrapper) context).getBaseContext();
         }
-        throw  new IllegalStateException("View" +view+"is not attached to an activity");
+        throw new IllegalStateException("View" + view + "is not attached to an activity");
     }
 
     /**
      * 全局获取String 的方法
+     *
      * @param id 资源id
      * @return String
      */
-    public static String getString(@StringRes int id){
+    public static String getString(@StringRes int id) {
         return context.getResources().getString(id);
     }
-
 
 
     public static <T> T checkNotNull(T obj) {
@@ -64,5 +66,18 @@ public class Utils {
             throw new NullPointerException();
         }
         return obj;
+    }
+
+    public static float dpToPx(float dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
+    }
+
+    public static float spToPx(float sp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, Resources.getSystem().getDisplayMetrics());
+    }
+
+    public static float pxToSp(float px) {
+        final float fontScale = Resources.getSystem().getDisplayMetrics().scaledDensity;
+        return (int) (px / fontScale + 0.5f);
     }
 }

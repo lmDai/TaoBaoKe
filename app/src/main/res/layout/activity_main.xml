@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.LoginActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,7 +45,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/tab_order_normal"
                 android:gravity="center"
-                android:text="去淘宝购物"
+                android:text="订单得收益"
                 android:textColor="@color/tab_color"
                 android:textSize="@dimen/sp_12" />
 
@@ -57,7 +58,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/tab_skill_normal"
                 android:gravity="center"
-                android:text="去淘宝购物"
+                android:text="我要涨技能"
                 android:textColor="@color/tab_color"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>

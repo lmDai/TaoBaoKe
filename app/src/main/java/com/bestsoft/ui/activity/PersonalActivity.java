@@ -14,6 +14,7 @@ import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.PersonalContract;
 import com.bestsoft.mvp.presenter.PersonalPresenter;
+import com.bestsoft.utils.GlideUtil;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.KeyboardUtils;
 
@@ -106,5 +107,6 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
     public void setUserModel(UserModel userModel) {
         txtName.setText(userModel.getNickname());
         txtId.setText(userModel.getId());
+        GlideUtil.loadCirclePic(mContext, userModel.getHeadimgurl(), imgHead);
     }
 }

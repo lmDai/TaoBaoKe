@@ -29,7 +29,10 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderModel, BaseViewHolde
         TextView mTextView = helper.getView(R.id.txt_title);
         MagicTextViewUtil.getInstance(mTextView)
                 .append(R.drawable.ic_order_tag)
-                .append("红色123454541213456456445飞机撒开了饭啊减肥的拉萨附近啊飞机开酸辣粉解开了将阿凡达死了阿警方撒了饭")
+                .append(item.getItem_title())
                 .show();
+        helper.setText(R.id.txt_commission, item.getCommission())
+                .setText(R.id.txt_commission1, "收货到账" + item.getCommission());
+
     }
 }

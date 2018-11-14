@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.KeyWordModel;
 import com.bestsoft.bean.OrderConfirmModel;
 import com.bestsoft.bean.ProductModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
 import com.bestsoft.common.https.intercept.InterceptUtils;
@@ -50,7 +52,6 @@ public class MainModel {
     /**
      * 类目商品列表
      *
-     * @param channel_id
      * @return
      */
     public Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(String key, String sort, String page
@@ -69,7 +70,6 @@ public class MainModel {
     /**
      * 类目商品详情
      *
-     * @param channel_id
      * @return
      */
     public Observable<BaseResponse<ProductModel>> getHaoDetail(String item_id, String user_id, String user_channel_id) {
@@ -98,5 +98,47 @@ public class MainModel {
         requestMap.put("couponmoney", couponmoney);
         Observable<BaseResponse<OrderConfirmModel>> orderConfirm = mApiService.orderConfirm(requestMap);
         return orderConfirm;
+    }
+
+    public Observable<BaseNoDataResponse> orderPayConfirm(String order_id, String third_number,
+                                                          String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("order_id", order_id);
+        requestMap.put("third_number", third_number);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseNoDataResponse> orderPayConfirm = mApiService.orderPayConfirm(requestMap);
+        return orderPayConfirm;
+    }
+
+    /**
+     * 商品关键字搜索
+     *
+     * @return
+     */
+    public Observable<BaseResponse<List<ProductModel>>> getGoodsSearch(String keyword, String sort, String page
+            , String user_id, String user_channel_id, int user_level) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("keyword", keyword);
+        requestMap.put("sort", sort);
+        requestMap.put("page", page);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        requestMap.put("user_level", user_level);
+        Observable<BaseResponse<List<ProductModel>>> classify = mApiService.getGoodsSearch(requestMap);
+        return classify;
+    }
+
+    /**
+     * 获取热搜关键字
+     *
+     * @return
+     */
+    public Observable<BaseResponse<List<KeyWordModel>>> getHotKeyWord(String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<List<KeyWordModel>>> classify = mApiService.getHotKeyWord(requestMap);
+        return classify;
     }
 }

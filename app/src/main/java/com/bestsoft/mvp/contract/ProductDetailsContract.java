@@ -2,6 +2,7 @@ package com.bestsoft.mvp.contract;
 
 import com.bestsoft.bean.OrderConfirmModel;
 import com.bestsoft.bean.ProductModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 
@@ -17,6 +18,8 @@ public interface ProductDetailsContract {
         void setResult(ProductModel result);
 
         void orderConfirm(OrderConfirmModel orderConfirmModel);
+
+        void orderPayConfirm(BaseNoDataResponse response);
     }
 
     abstract class Presenter extends BasePresenter<View> {
@@ -25,6 +28,8 @@ public interface ProductDetailsContract {
         public abstract void orderConfirm(String item_id, String item_title,
                                           String item_price, String item_end_price,
                                           String tkrates, String tkmoney,
-                                          String user_id, String user_channel_id,String couponmoney);
+                                          String user_id, String user_channel_id, String couponmoney);
+
+        public abstract void oderPayConfirm(String order_id, String third_number, String user_id, String user_channel_id);
     }
 }

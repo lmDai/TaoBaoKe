@@ -6,11 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.ali.auth.third.core.util.SystemUtils;
 import com.bestsoft.MyApplication;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.KeyboardUtils;
+import com.blankj.utilcode.utils.ScreenUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -121,6 +123,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             case MotionEvent.ACTION_DOWN:
                 View view = getCurrentFocus();
                 KeyboardUtils.clickBlankArea2HideSoftInput(view, ev, mContext);//调用方法判断是否需要隐藏键盘
+                if (KeyboardUtils.isFastDoubleClick()) {
+                    return true;
+                }
                 break;
             default:
                 break;

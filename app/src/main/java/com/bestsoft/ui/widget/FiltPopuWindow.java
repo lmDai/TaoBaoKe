@@ -2,6 +2,7 @@ package com.bestsoft.ui.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
@@ -91,7 +92,7 @@ public class FiltPopuWindow extends PopupWindow {
             return this;
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
         public Builder build() {
             newItemLayout(getRowCount(), columnCount);
             //添加选项
@@ -133,7 +134,7 @@ public class FiltPopuWindow extends PopupWindow {
         /**
          * 添加选项
          */
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
         private void addTabs(List<ClassfyModel> classfyModels) {
 
             for (int i = 0; i < classfyModels.size(); i++) {
@@ -175,7 +176,7 @@ public class FiltPopuWindow extends PopupWindow {
             }
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
         private GridLayout.LayoutParams getItemLayoutParams(int i, int row) {
             //使用Spec定义子控件的位置和比重
             GridLayout.Spec rowSpec = GridLayout.spec(row, 1f);
@@ -225,5 +226,16 @@ public class FiltPopuWindow extends PopupWindow {
             void onClick(FiltPopuWindow popupWindow, ClassfyModel confirm);
         }
 
+    }
+
+    @Override
+    public void showAsDropDown(View anchor) {
+        if (Build.VERSION.SDK_INT >= 24) {
+            Rect rect = new Rect();
+            anchor.getGlobalVisibleRect(rect);
+            int h = anchor.getResources().getDisplayMetrics().heightPixels - rect.bottom;
+            setHeight(h);
+        }
+        super.showAsDropDown(anchor);
     }
 }

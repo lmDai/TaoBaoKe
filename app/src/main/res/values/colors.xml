@@ -7,7 +7,7 @@
     <color name="color_tag_end">#E30000</color>
     <color name="item_income_title">#FF3B00</color>
     <color name="item_popular_account">#FF3100</color>
-    <color name="color_indicator">#FE4524</color>
+    <color name="color_indicator">#FFDE59</color>
     <color name="dialog_submit">#FF6200</color>
     <color name="color_tag_start">#FF8D5A</color>
     <color name="color_order_wrong">#FC6519</color>
@@ -29,6 +29,7 @@
     <color name="item_color_title">#1F1F1F</color>
     <color name="text_normal">#222222</color>
     <color name="text_info">#020202</color>
+    <color name="text_search">#2F2F2F</color>
     <color name="text_toolbar_title">#242424</color>
     <color name="text_input_title">#171717</color>
     <color name="dialog_info">#4E4E4E</color>
@@ -47,6 +48,7 @@
     <color name="color_invite_code">#727272</color>
     <color name="color_order_right">#888888</color>
     <color name="color_invite_number">#ACACAC</color>
+    <color name="color_tag_title">#CCCCCC</color>
     <color name="color_gray">#ADADAD</color>
     <color name="color_message_time">#AAAAAA</color>
     <color name="dialog_cancel">#A7A7A7</color>

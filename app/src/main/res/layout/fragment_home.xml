@@ -22,52 +22,69 @@
                 android:id="@+id/appbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="820dp"
-                app:elevation="@dimen/dp_0">
+                android:background="@color/colorBg"
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_home"
+                app:layout_behavior="com.bestsoft.ui.widget.FixBounceV26Behavior">
+
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/layout_collapsing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_round_white"
-                    app:layout_scrollFlags="scroll" />
+                    android:paddingBottom="@dimen/dp_20"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:scrimAnimationDuration="0">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <!--<android.support.v7.widget.RecyclerView-->
+                        <!--android:id="@+id/recycler_home"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/bg_round_white"-->
+                        <!--android:overScrollMode="never" />-->
+                        <include layout="@layout/layout_home_title" />
+
+                        <include layout="@layout/layout_home_search" />
+
+                        <include layout="@layout/item_menu" />
+
+                        <include layout="@layout/layout_home_banner" />
+
+                        <include layout="@layout/base_view_title" />
+
+                        <include layout="@layout/layout_home_entrace" />
+                    </LinearLayout>
+                </android.support.design.widget.CollapsingToolbarLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/color_gray">
+                    android:layout_gravity="bottom">
 
                     <com.flyco.tablayout.SlidingTabLayout
                         android:id="@+id/tabs"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_48"
                         android:layout_weight="1"
-                        android:background="@color/color_gray"
+                        android:background="@color/colorWhite"
                         app:tl_indicator_color="@color/color_indicator"
                         app:tl_indicator_height="@dimen/dp_2"
-                        app:tl_indicator_margin_bottom="@dimen/dp_6"
                         app:tl_indicator_margin_top="@dimen/dp_4"
                         app:tl_indicator_width_equal_title="true"
                         app:tl_tab_padding="@dimen/dp_10"
                         app:tl_tab_space_equal="false"
-                        app:tl_textSelectColor="@color/color_indicator"
+                        app:tl_textSelectColor="@color/colorBlack"
                         app:tl_textUnselectColor="@color/colorBlack"
                         app:tl_textsize="@dimen/sp_16" />
-
-                    <View
-                        android:layout_width="@dimen/dp_2"
-                        android:layout_height="@dimen/dp_25"
-                        android:layout_gravity="center"
-                        android:background="@drawable/bg_white_round" />
 
                     <ImageButton
                         android:id="@+id/btn_select"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:background="@null"
+                        android:background="@color/colorWhite"
                         android:padding="@dimen/dp_10"
                         android:src="@drawable/ic_more_classify" />
                 </LinearLayout>

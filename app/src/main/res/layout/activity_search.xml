@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_search" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlEnablePureScrollMode="true">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_hot_search"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="热门搜索"
+                    android:textColor="@color/color_tag_title"
+                    android:textSize="@dimen/sp_14" />
+
+                <com.bestsoft.common.widget.FlowTagLayout
+                    android:id="@+id/tag_hot_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:item_background="@drawable/bg_round_tag"
+                    app:item_bottomMargin="@dimen/dp_8"
+                    app:item_bottomPadding="@dimen/dp_6"
+                    app:item_leftMargin="@dimen/dp_8"
+                    app:item_leftPadding="@dimen/dp_12"
+                    app:item_rightMargin="@dimen/dp_8"
+                    app:item_rightPadding="@dimen/dp_12"
+                    app:item_textColor="#717171"
+                    app:item_textSize="@dimen/sp_12"
+                    app:item_topMargin="@dimen/dp_8"
+                    app:item_topPadding="@dimen/dp_6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_history"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="历史搜索"
+                    android:textColor="@color/color_tag_title"
+                    android:textSize="@dimen/sp_14" />
+
+                <com.bestsoft.common.widget.FlowTagLayout
+                    android:id="@+id/tag_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:item_background="@drawable/bg_round_tag"
+                    app:item_bottomMargin="@dimen/dp_8"
+                    app:item_bottomPadding="@dimen/dp_6"
+                    app:item_leftMargin="@dimen/dp_8"
+                    app:item_leftPadding="@dimen/dp_12"
+                    app:item_rightMargin="@dimen/dp_8"
+                    app:item_rightPadding="@dimen/dp_12"
+                    app:item_textColor="#717171"
+                    app:item_textSize="@dimen/sp_12"
+                    app:item_topMargin="@dimen/dp_8"
+                    app:item_topPadding="@dimen/dp_6" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

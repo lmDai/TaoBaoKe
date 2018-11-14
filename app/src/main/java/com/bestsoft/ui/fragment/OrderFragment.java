@@ -1,5 +1,7 @@
 package com.bestsoft.ui.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,24 +9,34 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bestsoft.R;
-import com.bestsoft.base.BaseFragment;
+import com.bestsoft.base.BaseMvpFragment;
+import com.bestsoft.bean.ProfitModel;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.OrderContract;
+import com.bestsoft.mvp.presenter.OrderPresenter;
 import com.bestsoft.ui.activity.MessageActivity;
 import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.activity.TeamDataActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.utils.IntentUtils;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * @package: com.bestsoft.ui.fragment
@@ -32,7 +44,8 @@ import butterknife.OnClick;
  * @date:2018/10/31
  * @description: 订单
  **/
-public class OrderFragment extends BaseFragment {
+@CreatePresenterAnnotation(OrderPresenter.class)
+public class OrderFragment extends BaseMvpFragment<OrderContract.View, OrderPresenter> implements OrderContract.View {
     @BindView(R.id.img_me)
     ImageView imgMe;
     @BindView(R.id.txt_title)
@@ -49,6 +62,17 @@ public class OrderFragment extends BaseFragment {
     ViewPager viewpager;
     @BindView(R.id.btn_team_data)
     Button btnTeamData;
+    @BindView(R.id.txt_couponmoney)
+    TextView txtCouponmoney;
+    @BindView(R.id.txt_commission)
+    TextView txtCommission;
+    @BindView(R.id.btn_own_commission)
+    Button btnOwnCommission;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout refreshLayout;
+    Unbinder unbinder;
+    private int position = 0;
+    private BasePagerAdapter myAdapter;
 
     @Override
     protected int getLayout() {
@@ -65,11 +89,13 @@ public class OrderFragment extends BaseFragment {
         mTitleList.add(mContext.getString(R.string.tab_paid));//已付款
         mTitleList.add(mContext.getString(R.string.tab_settled));//已结算
         mTitleList.add(mContext.getString(R.string.tab_expired));//已失效
+        //1.待支付订单，2.已支付订单，3.退款订单，4.完成订单，5.失效订单 0.全部
         mFragments.add(new OrderListFragment().newInstance(0));
-        mFragments.add(new OrderListFragment().newInstance(1));
         mFragments.add(new OrderListFragment().newInstance(2));
-        mFragments.add(new OrderListFragment().newInstance(3));
+        mFragments.add(new OrderListFragment().newInstance(4));
+        mFragments.add(new OrderListFragment().newInstance(5));
         initTabViewPager(mFragments, mTitleList);
+
     }
 
     @Override
@@ -79,9 +105,27 @@ public class OrderFragment extends BaseFragment {
                 .init();
     }
 
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                ((OrderListFragment) myAdapter.getItem(position)).lazyFetchData();
+                getMvpPresenter().userProfit(userModel.getId(), userModel.getUser_channel_id());
+            }
+        });
+    }
+
+    @Override
+    protected void lazyFetchData() {
+        super.lazyFetchData();
+        getMvpPresenter().userProfit(userModel.getId(), userModel.getUser_channel_id());
+    }
+
     private void initTabViewPager(List<Fragment> mFragments, List<String> mTitleList) {
         FragmentManager supportFragmentManager = getChildFragmentManager();
-        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
+        myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
         viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
         viewpager.setOffscreenPageLimit(mFragments.size());
@@ -94,7 +138,7 @@ public class OrderFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-
+                OrderFragment.this.position = position;
             }
 
             @Override
@@ -119,4 +163,13 @@ public class OrderFragment extends BaseFragment {
                 break;
         }
     }
+
+    @Override
+    public void setUserProfit(ProfitModel result) {
+        txtCommission.setText("待到账订单" + result.getCommission() + "元");
+        txtCouponmoney.setText(result.getCouponmoney());
+        btnOwnCommission.setText("含自购" + result.getOwn_commission());
+        refreshLayout.finishRefresh();
+    }
+
 }

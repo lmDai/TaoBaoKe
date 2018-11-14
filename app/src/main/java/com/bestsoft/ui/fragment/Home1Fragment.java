@@ -48,8 +48,8 @@ import butterknife.BindView;
 @CreatePresenterAnnotation(HomeFragmentPresenter.class)
 public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, HomeFragmentPresenter> implements HomeFragmentContract.View {
 
-    @BindView(R.id.recycler_home)
-    RecyclerView recyclerHome;
+//    @BindView(R.id.recycler_home)
+//    RecyclerView recyclerHome;
     @BindView(R.id.tabs)
     SlidingTabLayout tabs;
     @BindView(R.id.tabs_title)
@@ -92,41 +92,41 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
     }
 
     private void initRecyclerView() {
-        recyclerHome.setNestedScrollingEnabled(false);
-        DelegateAdapter delegateAdapter = getMvpPresenter().initRecyclerView(recyclerHome);
-        BaseDelegateAdapter bannerAdapter = getMvpPresenter().initBanner();
-        mAdapters.add(bannerAdapter);
-        BaseDelegateAdapter searchAdapter = getMvpPresenter().initSearch();
-        mAdapters.add(searchAdapter);
-        mAdapters.add(onePlusAdapter(1));
-        mAdapters.add(onePlusAdapter(2));
-        mAdapters.add(onePlusAdapter(3));
-        mAdapters.add(menuAdapter(1));
-        mAdapters.add(menuAdapter(2));
-        mAdapters.add(onePlusAdapter(1));
-        mAdapters.add(onePlusAdapter(2));
-        mAdapters.add(onePlusAdapter(3));
-        mAdapters.add(menuAdapter(1));
-        mAdapters.add(menuAdapter(2));
-        //初始化快速入口标题
-        BaseDelegateAdapter fastEntrceTitleAdapter = getMvpPresenter().initFastEntrceTitle();
-        mAdapters.add(fastEntrceTitleAdapter);
-        //初始化快速入口标题
-        BaseDelegateAdapter fastEntraceAdapter = getMvpPresenter().initFastEntrace();
-        mAdapters.add(fastEntraceAdapter);
-
-        //设置适配器
-        delegateAdapter.setAdapters(mAdapters);
-
-        final Handler mainHandler = new Handler(Looper.getMainLooper());
-
-        trigger = new Runnable() {
-            @Override
-            public void run() {
-                recyclerHome.requestLayout();
-            }
-        };
-        mainHandler.postDelayed(trigger, 1000);
+//        recyclerHome.setNestedScrollingEnabled(false);
+//        DelegateAdapter delegateAdapter = getMvpPresenter().initRecyclerView(recyclerHome);
+//        BaseDelegateAdapter bannerAdapter = getMvpPresenter().initBanner();
+//        mAdapters.add(bannerAdapter);
+//        BaseDelegateAdapter searchAdapter = getMvpPresenter().initSearch();
+//        mAdapters.add(searchAdapter);
+//        mAdapters.add(onePlusAdapter(1));
+//        mAdapters.add(onePlusAdapter(2));
+//        mAdapters.add(onePlusAdapter(3));
+//        mAdapters.add(menuAdapter(1));
+//        mAdapters.add(menuAdapter(2));
+//        mAdapters.add(onePlusAdapter(1));
+//        mAdapters.add(onePlusAdapter(2));
+//        mAdapters.add(onePlusAdapter(3));
+//        mAdapters.add(menuAdapter(1));
+//        mAdapters.add(menuAdapter(2));
+//        //初始化快速入口标题
+//        BaseDelegateAdapter fastEntrceTitleAdapter = getMvpPresenter().initFastEntrceTitle();
+//        mAdapters.add(fastEntrceTitleAdapter);
+//        //初始化快速入口标题
+//        BaseDelegateAdapter fastEntraceAdapter = getMvpPresenter().initFastEntrace();
+//        mAdapters.add(fastEntraceAdapter);
+//
+//        //设置适配器
+//        delegateAdapter.setAdapters(mAdapters);
+//
+//        final Handler mainHandler = new Handler(Looper.getMainLooper());
+//
+//        trigger = new Runnable() {
+//            @Override
+//            public void run() {
+//                recyclerHome.requestLayout();
+//            }
+//        };
+//        mainHandler.postDelayed(trigger, 1000);
     }
 
     @Override

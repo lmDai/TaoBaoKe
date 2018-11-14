@@ -2,8 +2,12 @@ package com.bestsoft.api;
 
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.KeyWordModel;
 import com.bestsoft.bean.OrderConfirmModel;
+import com.bestsoft.bean.OrderModel;
 import com.bestsoft.bean.ProductModel;
+import com.bestsoft.bean.ProfitModel;
+import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BaseResponse;
@@ -59,6 +63,16 @@ public interface TaoBaoKeService {
     @FormUrlEncoded
     Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(@FieldMap Map<String, Object> map);
 
+    //商品关键字
+    @POST(TaoBaoKeApi.HAO_SEARCH)
+    @FormUrlEncoded
+    Observable<BaseResponse<List<ProductModel>>> getGoodsSearch(@FieldMap Map<String, Object> map);
+
+    //获取热搜关键词
+    @POST(TaoBaoKeApi.HOT_KEYWORD)
+    @FormUrlEncoded
+    Observable<BaseResponse<List<KeyWordModel>>> getHotKeyWord(@FieldMap Map<String, Object> map);
+
     //商品详情
     @POST(TaoBaoKeApi.HAO_DETAIL)
     @FormUrlEncoded
@@ -73,4 +87,24 @@ public interface TaoBaoKeService {
     @FormUrlEncoded
     @POST(TaoBaoKeApi.ORDER_CONFIRM)
     Observable<BaseResponse<OrderConfirmModel>> orderConfirm(@FieldMap Map<String, Object> map);
+
+    //下单
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.ORDER_PAY_CONFIRM)
+    Observable<BaseNoDataResponse> orderPayConfirm(@FieldMap Map<String, Object> map);
+
+    //会员收益数据
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.USER_PROFIT)
+    Observable<BaseResponse<ProfitModel>> userProfit(@FieldMap Map<String, Object> map);
+
+    //会员订单数据
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.USER_ORDER)
+    Observable<BaseResponse<List<OrderModel>>> userOrder(@FieldMap Map<String, Object> map);
+
+    //会员订单数据
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.USER_UPGRADE)
+    Observable<BaseResponse<UpgradeModel>> userUpgrade(@FieldMap Map<String, Object> map);
 }

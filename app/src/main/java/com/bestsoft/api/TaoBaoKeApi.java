@@ -21,8 +21,20 @@ public class TaoBaoKeApi {
     public final static String HAO_LIST = "app/goods/hao-list";
     //商品详情
     public final static String HAO_DETAIL = "app/goods/hao-detail";
+    //商品关键字搜索
+    public final static String HAO_SEARCH = "app/goods/hao-search";
+    //获取热搜关键字
+    public final static String HOT_KEYWORD = "app/goods/hao-hot-keyword";
     //会员信息
     public final static String USER_INFO = "app/user/info";
     //下单
     public final static String ORDER_CONFIRM = "app/order/confirm";
+    //订单确认支付接口
+    public final static String ORDER_PAY_CONFIRM = "app/order/pay-confirm";
+    //会员收益数据
+    public final static String USER_PROFIT = "app/user/profit";
+    //会员订单数据
+    public final static String USER_ORDER = "app/user/order";
+    //会员升级数据
+    public final static String USER_UPGRADE = "app/user/upgrade";
 }

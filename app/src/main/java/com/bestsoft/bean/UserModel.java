@@ -19,6 +19,7 @@ public class UserModel {
      * invite_code : F1569EEA
      */
 
+
     private String id;
     private String nickname;
     private int level;
@@ -28,6 +29,13 @@ public class UserModel {
     private int discount;
     private String invite_code;
     private String user_channel_id;
+    /**
+     * id : 3
+     * headimgurl :
+     * user_channel_id : 2
+     */
+
+    private String headimgurl;
 
     public String getUser_channel_id() {
         return user_channel_id;
@@ -99,5 +107,13 @@ public class UserModel {
 
     public void setInvite_code(String invite_code) {
         this.invite_code = invite_code;
+    }
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
     }
 }

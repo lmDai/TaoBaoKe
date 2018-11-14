@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_gray">
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_20">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -17,13 +18,12 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_wangwang" />
+            android:src="@drawable/ic_taobao" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:text="找投资"
+            android:text="淘宝"
             android:textColor="@color/text_toolbar_title"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>
@@ -41,13 +41,12 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_wangwang" />
+            android:src="@drawable/ic_jd" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:text="找投资"
+            android:text="京东"
             android:textColor="@color/text_toolbar_title"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>
@@ -65,13 +64,12 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_wangwang" />
+            android:src="@drawable/ic_pdd" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:text="找投资"
+            android:text="拼多多"
             android:textColor="@color/text_toolbar_title"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>
@@ -89,13 +87,12 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_wangwang" />
+            android:src="@drawable/ic_daka" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:text="找投资"
+            android:text="早起打卡"
             android:textColor="@color/text_toolbar_title"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>

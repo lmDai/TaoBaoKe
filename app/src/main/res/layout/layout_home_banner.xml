@@ -9,7 +9,7 @@
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_230"
+        android:layout_height="@dimen/dp_160"
         app:indicator_drawable_selected="@color/item_fan_in"
         app:indicator_drawable_unselected="@android:color/white"
         app:indicator_height="@dimen/dp_4"

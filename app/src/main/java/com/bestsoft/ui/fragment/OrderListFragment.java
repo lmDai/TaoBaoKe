@@ -7,7 +7,11 @@ import android.view.View;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseFragment;
+import com.bestsoft.base.BaseMvpFragment;
 import com.bestsoft.bean.OrderModel;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.OrderListContract;
+import com.bestsoft.mvp.presenter.OrderListPresenter;
 import com.bestsoft.ui.adapter.OrderListAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -24,14 +28,15 @@ import butterknife.BindView;
  * @date:2018/11/2
  * @description: 订单列表
  **/
-public class OrderListFragment extends BaseFragment {
+@CreatePresenterAnnotation(OrderListPresenter.class)
+public class OrderListFragment extends BaseMvpFragment<OrderListContract.View, OrderListPresenter> implements OrderListContract.View {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
     private OrderListAdapter orderAdapter;
     private static final String TYPE = "type";
-    public int tag;//0 全部订单，1 已付款，2 已结算，3 已失效
+    public int tag;//1.待支付订单，2.已支付订单，3.退款订单，4.完成订单，5.失效订单 0.全部
 
     public OrderListFragment newInstance(int tag) {
         OrderListFragment orderListFragment = new OrderListFragment();
@@ -58,15 +63,12 @@ public class OrderListFragment extends BaseFragment {
         addHeader();//添加头部
         RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
         recyclerView.setAdapter(orderAdapter);
-        initData();
     }
 
-    private void initData() {
-        List<OrderModel> modelList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            modelList.add(new OrderModel());
-        }
-        orderAdapter.setNewData(modelList);
+    @Override
+    protected void lazyFetchData() {
+        super.lazyFetchData();
+        getMvpPresenter().getUserOrder(tag + "", userModel.getId(), userModel.getUser_channel_id(), true);
     }
 
     @Override
@@ -75,12 +77,7 @@ public class OrderListFragment extends BaseFragment {
         orderAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                //todo 加载更多
-                List<OrderModel> modelList = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    modelList.add(new OrderModel());
-                }
-                RecyclerViewUtils.handleNormalAdapter(orderAdapter, modelList, false);
+                getMvpPresenter().getUserOrder(tag + "", userModel.getId(), userModel.getUser_channel_id(), false);
             }
         }, recyclerView);
     }
@@ -88,5 +85,20 @@ public class OrderListFragment extends BaseFragment {
     private void addHeader() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.order_list_head, null, false);
         orderAdapter.addHeaderView(view);
+    }
+
+    @Override
+    public void showOrderList(List<OrderModel> models, boolean isRefresh) {
+        RecyclerViewUtils.handleNormalAdapter(orderAdapter, models, isRefresh);
+    }
+
+    @Override
+    public void showError(Throwable throwable, boolean isRefresh) {
+        RecyclerViewUtils.handError(orderAdapter, isRefresh);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

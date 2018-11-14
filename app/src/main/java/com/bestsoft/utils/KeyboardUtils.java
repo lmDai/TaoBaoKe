@@ -53,4 +53,16 @@ public class KeyboardUtils {
                 .rippleHover(true)
                 .create();
     }
+
+
+    private static long mExitTime;
+
+    public static boolean isFastDoubleClick() {
+        if ((System.currentTimeMillis() - mExitTime) > 500) {
+            mExitTime = System.currentTimeMillis();
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
