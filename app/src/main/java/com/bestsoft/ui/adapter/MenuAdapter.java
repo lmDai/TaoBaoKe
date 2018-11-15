@@ -46,7 +46,7 @@ public class MenuAdapter extends DelegateAdapter.Adapter<MenuAdapter.MainViewHol
     public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         if (type == 1) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_menu, parent, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.layout_menu, parent, false);
         } else if (type == 2) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_menu_two, parent, false);
         }

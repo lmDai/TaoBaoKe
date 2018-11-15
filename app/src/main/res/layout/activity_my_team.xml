@@ -72,6 +72,7 @@
 
 
                             <TextView
+                                android:id="@+id/txt_teams_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_10"
@@ -107,13 +108,13 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dp_6"
-                                    android:text="累计粉丝(人)"
+                                    android:text="累计赚取收益"
                                     android:textColor="@color/colorBlack"
                                     android:textSize="@dimen/sp_12" />
                             </LinearLayout>
 
-
                             <TextView
+                                android:id="@+id/txt_commission"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_10"
@@ -163,6 +164,7 @@
                             android:textSize="@dimen/sp_12" />
 
                         <TextView
+                            android:id="@+id/txt_potential_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_6"
@@ -196,6 +198,7 @@
                             android:textSize="@dimen/sp_12" />
 
                         <TextView
+                            android:id="@+id/txt_direct_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_6"
@@ -229,6 +232,7 @@
                             android:textSize="@dimen/sp_12" />
 
                         <TextView
+                            android:id="@+id/txt_indirect_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_6"

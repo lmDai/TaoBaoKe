@@ -5,7 +5,9 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.IconModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
@@ -25,6 +27,10 @@ public interface HomeFragmentContract {
         Context getContext();
 
         void setClassfiy(List<ClassfyModel> classfiy);
+
+        void setAdvert(List<AdvertModel> model);
+
+        void setIconPage(List<IconModel> iconPage);
     }
 
 
@@ -44,6 +50,10 @@ public interface HomeFragmentContract {
         public abstract BaseDelegateAdapter initFastEntrace();//初始化快速入口内容
 
         public abstract void getIconClassify();//获取所有标签
+
+        public abstract void getAdvert(String user_id, String user_channel_id);//广告
+
+        public abstract void getIconpage(String user_id, String user_channel_id);
 
     }
 

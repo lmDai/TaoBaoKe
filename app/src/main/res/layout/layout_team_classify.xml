@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_all"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/btn_classify_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="综合"
+            android:textColor="@drawable/radio_text_check"
+            android:textSize="@dimen/sp_12" />
+
+        <RadioButton
+            android:id="@+id/rb_payed"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/btn_classify_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="已付款"
+            android:textColor="@drawable/radio_text_check"
+            android:textSize="@dimen/sp_12" />
+
+        <RadioButton
+            android:id="@+id/rb_checked"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/btn_classify_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="已结算"
+            android:textColor="@drawable/radio_text_check"
+            android:textSize="@dimen/sp_12" />
+
+        <RadioButton
+            android:id="@+id/rb_invalid"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/btn_classify_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="已失效"
+            android:textColor="@drawable/radio_text_check"
+            android:textSize="@dimen/sp_12" />
+    </RadioGroup>
+</LinearLayout>

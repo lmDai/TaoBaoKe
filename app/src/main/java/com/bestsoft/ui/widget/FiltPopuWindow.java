@@ -1,5 +1,6 @@
 package com.bestsoft.ui.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -7,10 +8,12 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,7 +38,7 @@ import java.util.List;
 public class FiltPopuWindow extends PopupWindow {
     public FiltPopuWindow(Context context, View view) {
         //这里可以修改popupwindow的宽高
-        super(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        super(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setContentView(view);
         initViews();
     }

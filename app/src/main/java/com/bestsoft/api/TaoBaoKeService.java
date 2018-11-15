@@ -1,15 +1,21 @@
 package com.bestsoft.api;
 
+import com.bestsoft.bean.AdvertModel;
+import com.bestsoft.bean.ChartModel;
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.IconModel;
 import com.bestsoft.bean.KeyWordModel;
 import com.bestsoft.bean.OrderConfirmModel;
 import com.bestsoft.bean.OrderModel;
 import com.bestsoft.bean.ProductModel;
 import com.bestsoft.bean.ProfitModel;
+import com.bestsoft.bean.TeamOrderModel;
+import com.bestsoft.bean.TeamProfitModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
+import com.bestsoft.common.https.BasePageResponse;
 import com.bestsoft.common.https.BaseResponse;
 
 import java.util.List;
@@ -61,12 +67,12 @@ public interface TaoBaoKeService {
     //类目商品列表
     @POST(TaoBaoKeApi.HAO_LIST)
     @FormUrlEncoded
-    Observable<BaseResponse<List<ProductModel>>> getGoodHaoList(@FieldMap Map<String, Object> map);
+    Observable<BasePageResponse<List<ProductModel>>> getGoodHaoList(@FieldMap Map<String, Object> map);
 
     //商品关键字
     @POST(TaoBaoKeApi.HAO_SEARCH)
     @FormUrlEncoded
-    Observable<BaseResponse<List<ProductModel>>> getGoodsSearch(@FieldMap Map<String, Object> map);
+    Observable<BasePageResponse<List<ProductModel>>> getGoodsSearch(@FieldMap Map<String, Object> map);
 
     //获取热搜关键词
     @POST(TaoBaoKeApi.HOT_KEYWORD)
@@ -110,5 +116,23 @@ public interface TaoBaoKeService {
     //团队收益数据
     @FormUrlEncoded
     @POST(TaoBaoKeApi.TEAM_PROFIT)
-    Observable<BaseResponse<UpgradeModel>> userTeamProfit(@FieldMap Map<String, Object> map);
+    Observable<BaseResponse<TeamProfitModel>> userTeamProfit(@FieldMap Map<String, Object> map);
+
+    //会员团队订单
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.TEAM_ORDER)
+    Observable<BaseResponse<List<TeamOrderModel>>> userTeamOrder(@FieldMap Map<String, Object> map);
+
+    //会员团队收益图表
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.USER_CHART)
+    Observable<BaseResponse<ChartModel>> userChart(@FieldMap Map<String, Object> map);
+    //首页广告
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.ADVERT_HOME)
+    Observable<BaseResponse<List<AdvertModel>>> homeAdavert(@FieldMap Map<String, Object> map);
+    //首页图标
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.ICON_PAGE)
+    Observable<BaseResponse<List<IconModel>>> homeIconpage(@FieldMap Map<String, Object> map);
 }

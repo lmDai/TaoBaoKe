@@ -85,6 +85,7 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
     private String itemId;
     private ProductModel result;
     private int type = 0;//0立即领券，1 立即购买
+    private OrderConfirmModel orderConfirmModel;
 
     @Override
     protected int getLayout() {
@@ -109,14 +110,15 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
     @Override
     protected void getIntentData() {
         super.getIntentData();
-        ProductModel productModel = getIntent().getParcelableExtra(OPEN_ACTIVITY_KEY);
-        itemId = productModel.getItem_id();
-        getMvpPresenter().getHaoDetail(productModel.getItem_id(), userModel.getId(), userModel.getUser_channel_id());
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        if (bundle != null) {
+            itemId = bundle.getString("item_id");
+        }
+        getMvpPresenter().getHaoDetail(itemId, userModel.getId(), userModel.getUser_channel_id());
         if (userModel.getLevel() == 1) {
             txtUpgrade.setVisibility(View.GONE);
         } else {
             txtUpgrade.setVisibility(View.VISIBLE);
-            txtUpgrade.setText("赚¥" + productModel.getUpgrade());
         }
     }
 
@@ -136,12 +138,22 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
         txtTime.setText("使用时间:" + result.getCouponstarttime() + "-" + result.getCouponendtime());
         txtSellerNick.setText(result.getSellernick());
         GlideUtil.intoLongImagView(mContext, result.getItem_pic_copy(), imgPic);
+        txtUpgrade.setText("赚¥" + result.getCommission());
     }
 
     @Override
     public void orderConfirm(OrderConfirmModel orderConfirmModel) {
-        Log.i("single", orderConfirmModel.getTaobao_pid());
-//提供给三方传递配置参数
+        this.orderConfirmModel = orderConfirmModel;
+        openTaoBao();
+    }
+
+    @Override
+    public void orderPayConfirm(BaseNoDataResponse response) {
+        ToastUtils.showShortToastSafe(mContext, response.getMsg());
+    }
+
+    public void openTaoBao() {
+        //提供给三方传递配置参数
         Map<String, String> exParams = new HashMap<>();
         exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
         AlibcBasePage alibcBasePage = null;
@@ -152,8 +164,7 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
         }
         //设置页面打开方式
         AlibcShowParams showParams = new AlibcShowParams(OpenType.Native, false);
-        AlibcTaokeParams taokeParams = new AlibcTaokeParams(orderConfirmModel.getTaobao_pid(), orderConfirmModel.getTaobao_pid(), null);
-
+        AlibcTaokeParams taokeParams = new AlibcTaokeParams(userModel.getTaobao_pid(), userModel.getTaobao_pid(), null);
         //使用百川sdk提供默认的Activity打开detail
         AlibcTrade.show(mContext, alibcBasePage, showParams, taokeParams, exParams,
                 new AlibcTradeCallback() {
@@ -162,7 +173,9 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
                         //打开电商组件，用户操作中成功信息回调。tradeResult：成功信息（结果类型：加购，支付；支付结果）
                         Log.i("single", "onTradeSuccess");
                         Log.i("single", String.valueOf(tradeResult.payResult.paySuccessOrders));
-                        getMvpPresenter().oderPayConfirm(orderConfirmModel.getOrder_id(), String.valueOf(tradeResult.payResult.paySuccessOrders), userModel.getId(), userModel.getUser_channel_id());
+                        if (orderConfirmModel != null) {
+                            getMvpPresenter().oderPayConfirm(orderConfirmModel.getOrder_id(), String.valueOf(tradeResult.payResult.paySuccessOrders), userModel.getId(), userModel.getUser_channel_id());
+                        }
                     }
 
                     @Override
@@ -173,11 +186,6 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
                 });
     }
 
-    @Override
-    public void orderPayConfirm(BaseNoDataResponse response) {
-        ToastUtils.showShortToastSafe(mContext, response.getMsg());
-    }
-
     @OnClick({R.id.img_back, R.id.txt_confirm, R.id.btn_buy, R.id.btn_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -186,13 +194,12 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
                 break;
             case R.id.txt_confirm:
                 type = 0;
-                getMvpPresenter().orderConfirm(result.getItem_id(), result.getItem_title(), result.getItem_price()
-                        , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
-                        , result.getCouponmoney());
+                openTaoBao();
                 break;
             case R.id.btn_buy:
                 type = 1;
-                getMvpPresenter().orderConfirm(result.getItem_id(), result.getItem_title(), result.getItem_price()
+                String pic = result.getItem_pic() == null ? "" : result.getItem_pic().get(0);
+                getMvpPresenter().orderConfirm(result.getItem_id(), pic, result.getItem_title(), result.getItem_price()
                         , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
                         , result.getCouponmoney());
                 break;

@@ -2,11 +2,9 @@ package com.bestsoft.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
@@ -180,8 +178,9 @@ public class ProductListFragment extends BaseMvpFragment<ProductListContract.Vie
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ProductModel productModel = productAdapter.getItem(position);
-
-                IntentUtils.get().goActivity(mContext, ProductDetailsActivity.class, productModel);
+                Bundle bundle = new Bundle();
+                bundle.putString("item_id", productModel.getItem_id());
+                IntentUtils.get().goActivity(mContext, ProductDetailsActivity.class, bundle);
             }
         });
     }

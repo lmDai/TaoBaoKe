@@ -19,7 +19,9 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.bestsoft.Constant;
 import com.bestsoft.R;
+import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.IconModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
@@ -219,6 +221,32 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
                     @Override
                     public void onSuccess(List<ClassfyModel> result) {
                         getView().setClassfiy(result);
+                    }
+                });
+    }
+
+    @Override
+    public void getAdvert(String user_id, String user_channel_id) {
+        MainModel.getInstance(Utils.getContext()).homeAdavert(user_id, user_channel_id)
+                .compose(RxUtil.observableIO2Main(getView()))
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<List<AdvertModel>>(this, true, "加载中...") {
+                    @Override
+                    public void onSuccess(List<AdvertModel> result) {
+                        getView().setAdvert(result);
+                    }
+                });
+    }
+
+    @Override
+    public void getIconpage(String user_id, String user_channel_id) {
+        MainModel.getInstance(Utils.getContext()).homeIconpage(user_id, user_channel_id)
+                .compose(RxUtil.observableIO2Main(getView()))
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<List<IconModel>>(this, true, "加载中...") {
+                    @Override
+                    public void onSuccess(List<IconModel> result) {
+                        getView().setIconPage(result);
                     }
                 });
     }

@@ -11,9 +11,18 @@
         app:srlEnableLoadMore="false"
         app:srlEnableRefresh="false">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/colorBg"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_team_classify" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

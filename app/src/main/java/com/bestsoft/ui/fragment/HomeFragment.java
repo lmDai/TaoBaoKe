@@ -6,8 +6,10 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,26 +22,37 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
+import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.IconModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.presenter.HomeFragmentPresenter;
 import com.bestsoft.ui.activity.MessageActivity;
 import com.bestsoft.ui.activity.PersonalActivity;
+import com.bestsoft.ui.activity.ProductDetailsActivity;
+import com.bestsoft.ui.activity.ProductListActivity;
 import com.bestsoft.ui.activity.SearchActivity;
+import com.bestsoft.ui.activity.WebViewActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
+import com.bestsoft.ui.adapter.IconAdapter;
 import com.bestsoft.ui.adapter.MenuAdapter;
 import com.bestsoft.ui.adapter.OnePlusAdapter;
+import com.bestsoft.ui.widget.ClassifyPopu;
 import com.bestsoft.ui.widget.FiltPopuWindow;
 import com.bestsoft.ui.widget.GlideImageLoader;
+import com.bestsoft.ui.widget.ItemClickListener;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.SpacesItemDecoration;
+import com.blankj.utilcode.utils.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,12 +96,14 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
     TextView tvTitle;
     @BindView(R.id.recycler_entrance)
     RecyclerView recyclerEntrance;
-
-
+    @BindView(R.id.recycler_icon)
+    RecyclerView recyclerIcon;
     private List<DelegateAdapter.Adapter> mAdapters;
     private int position;
     private BasePagerAdapter myAdapter;
     private List<ClassfyModel> classfiy;
+    private IconAdapter iconAdapter;
+    private ClassifyPopu classifyPopu;
 
 
     @Override
@@ -103,12 +118,8 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
         mAdapters = new LinkedList<>();
         initRecyclerView();
         getMvpPresenter().getIconClassify();//获取分类列表
-        String[] urls = mContext.getResources().getStringArray(R.array.url);
-        List list = Arrays.asList(urls);
-        List<?> images = new ArrayList(list);
-        banner.setImages(images)
-                .setImageLoader(new GlideImageLoader())
-                .start();
+        getMvpPresenter().getAdvert(userModel.getId(), userModel.getUser_channel_id());
+        getMvpPresenter().getIconpage(userModel.getId(), userModel.getUser_channel_id());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerEntrance.setLayoutManager(linearLayoutManager);
@@ -129,6 +140,16 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 ((ProductListFragment) myAdapter.getItem(position)).lazyFetchData();
                 refreshLayout.finishRefresh();
+            }
+        });
+        iconAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                IconModel iconModel = iconAdapter.getData().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", iconModel.getName());
+                bundle.putString("key", iconModel.getKey());
+                IntentUtils.get().goActivity(mContext, ProductListActivity.class, bundle);
             }
         });
     }
@@ -163,6 +184,23 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
      * 显示筛选框
      */
     public void showFilterPopu() {
+//        classifyPopu = new ClassifyPopu(mContext, classfiy, R.layout.item_menu, 1);
+//        classifyPopu.showPopupWindow(tabs);
+//        classifyPopu.setOnItemClickListener(new ItemClickListener() {
+//            @Override
+//            public void onItemClick(Object obj, int position) {
+//                classifyPopu.dismiss();
+//                classifyPopu = null;
+//                if (classfiy.contains(classfiy.get(position)))
+//                    viewpager.setCurrentItem(position);
+//            }
+//        });
+//        classifyPopu.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                btnSelect.setImageResource(R.drawable.ic_more_classify);
+//            }
+//        });
         FiltPopuWindow mFilter = new FiltPopuWindow.Builder(mContext, new FiltPopuWindow.Builder.OnCloseListener() {
             @Override
             public void onClick(FiltPopuWindow popupWindow, ClassfyModel confirm) {
@@ -188,21 +226,13 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
 
 
     private void initRecyclerView() {
-//        recyclerHome.setNestedScrollingEnabled(false);
-//        DelegateAdapter delegateAdapter = getMvpPresenter().initRecyclerView(recyclerHome);
-//        BaseDelegateAdapter bannerAdapter = getMvpPresenter().initBanner();
-//        mAdapters.add(bannerAdapter);
-//        BaseDelegateAdapter searchAdapter = getMvpPresenter().initSearch();
-//        mAdapters.add(searchAdapter);
-//        mAdapters.add(onePlusAdapter(3));
-//        mAdapters.add(menuAdapter(2));
-//        //初始化快速入口标题
-//        BaseDelegateAdapter fastEntrceTitleAdapter = getMvpPresenter().initFastEntrceTitle();
-//        mAdapters.add(fastEntrceTitleAdapter);
-//        //初始化快速入口标题
-//        BaseDelegateAdapter fastEntraceAdapter = getMvpPresenter().initFastEntrace();
-//        mAdapters.add(fastEntraceAdapter);
-//        delegateAdapter.setAdapters(mAdapters);
+        recyclerIcon.setNestedScrollingEnabled(false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 5);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerIcon.setLayoutManager(gridLayoutManager);
+        recyclerIcon.addItemDecoration(new SpacesItemDecoration(0));
+        iconAdapter = new IconAdapter(R.layout.item_menu);
+        recyclerIcon.setAdapter(iconAdapter);
     }
 
     private void initTabViewPager(List<Fragment> mFragments, List<String> mTitleList) {
@@ -244,6 +274,41 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
             mFragments.add(new ProductListFragment().newInstance(classfyModel.getKey()));
         }
         initTabViewPager(mFragments, titles);
+    }
+
+    @Override
+    public void setAdvert(List<AdvertModel> model) {
+        List images = new ArrayList();
+        for (AdvertModel advertModel : model) {
+            images.add(advertModel.getImage());
+        }
+        banner.setImages(images)
+                .setImageLoader(new GlideImageLoader())
+                .start();
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Bundle bundle = new Bundle();
+                switch (model.get(position).getType()) {
+                    case 1:
+                        bundle.putString("link", model.get(position).getLink());
+                        IntentUtils.get().goActivity(mContext, WebViewActivity.class, bundle);
+                        break;
+                    case 2:
+                        bundle.putString("item_id", model.get(position).getLink());
+                        IntentUtils.get().goActivity(mContext, ProductDetailsActivity.class, bundle);
+                        break;
+                    case 3:
+                        break;
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void setIconPage(List<IconModel> iconPage) {
+        iconAdapter.setNewData(iconPage);
     }
 
 

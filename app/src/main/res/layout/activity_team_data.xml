@@ -46,6 +46,7 @@
                             android:textSize="@dimen/sp_12" />
 
                         <TextView
+                            android:id="@+id/txt_today_commission"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
@@ -56,6 +57,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/txt_stay_commission"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
@@ -85,6 +87,7 @@
                                 android:textSize="@dimen/sp_12" />
 
                             <TextView
+                                android:id="@+id/txt_today_orders_num"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
@@ -104,11 +107,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="今日付款笔数"
+                                android:text="预估佣金"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/sp_12" />
 
                             <TextView
+                                android:id="@+id/txt_today_estimate_commision"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
@@ -128,11 +132,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="今日付款笔数"
+                                android:text="其他"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/sp_12" />
 
                             <TextView
+                                android:id="@+id/txt_today_other"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
@@ -160,11 +165,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="今日付款笔数"
+                                android:text="昨日付款笔数"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/sp_12" />
 
                             <TextView
+                                android:id="@+id/txt_yesterday_orders_num"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
@@ -184,11 +190,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="今日付款笔数"
+                                android:text="预估佣金"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/sp_12" />
 
                             <TextView
+                                android:id="@+id/txt_yesterday_estimate_commison"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
@@ -208,11 +215,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="今日付款笔数"
+                                android:text="其他"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/sp_12" />
 
                             <TextView
+                                android:id="@+id/txt_yesterday_other"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"

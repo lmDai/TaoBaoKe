@@ -1,7 +1,6 @@
 package com.bestsoft.mvp.contract;
 
-import com.bestsoft.bean.TeamProfitModel;
-import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.bean.ChartModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 
@@ -11,14 +10,14 @@ import com.bestsoft.common.https.IBaseView;
  * @date:2018/10/29
  * @description:会员升级
  **/
-public interface TeamDataContract {
+public interface ChartDataContract {
     interface View extends IBaseView {
-        void setTeamData(TeamProfitModel models);
+        void setChartData(ChartModel models);
 
         void showError(Throwable throwable);
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void getUserTeamProfit(String user_id, String user_channel_id);
+        public abstract void getUserChart(String user_id, String user_channel_id);
     }
 }

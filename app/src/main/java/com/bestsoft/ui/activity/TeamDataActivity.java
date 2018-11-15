@@ -13,14 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bestsoft.R;
-import com.bestsoft.base.BaseActivity;
 import com.bestsoft.base.BaseMvpActivity;
-import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.bean.TeamProfitModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.TeamDataContract;
 import com.bestsoft.mvp.presenter.TeamDataPresenter;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
-import com.bestsoft.ui.fragment.TeamDataHomeFragment;
+import com.bestsoft.ui.fragment.TeamDataListFragment;
 import com.bestsoft.utils.IntentUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -51,6 +51,22 @@ public class TeamDataActivity extends BaseMvpActivity<TeamDataContract.View, Tea
     Button btnInviteFans;
     @BindView(R.id.txt_title)
     TextView txtTitle;
+    @BindView(R.id.txt_today_orders_num)
+    TextView txtTodayOrdersNum;
+    @BindView(R.id.txt_today_estimate_commision)
+    TextView txtTodayEstimateCommision;
+    @BindView(R.id.txt_today_other)
+    TextView txtTodayOther;
+    @BindView(R.id.txt_yesterday_orders_num)
+    TextView txtYesterdayOrdersNum;
+    @BindView(R.id.txt_yesterday_estimate_commison)
+    TextView txtYesterdayEstimateCommison;
+    @BindView(R.id.txt_yesterday_other)
+    TextView txtYesterdayOther;
+    @BindView(R.id.txt_today_commission)
+    TextView txtTodayCommission;
+    @BindView(R.id.txt_stay_commission)
+    TextView txtStayCommission;
 
     @Override
     protected int getLayout() {
@@ -67,9 +83,9 @@ public class TeamDataActivity extends BaseMvpActivity<TeamDataContract.View, Tea
         mTitleList.add(mContext.getString(R.string.tab_all));//全部
         mTitleList.add(mContext.getString(R.string.tab_promotion_order));//推广订单
         mTitleList.add(mContext.getString(R.string.tab_natural_order));//自然订单
-        mFragments.add(new TeamDataHomeFragment().newInstance(0));
-        mFragments.add(new TeamDataHomeFragment().newInstance(1));
-        mFragments.add(new TeamDataHomeFragment().newInstance(2));
+        mFragments.add(new TeamDataListFragment().newInstance(0));
+        mFragments.add(new TeamDataListFragment().newInstance(1));
+        mFragments.add(new TeamDataListFragment().newInstance(2));
         initTabViewPager(mFragments, mTitleList);
     }
 
@@ -122,12 +138,27 @@ public class TeamDataActivity extends BaseMvpActivity<TeamDataContract.View, Tea
     }
 
     @Override
-    public void setTeamData(UpgradeModel models) {
+    public void setTeamData(TeamProfitModel models) {
+        txtTodayOrdersNum.setText(models.getToday_orders_num());
+        txtTodayEstimateCommision.setText("¥" + models.getToday_estimate_commission());
+        txtTodayOther.setText("¥" + models.getToday_other());
+
+        txtYesterdayOrdersNum.setText(models.getYesterday_orders_num());
+        txtYesterdayEstimateCommison.setText("¥" + models.getYesterday_estimate_commission());
+        txtYesterdayOther.setText("¥" + models.getYesterday_other());
+
+        txtTodayCommission.setText(models.getToday_commission());
+        txtStayCommission.setText("待到账订单" + models.getStay_commission() + "元");
 
     }
 
     @Override
     public void showError(Throwable throwable) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -17,7 +17,9 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
+import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.IconModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.presenter.HomeFragmentPresenter;
@@ -148,6 +150,16 @@ public class Home1Fragment extends BaseMvpFragment<HomeFragmentContract.View, Ho
             mFragments.add(new ProductListFragment());
         }
         initViewPager(mFragments, titles);
+    }
+
+    @Override
+    public void setAdvert(List<AdvertModel> model) {
+
+    }
+
+    @Override
+    public void setIconPage(List<IconModel> iconPage) {
+
     }
 
     @Override

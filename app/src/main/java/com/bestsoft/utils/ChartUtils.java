@@ -1,6 +1,7 @@
 package com.bestsoft.utils;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -34,6 +35,8 @@ public class ChartUtils {
         chart.getDescription().setEnabled(false);
         // 没有数据的时候，显示“暂无数据”
         chart.setNoDataText("暂无数据");
+        chart.setDragEnabled(true);
+
         // 不显示表格颜色
         chart.setDrawGridBackground(false);
         // 不可以缩放
@@ -51,6 +54,8 @@ public class ChartUtils {
         XAxis xAxis = chart.getXAxis();
         // 不显示x轴
         xAxis.setDrawAxisLine(false);
+        xAxis.setGranularity(1f);
+
         // 设置x轴数据的位置
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(Color.parseColor("#2E2E2E"));
@@ -68,7 +73,7 @@ public class ChartUtils {
         // 不从y轴发出横向直线
         yAxis.setDrawGridLines(false);
         yAxis.setTextColor(Color.parseColor("#2E2E2E"));
-        yAxis.setTextSize(15);
+        yAxis.setTextSize(30);
         // 设置y轴数据偏移量
         yAxis.setXOffset(30);
         yAxis.setYOffset(-3);
@@ -126,14 +131,20 @@ public class ChartUtils {
      * @param chart  图表
      * @param values 数据
      */
-    public static void notifyDataSetChanged(LineChart chart, List<Entry> values
-    ) {
-        chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return String.valueOf(value);
-            }
-        });
+    public static void notifyDataSetChanged(LineChart chart, List<Entry> values) {
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setLabelCount(values.size(), true);
+//        float ratio = (float) values.size()/(float) 6;
+//        //显示的时候是按照多大的比率缩放显示,1f表示不放大缩小
+//        chart.zoom(ratio,1f,0,0);
+//        chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                Log.i("single",(int)value+"");
+//                return String.valueOf(value);
+//            }
+//        });
+
         chart.getXAxis().setValueFormatter((value, axis) -> values.get((int) value).getData() + "");
         chart.invalidate();
         setChartData(chart, values);

@@ -98,7 +98,9 @@ public class SearchDetailActivity extends BaseMvpActivity<SearchDetailsContract.
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ProductModel productModel = productAdapter.getItem(position);
-                IntentUtils.get().goActivity(mContext, ProductDetailsActivity.class, productModel);
+                Bundle bundle = new Bundle();
+                bundle.putString("item_id", productModel.getItem_id());
+                IntentUtils.get().goActivity(mContext, ProductDetailsActivity.class, bundle);
             }
         });
     }

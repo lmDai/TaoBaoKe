@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -51,6 +52,7 @@ public abstract class SpinerPopWindow<T> extends PopupWindow {
     private SpinerAdapter spinerAdapter;
     private int itemResId;
     private Activity mActivity;
+    private int type = 0;//0,linearLayout 1，linearLayoutgridlayout
 
     public SpinerPopWindow(Context context, List<T> list, int resId) {
         this.mContext = context;
@@ -58,6 +60,16 @@ public abstract class SpinerPopWindow<T> extends PopupWindow {
         mInflater = LayoutInflater.from(mContext);
         this.itemResId = resId;
         mActivity = (Activity) context;
+        initPopup();
+    }
+
+    public SpinerPopWindow(Context context, List<T> list, int resId, int type) {
+        this.mContext = context;
+        this.datas = list;
+        mInflater = LayoutInflater.from(mContext);
+        this.itemResId = resId;
+        mActivity = (Activity) context;
+        this.type = type;
         initPopup();
     }
 
@@ -86,7 +98,11 @@ public abstract class SpinerPopWindow<T> extends PopupWindow {
             }
         });
         //设置布局管理器
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        if (type == 0) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
+        }
         //设置adapter
         spinerAdapter = new SpinerAdapter(mContext, datas, itemResId);
         recyclerView.setAdapter(spinerAdapter);

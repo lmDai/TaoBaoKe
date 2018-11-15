@@ -71,6 +71,7 @@ public class ProductModel implements Parcelable {
     private String couponendtime;
     private String couponurl;
     private double core_commission;
+    private double commission;
 
     protected ProductModel(Parcel in) {
         item_id = in.readString();
@@ -99,6 +100,7 @@ public class ProductModel implements Parcelable {
         couponendtime = in.readString();
         couponurl = in.readString();
         core_commission = in.readDouble();
+        commission = in.readDouble();
     }
 
     public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
@@ -112,6 +114,15 @@ public class ProductModel implements Parcelable {
             return new ProductModel[size];
         }
     };
+
+    public double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(double commission) {
+        this.commission = commission;
+    }
+
 
     public String getEstimate() {
         return estimate;
@@ -354,5 +365,6 @@ public class ProductModel implements Parcelable {
         dest.writeString(couponendtime);
         dest.writeString(couponurl);
         dest.writeDouble(core_commission);
+        dest.writeDouble(commission);
     }
 }

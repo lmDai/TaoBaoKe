@@ -39,4 +39,12 @@ public class TaoBaoKeApi {
     public final static String USER_UPGRADE = "app/user/upgrade";
     //团队收益数据
     public final static String TEAM_PROFIT = "app/user/team-profit";
+    //会员团队订单
+    public final static String TEAM_ORDER = "app/user/team-order";
+    //会员团队收益图表
+    public final static String USER_CHART = "app/user/chart";
+    //首页广告
+    public final static String ADVERT_HOME = "app/advert/homepage";
+    //首页图标
+    public final static String ICON_PAGE="app/icon/home-page";
 }

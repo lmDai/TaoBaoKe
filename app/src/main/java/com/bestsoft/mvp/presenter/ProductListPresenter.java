@@ -3,8 +3,11 @@ package com.bestsoft.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.bestsoft.bean.ProductModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
+import com.bestsoft.common.https.BasePageResponse;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.ProductListContract;
 import com.bestsoft.mvp.contract.RegisterContract;
@@ -19,24 +22,28 @@ import java.util.List;
  * @date:2018/10/29
  * @description: 注册
  **/
+@CreatePresenterAnnotation(ProductListPresenter.class)
 public class ProductListPresenter extends ProductListContract.Presenter {
-    private int currentPage = 1;
+    private String currentPage = "1";
 
     @Override
     public void getGoodHaoList(String key, String sort, String user_id, String user_channel_id, int user_level, boolean isRefresh) {
         if (isRefresh) {
-            currentPage = 1;
-        } else {
-            ++currentPage;
+            currentPage = "1";
         }
-        MainModel.getInstance(Utils.getContext()).getGoodHaoList(key, sort, currentPage + "",
+        MainModel.getInstance(Utils.getContext()).getGoodHaoList(key, sort, currentPage,
                 user_id, user_channel_id, user_level)
                 .compose(RxUtil.observableIO2Main(getView()))
-                .compose(RxUtil.hanResult())
-                .subscribe(new ProgressObserver<List<ProductModel>>(this, true, "请稍后...") {
+                .compose(RxUtil.handNoResponseResult())
+                .subscribe(new ProgressObserver<BasePageResponse<List<ProductModel>>>(this, true, "请稍后...") {
                     @Override
-                    public void onSuccess(List<ProductModel> result) {
-                        getView().showProductList(result, isRefresh);//注册成功
+                    public void onSuccess(BasePageResponse<List<ProductModel>> result) {
+                        if (result.getErrorcode() == 0) {
+                            currentPage = result.getNext();
+                            getView().showProductList(result.getData(), isRefresh);//注册成功
+                        } else {
+                            getView().showError(new Throwable(), isRefresh);
+                        }
                     }
 
                     @Override
