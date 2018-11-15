@@ -37,4 +37,6 @@ public class TaoBaoKeApi {
     public final static String USER_ORDER = "app/user/order";
     //会员升级数据
     public final static String USER_UPGRADE = "app/user/upgrade";
+    //团队收益数据
+    public final static String TEAM_PROFIT = "app/user/team-profit";
 }

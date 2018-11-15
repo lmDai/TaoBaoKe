@@ -94,8 +94,9 @@ public class SearchActivity extends BaseMvpActivity<SearchContract.View, SearchP
         tagHotSearch.setTagClickListener(new FlowTagLayout.OnTagClickListener() {
             @Override
             public void tagClick(int position) {
-                if (!KeyWordDaoOpe.queryAll(mContext).contains(models.get(position)) && KeyWordDaoOpe.queryAll(mContext).size() < 8)
-                    KeyWordDaoOpe.saveData(mContext, models.get(position));
+                List<KeyWordModel> historys = KeyWordDaoOpe.queryAll(mContext);
+                if (!historys.contains(models.get(position)))
+                KeyWordDaoOpe.saveData(mContext, models.get(position));
                 showSearchHistory();
                 editSearch.setText(dataList.get(position));
                 editSearch.setSelection(editSearch.getText().length());

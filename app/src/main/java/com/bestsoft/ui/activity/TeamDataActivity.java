@@ -14,6 +14,11 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.TeamDataContract;
+import com.bestsoft.mvp.presenter.TeamDataPresenter;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.fragment.TeamDataHomeFragment;
 import com.bestsoft.utils.IntentUtils;
@@ -28,7 +33,8 @@ import butterknife.OnClick;
 /**
  * 团队数据
  */
-public class TeamDataActivity extends BaseActivity {
+@CreatePresenterAnnotation(TeamDataPresenter.class)
+public class TeamDataActivity extends BaseMvpActivity<TeamDataContract.View, TeamDataPresenter> implements TeamDataContract.View {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabs)
@@ -55,6 +61,7 @@ public class TeamDataActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         toolbar.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_toolbar));
         txtTitle.setText(mContext.getString(R.string.title_team_data));
+        getMvpPresenter().getUserTeamProfit(userModel.getId(), userModel.getUser_channel_id());
         List<String> mTitleList = new ArrayList<>();
         List<Fragment> mFragments = new ArrayList<>();
         mTitleList.add(mContext.getString(R.string.tab_all));//全部
@@ -112,5 +119,15 @@ public class TeamDataActivity extends BaseActivity {
                 IntentUtils.get().goActivity(mContext, InviteActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public void setTeamData(UpgradeModel models) {
+
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+
     }
 }

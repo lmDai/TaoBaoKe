@@ -32,4 +32,11 @@ public class KeyWordModel {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        KeyWordModel inItem = (KeyWordModel) o;
+        return keyword.equals(inItem.getKeyword());
+    }
+
 }

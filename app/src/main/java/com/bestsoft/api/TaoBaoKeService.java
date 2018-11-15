@@ -107,4 +107,8 @@ public interface TaoBaoKeService {
     @FormUrlEncoded
     @POST(TaoBaoKeApi.USER_UPGRADE)
     Observable<BaseResponse<UpgradeModel>> userUpgrade(@FieldMap Map<String, Object> map);
+    //团队收益数据
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.TEAM_PROFIT)
+    Observable<BaseResponse<UpgradeModel>> userTeamProfit(@FieldMap Map<String, Object> map);
 }
