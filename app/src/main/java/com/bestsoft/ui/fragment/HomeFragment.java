@@ -9,10 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -42,10 +40,8 @@ import com.bestsoft.ui.adapter.OnePlusAdapter;
 import com.bestsoft.ui.widget.ClassifyPopu;
 import com.bestsoft.ui.widget.FiltPopuWindow;
 import com.bestsoft.ui.widget.GlideImageLoader;
-import com.bestsoft.ui.widget.ItemClickListener;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.SpacesItemDecoration;
-import com.blankj.utilcode.utils.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -55,14 +51,11 @@ import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * @package: com.bestsoft.ui.fragment

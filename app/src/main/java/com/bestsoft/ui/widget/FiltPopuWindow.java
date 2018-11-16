@@ -1,19 +1,15 @@
 package com.bestsoft.ui.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,9 +19,7 @@ import android.widget.Toast;
 
 import com.bestsoft.R;
 import com.bestsoft.bean.ClassfyModel;
-import com.bestsoft.bean.FiltModel;
 import com.bestsoft.utils.GlideUtil;
-import com.blankj.utilcode.utils.SizeUtils;
 
 import java.util.List;
 

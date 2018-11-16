@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.bean.ClassfyModel;
-import com.bestsoft.bean.SelectModel;
 import com.bestsoft.utils.GlideUtil;
 
 import java.util.List;

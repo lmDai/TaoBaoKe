@@ -2,7 +2,6 @@ package com.bestsoft.ui.adapter;
 
 import com.bestsoft.R;
 import com.bestsoft.bean.ArticleModel;
-import com.bestsoft.bean.CircleCenterModel;
 import com.bestsoft.bean.PhotoInfo;
 import com.bestsoft.ui.widget.MultiImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;

@@ -2,17 +2,12 @@ package com.bestsoft.mvp.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.bestsoft.bean.OrderModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
-import com.bestsoft.mvp.contract.OrderListContract;
 import com.bestsoft.mvp.contract.UpgradeContract;
 import com.bestsoft.mvp.model.MemberModule;
-import com.bestsoft.mvp.model.OrderModule;
-
-import java.util.List;
 
 /**
  * @package: com.bestsoft.mvp.presenter

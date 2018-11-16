@@ -15,7 +15,7 @@ import com.bestsoft.mvp.contract.UpgradeContract;
 import com.bestsoft.mvp.presenter.UpgradePresenter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
 import com.bestsoft.utils.SpacesItemDecoration;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -103,7 +102,7 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
 
     @OnClick(R.id.btn_upgrade)
     public void onViewClicked() {
-        ToastUtils.showShortToastSafe(mContext, "点击按钮");
+        ToastUtils.showShort("点击按钮");
     }
 
     @Override

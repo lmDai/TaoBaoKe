@@ -20,7 +20,6 @@ import com.scwang.smartrefresh.layout.util.DensityUtil;
 import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WebViewActivity extends BaseActivity {

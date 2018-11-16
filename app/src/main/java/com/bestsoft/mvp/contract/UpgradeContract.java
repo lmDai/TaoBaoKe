@@ -1,11 +1,8 @@
 package com.bestsoft.mvp.contract;
 
-import com.bestsoft.bean.OrderModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
-
-import java.util.List;
 
 /**
  * @package: com.bestsoft.mvp.contract

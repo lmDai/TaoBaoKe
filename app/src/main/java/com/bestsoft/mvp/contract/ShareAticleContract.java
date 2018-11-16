@@ -1,7 +1,6 @@
 package com.bestsoft.mvp.contract;
 
 import com.bestsoft.bean.ArticleModel;
-import com.bestsoft.bean.ProductModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 

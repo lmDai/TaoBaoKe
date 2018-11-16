@@ -6,11 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.bestsoft.R;
-import com.bestsoft.base.BaseFragment;
-import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.base.BaseMvpFragment;
 import com.bestsoft.bean.ArticleModel;
-import com.bestsoft.bean.CircleCenterModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.ShareAticleContract;
 import com.bestsoft.mvp.presenter.ShareAticlePresenter;
@@ -21,12 +18,9 @@ import com.bestsoft.utils.RecyclerViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
-import static android.support.test.InstrumentationRegistry.getArguments;
 
 /**
  * @package: com.bestsoft.ui.fragment

@@ -6,8 +6,8 @@ import com.bestsoft.common.R;
 import com.bestsoft.common.https.exception.ApiException;
 import com.bestsoft.common.https.exception.ExceptionUtil;
 import com.bestsoft.common.utils.Utils;
-import com.blankj.utilcode.utils.NetworkUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -21,8 +21,8 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
-        if (!NetworkUtils.isConnected(Utils.getContext())) {
-            ToastUtils.showShortToastSafe(Utils.getContext(), Utils.getString(R.string.NO_NET_CONNECTED));
+        if (!NetworkUtils.isConnected()) {
+            ToastUtils.showShort(Utils.getString(R.string.NO_NET_CONNECTED));
 //            onComplete();
         }
     }
@@ -52,6 +52,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public abstract void onSuccess(T result);
 
     public void onFailure(Throwable e, int code, String errorMsg) {
-        ToastUtils.showShortToastSafe(Utils.getContext(), errorMsg);
+        ToastUtils.showShort(errorMsg);
     }
 }

@@ -4,11 +4,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bestsoft.R;
-import com.bestsoft.bean.TeamDataListModel;
 import com.bestsoft.bean.TeamOrderModel;
 import com.bestsoft.utils.GlideUtil;
 import com.bestsoft.utils.MagicTextViewUtil;
-import com.blankj.utilcode.utils.SizeUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 

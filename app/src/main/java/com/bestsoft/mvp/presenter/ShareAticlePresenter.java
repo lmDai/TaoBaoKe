@@ -3,15 +3,10 @@ package com.bestsoft.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.bestsoft.bean.ArticleModel;
-import com.bestsoft.bean.ProductModel;
-import com.bestsoft.common.https.BasePageResponse;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
-import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.common.utils.Utils;
-import com.bestsoft.mvp.contract.ProductListContract;
 import com.bestsoft.mvp.contract.ShareAticleContract;
-import com.bestsoft.mvp.model.MainModel;
 import com.bestsoft.mvp.model.SkillModule;
 
 import java.util.List;

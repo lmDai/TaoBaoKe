@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bestsoft.R;
+import com.bestsoft.utils.GlideUtil;
+import com.blankj.utilcode.util.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +46,8 @@ public class ImgPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_main, container, false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
-        imageView.setImageResource(R.drawable.ic_zhanwei_theme);
+        ImageView imageView = view.findViewById(R.id.iv);
+        GlideUtil.loadRoundImage(mContext, mList.get(position), SizeUtils.dp2px(10), imageView);
         container.addView(view);
         return view;
     }

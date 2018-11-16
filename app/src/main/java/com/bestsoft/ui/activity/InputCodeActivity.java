@@ -1,7 +1,6 @@
 package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,15 +11,11 @@ import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.CodeModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
-import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.contract.RegisterContract;
-import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.mvp.presenter.RegisterPresenter;
 import com.bestsoft.ui.widget.VerifyCodeView;
-import com.bestsoft.utils.DeviceUtil;
 import com.bestsoft.utils.IntentUtils;
-import com.blankj.utilcode.utils.PhoneUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 
 import butterknife.BindView;
@@ -99,7 +94,7 @@ public class InputCodeActivity extends BaseMvpActivity<RegisterContract.View, Re
             case R.id.btn_next:
                 //todo 跳转首页
                 if (codeModel == null) {
-                    ToastUtils.showShortToastSafe(mContext, "邀请码不正确");
+                    ToastUtils.showShort("邀请码不正确");
                     return;
                 }
                 getMvpPresenter().userRegister(phone, verifyCodeView.getEditContent(), codeModel.getUser_channel_id()
@@ -110,10 +105,9 @@ public class InputCodeActivity extends BaseMvpActivity<RegisterContract.View, Re
 
     @Override
     public void registerSuccess(BaseNoDataResponse result) {
-        ToastUtils.showShortToastSafe(mContext, result.getMsg());
-        // IntentUtils.get().goActivityKill(mContext, LoginActivity.class);
+        ToastUtils.showShort(result.getMsg());
         if (result.getErrorcode() == 0) {
-            IntentUtils.get().goActivityKill(mContext, MainActivity.class);
+            IntentUtils.get().goActivityKill(mContext, LoginActivity.class);
         }
     }
 

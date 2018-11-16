@@ -3,12 +3,8 @@ package com.bestsoft.mvp.model;
 import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
-import com.bestsoft.bean.ClassfyModel;
-import com.bestsoft.bean.OrderConfirmModel;
 import com.bestsoft.bean.OrderModel;
-import com.bestsoft.bean.ProductModel;
 import com.bestsoft.bean.ProfitModel;
-import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
 import com.bestsoft.common.https.intercept.InterceptUtils;

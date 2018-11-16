@@ -2,7 +2,6 @@ package com.bestsoft.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Id;
 
 /**
  * @package: com.bestsoft.bean

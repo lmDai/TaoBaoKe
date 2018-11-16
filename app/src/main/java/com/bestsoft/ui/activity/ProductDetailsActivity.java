@@ -28,7 +28,7 @@ import com.bestsoft.mvp.contract.ProductDetailsContract;
 import com.bestsoft.mvp.presenter.ProductDetailsPresenter;
 import com.bestsoft.ui.widget.GlideImageLoader;
 import com.bestsoft.utils.GlideUtil;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.youth.banner.Banner;
 
@@ -36,10 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.bestsoft.utils.IntentUtils.OPEN_ACTIVITY_KEY;
 
 /**
  * 商品详情
@@ -149,7 +146,7 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
 
     @Override
     public void orderPayConfirm(BaseNoDataResponse response) {
-        ToastUtils.showShortToastSafe(mContext, response.getMsg());
+        ToastUtils.showShort(response.getMsg());
     }
 
     public void openTaoBao() {

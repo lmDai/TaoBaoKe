@@ -1,7 +1,6 @@
 package com.bestsoft;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
@@ -10,7 +9,6 @@ import com.alibaba.fastjson.JSON;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.BaseApplication;
 import com.bestsoft.utils.SpUtils;
-import com.blankj.utilcode.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;

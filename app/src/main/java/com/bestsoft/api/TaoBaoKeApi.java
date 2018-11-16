@@ -51,4 +51,6 @@ public class TaoBaoKeApi {
     public final static String SHARE_ARTICLE = "app/share/article";
     //会员提现页面数据
     public final static String USER_EXTRACT = "app/user/extract";
+    //淘宝设置授权
+    public final static String USER_SETTING_TAOBAO = "app/user/setting-taobao";
 }

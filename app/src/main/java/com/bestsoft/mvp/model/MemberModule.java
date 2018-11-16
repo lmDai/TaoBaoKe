@@ -3,14 +3,11 @@ package com.bestsoft.mvp.model;
 import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
-import com.bestsoft.bean.OrderModel;
-import com.bestsoft.bean.ProfitModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
 import com.bestsoft.common.https.intercept.InterceptUtils;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;

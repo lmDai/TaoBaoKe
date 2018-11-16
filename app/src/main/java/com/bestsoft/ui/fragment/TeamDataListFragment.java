@@ -4,32 +4,23 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bestsoft.R;
-import com.bestsoft.base.BaseFragment;
-import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.base.BaseMvpFragment;
-import com.bestsoft.bean.TeamDataListModel;
 import com.bestsoft.bean.TeamOrderModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
-import com.bestsoft.mvp.contract.TeamDataContract;
 import com.bestsoft.mvp.contract.TeamOrderContract;
 import com.bestsoft.mvp.presenter.TeamOrderPresenter;
 import com.bestsoft.ui.adapter.TeamDataListAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
-import com.blankj.utilcode.utils.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @package: com.bestsoft.ui.fragment

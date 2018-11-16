@@ -14,10 +14,14 @@ import com.bestsoft.common.https.IBaseView;
 public interface PersonalContract {
     interface View extends IBaseView {
         void setUserModel(UserModel userModel);
+
+        void userSettingTaobao(BaseNoDataResponse settingResult);
     }
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void getUserInfo(String user_id, String user_channel_id);
+
+        public abstract void userSettingTaobao(String user_id, String user_channel_id);
 
     }
 }

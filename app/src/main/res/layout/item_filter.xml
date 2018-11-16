@@ -16,7 +16,6 @@
         android:textSize="@dimen/sp_14" />
 
     <ImageView
-        android:id="@+id/img_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/pay_selector"

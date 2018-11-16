@@ -1,7 +1,6 @@
 package com.bestsoft.mvp.contract;
 
 import com.bestsoft.bean.ProfitModel;
-import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 

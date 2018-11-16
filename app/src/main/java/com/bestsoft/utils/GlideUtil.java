@@ -9,12 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bestsoft.R;
-import com.bestsoft.ui.widget.FiltPopuWindow;
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;

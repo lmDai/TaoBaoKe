@@ -12,11 +12,9 @@ import com.bestsoft.bean.ExtractModel;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.ExtractContract;
 import com.bestsoft.mvp.presenter.ExtractPresenter;
-import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.IntentUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

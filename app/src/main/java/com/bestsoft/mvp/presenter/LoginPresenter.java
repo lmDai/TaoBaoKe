@@ -8,8 +8,6 @@ import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.LoginContract;
 import com.bestsoft.mvp.model.LoginModel;
 
-import java.util.List;
-
 /**
  * @package: com.bestsoft.mvp.presenter
  * @user:xhkj

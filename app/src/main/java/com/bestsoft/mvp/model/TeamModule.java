@@ -6,8 +6,6 @@ import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.ChartModel;
 import com.bestsoft.bean.TeamOrderModel;
 import com.bestsoft.bean.TeamProfitModel;
-import com.bestsoft.bean.UpgradeModel;
-import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseResponse;
 import com.bestsoft.common.https.RetrofitManager;
 import com.bestsoft.common.https.intercept.InterceptUtils;

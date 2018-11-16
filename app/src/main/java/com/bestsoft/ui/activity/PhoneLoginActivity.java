@@ -21,8 +21,8 @@ import com.bestsoft.mvp.presenter.LoginPresenter;
 import com.bestsoft.ui.widget.ClearEditText;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.SpUtils;
-import com.blankj.utilcode.utils.RegexUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -85,7 +85,7 @@ public class PhoneLoginActivity extends BaseMvpActivity<LoginContract.View, Logi
                 break;
             case R.id.txt_count:
                 if (!RegexUtils.isMobileExact(userName)) {
-                    ToastUtils.showShortToastSafe(mContext, "请输入正确的手机号");
+                    ToastUtils.showShort( "请输入正确的手机号");
                     return;
                 }
                 countdown(60);//倒计时60s
@@ -99,7 +99,7 @@ public class PhoneLoginActivity extends BaseMvpActivity<LoginContract.View, Logi
 
     @Override
     public void sendCodeSuccess(BaseNoDataResponse result) {
-        ToastUtils.showShortToastSafe(mContext, result.getMsg());
+        ToastUtils.showShort( result.getMsg());
     }
 
     @Override

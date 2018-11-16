@@ -16,7 +16,8 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBg">
+            android:background="@color/colorBg"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,10 +50,12 @@
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/view_pager_theme"
-                    android:layout_width="240dp"
+                    android:layout_width="match_parent"
                     android:layout_height="360dp"
                     android:layout_gravity="center"
-                    android:clipChildren="false" />
+                    android:clipChildren="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_20"
-                        android:background="@drawable/bg_share"
+                        android:background="@drawable/btn_share"
                         android:text="分享专属海报"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_18" />

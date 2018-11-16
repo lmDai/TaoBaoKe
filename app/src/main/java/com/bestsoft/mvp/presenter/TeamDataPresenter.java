@@ -3,7 +3,6 @@ package com.bestsoft.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.bestsoft.bean.TeamProfitModel;
-import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;

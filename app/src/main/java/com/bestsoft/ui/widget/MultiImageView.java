@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.bestsoft.R;
 import com.bestsoft.bean.PhotoInfo;
 import com.bestsoft.common.utils.Utils;
-import com.blankj.utilcode.utils.SizeUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 
 

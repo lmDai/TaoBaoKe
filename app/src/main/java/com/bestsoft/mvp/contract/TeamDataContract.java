@@ -1,7 +1,6 @@
 package com.bestsoft.mvp.contract;
 
 import com.bestsoft.bean.TeamProfitModel;
-import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 

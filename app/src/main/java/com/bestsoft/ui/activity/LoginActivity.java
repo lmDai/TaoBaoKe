@@ -160,8 +160,9 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
                 DialogUtils.showPromptDialog(mContext, "你还没有注册或者未绑定微信", "提示", "去注册", "知道了", new DialogListener() {
                     @Override
                     public void onClick(boolean confirm) {
-                        //todo 跳转注册页面
-                        IntentUtils.get().goActivity(mContext, InputInvateInfoActivity.class);
+                        if (confirm)
+                            //todo 跳转注册页面
+                            IntentUtils.get().goActivity(mContext, InputInvateInfoActivity.class);
                     }
                 });
                 break;
@@ -171,6 +172,9 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
                 IntentUtils.get().goActivity(mContext, PhoneLoginActivity.class);//手机号登录
                 break;
             case R.id.txt_other:
+
+                break;
+            case R.id.img_down:
                 if (llWechat.getVisibility() == View.VISIBLE) {
                     llWechat.setVisibility(View.GONE);
                     llOther.setVisibility(View.VISIBLE);
@@ -183,8 +187,6 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
                     imgDown.setImageResource(R.drawable.ic_down);
                     txtOther.setText("其他登录方式");
                 }
-                break;
-            case R.id.img_down:
                 break;
         }
     }

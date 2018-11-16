@@ -3,14 +3,11 @@ package com.bestsoft.mvp.presenter;
 import android.support.annotation.NonNull;
 
 import com.bestsoft.bean.ExtractModel;
-import com.bestsoft.bean.TeamProfitModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.ExtractContract;
-import com.bestsoft.mvp.contract.TeamDataContract;
-import com.bestsoft.mvp.model.PersonModel;
-import com.bestsoft.mvp.model.TeamModule;
+import com.bestsoft.mvp.model.PersonModule;
 
 /**
  * @package: com.bestsoft.mvp.presenter
@@ -21,7 +18,7 @@ import com.bestsoft.mvp.model.TeamModule;
 public class ExtractPresenter extends ExtractContract.Presenter {
     @Override
     public void getUserExtract(String user_id, String user_channel_id) {
-        PersonModel.getInstance(Utils.getContext()).userExtract(user_id, user_channel_id)
+        PersonModule.getInstance(Utils.getContext()).userExtract(user_id, user_channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
                 .subscribe(new ProgressObserver<ExtractModel>(this, true, "请稍后...") {

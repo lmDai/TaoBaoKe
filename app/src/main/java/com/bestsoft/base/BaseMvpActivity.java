@@ -2,6 +2,7 @@ package com.bestsoft.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.test.internal.util.LogUtil;
 import android.util.Log;
 
 import com.bestsoft.common.https.BasePresenter;
@@ -11,6 +12,7 @@ import com.bestsoft.common.mvp_senior.factory.IPresenterProxyFactroy;
 import com.bestsoft.common.mvp_senior.factory.MvpPresenterFactroyImpl;
 import com.bestsoft.common.mvp_senior.factory.PresenterProxyFactroyImpl;
 import com.bestsoft.ui.widget.LoadingDialog;
+import com.blankj.utilcode.util.LogUtils;
 
 import io.reactivex.ObservableTransformer;
 
@@ -90,7 +92,11 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
 
     @Override
     public void showProgress(String message) {
+        LogUtils.d("single", message);
         if (mLoadingDialog != null) {
+            mLoadingDialog.setMessage(message).show();
+        } else {
+            mLoadingDialog = new LoadingDialog(this);
             mLoadingDialog.setMessage(message).show();
         }
     }
@@ -99,6 +105,7 @@ public abstract class BaseMvpActivity<V extends IBaseView, P extends BasePresent
     public void hideProgress() {
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
+            mLoadingDialog = null;
         }
     }
 

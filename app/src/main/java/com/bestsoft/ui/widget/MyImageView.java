@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.bestsoft.R;
 import com.bestsoft.common.utils.Utils;
-import com.blankj.utilcode.utils.SizeUtils;
+import com.blankj.utilcode.util.SizeUtils;
 
 
 /**

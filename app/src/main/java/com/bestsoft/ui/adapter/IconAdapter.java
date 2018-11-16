@@ -4,7 +4,6 @@ import android.widget.ImageView;
 
 import com.bestsoft.R;
 import com.bestsoft.bean.IconModel;
-import com.bestsoft.bean.IntroductionModel;
 import com.bestsoft.utils.GlideUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

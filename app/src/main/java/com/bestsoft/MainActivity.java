@@ -11,12 +11,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bestsoft.base.BaseActivity;
-import com.bestsoft.ui.fragment.Home1Fragment;
 import com.bestsoft.ui.fragment.HomeFragment;
 import com.bestsoft.ui.fragment.OrderFragment;
 import com.bestsoft.ui.fragment.SkillFragment;
 import com.bestsoft.utils.AppManager;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -101,7 +100,7 @@ public class MainActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == event.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                ToastUtils.showShortToastSafe(this, "再按一次退出");
+                ToastUtils.showShort("再按一次退出");
                 mExitTime = System.currentTimeMillis();
             } else {
                 AppManager.getAppManager().appExit(false);

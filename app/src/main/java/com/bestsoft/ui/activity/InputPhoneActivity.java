@@ -1,13 +1,11 @@
 package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +20,9 @@ import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.InputInvateInfoContract;
 import com.bestsoft.mvp.presenter.InputInvateInfoPresenter;
 import com.bestsoft.utils.IntentUtils;
-import com.blankj.utilcode.utils.RegexUtils;
-import com.blankj.utilcode.utils.StringUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.ToastUtils;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -185,7 +183,7 @@ public class InputPhoneActivity extends BaseMvpActivity<InputInvateInfoContract.
 
     @Override
     public void sendCodeSuccess(BaseNoDataResponse result) {
-        ToastUtils.showShortToastSafe(mContext, result.getMsg());
+        ToastUtils.showShort(result.getMsg());
         if (result.getErrorcode() == 0) {
             Bundle bundle = new Bundle();
             bundle.putParcelable("codeMode", codeModel);

@@ -28,7 +28,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * @package: com.bestsoft.api
@@ -115,6 +114,7 @@ public interface TaoBaoKeService {
     @FormUrlEncoded
     @POST(TaoBaoKeApi.USER_UPGRADE)
     Observable<BaseResponse<UpgradeModel>> userUpgrade(@FieldMap Map<String, Object> map);
+
     //团队收益数据
     @FormUrlEncoded
     @POST(TaoBaoKeApi.TEAM_PROFIT)
@@ -129,20 +129,29 @@ public interface TaoBaoKeService {
     @FormUrlEncoded
     @POST(TaoBaoKeApi.USER_CHART)
     Observable<BaseResponse<ChartModel>> userChart(@FieldMap Map<String, Object> map);
+
     //首页广告
     @FormUrlEncoded
     @POST(TaoBaoKeApi.ADVERT_HOME)
     Observable<BaseResponse<List<AdvertModel>>> homeAdavert(@FieldMap Map<String, Object> map);
+
     //首页图标
     @FormUrlEncoded
     @POST(TaoBaoKeApi.ICON_PAGE)
     Observable<BaseResponse<List<IconModel>>> homeIconpage(@FieldMap Map<String, Object> map);
+
     //分享文章列表
     @FormUrlEncoded
     @POST(TaoBaoKeApi.SHARE_ARTICLE)
     Observable<BaseResponse<List<ArticleModel>>> shareAticle(@FieldMap Map<String, Object> map);
+
     //会员提现页面数据
     @FormUrlEncoded
     @POST(TaoBaoKeApi.USER_EXTRACT)
     Observable<BaseResponse<ExtractModel>> userExtract(@FieldMap Map<String, Object> map);
+
+    //设置淘宝授权
+    @POST(TaoBaoKeApi.USER_SETTING_TAOBAO)
+    @FormUrlEncoded
+    Observable<BaseNoDataResponse> userSettingTaobao(@FieldMap Map<String, Object> map);
 }

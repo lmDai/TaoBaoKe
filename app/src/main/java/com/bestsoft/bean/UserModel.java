@@ -34,8 +34,34 @@ public class UserModel {
      * headimgurl :
      * user_channel_id : 2
      */
-
     private String headimgurl;
+    private int settingtaobao;//淘宝授权1.设置授权，2.不授权
+    private String alipay_account;//淘宝账号
+    private String real_name;//真实姓名
+
+    public void setSettingtaobao(int settingtaobao) {
+        this.settingtaobao = settingtaobao;
+    }
+
+    public void setAlipay_account(String alipay_account) {
+        this.alipay_account = alipay_account;
+    }
+
+    public void setReal_name(String real_name) {
+        this.real_name = real_name;
+    }
+
+    public int getSettingtaobao() {
+        return settingtaobao;
+    }
+
+    public String getAlipay_account() {
+        return alipay_account;
+    }
+
+    public String getReal_name() {
+        return real_name;
+    }
 
     public String getUser_channel_id() {
         return user_channel_id;

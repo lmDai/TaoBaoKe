@@ -14,7 +14,6 @@ import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.fragment.CircleCenterFragment;
-import com.bestsoft.utils.AppManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;

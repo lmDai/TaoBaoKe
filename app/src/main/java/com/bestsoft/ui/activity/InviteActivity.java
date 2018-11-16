@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class InviteActivity extends BaseActivity {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     private RuleAdapter ruleAdapter;
+    private int pagerWidth;
 
     @Override
     protected int getLayout() {
@@ -55,11 +57,19 @@ public class InviteActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         txtTitle.setText(mContext.getString(R.string.title_invite));
         viewPagerTheme.setOffscreenPageLimit(4);
-
+        pagerWidth = (int) (getResources().getDisplayMetrics().widthPixels * 3.0f / 6.0f);
+        ViewGroup.LayoutParams lp = viewPagerTheme.getLayoutParams();
+        if (lp == null) {
+            lp = new ViewGroup.LayoutParams(pagerWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+        } else {
+            lp.width = pagerWidth;
+        }
+        viewPagerTheme.setLayoutParams(lp);
+        viewPagerTheme.setPageMargin(-20);
         viewPagerTheme.setPageTransformer(true, new GallyPageTransformer());
         List<String> imageViews = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            imageViews.add("das");
+            imageViews.add("https://img.alicdn.com/imgextra/i2/1634291101/O1CN011K0IXB8UKZjVRqG_!!1634291101.jpg");
         }
         viewPagerTheme.setAdapter(new ImgPagerAdapter(imageViews, this));
         ruleAdapter = new RuleAdapter(R.layout.item_rule);

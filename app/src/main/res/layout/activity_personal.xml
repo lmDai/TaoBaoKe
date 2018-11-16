@@ -72,7 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:minHeight="@dimen/dp_48"
+                        android:minHeight="@dimen/dp_60"
                         android:padding="@dimen/dp_10">
 
                         <TextView
@@ -102,7 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:minHeight="@dimen/dp_48"
+                        android:minHeight="@dimen/dp_60"
                         android:padding="@dimen/dp_10">
 
                         <TextView
@@ -114,9 +114,11 @@
                             android:textSize="@dimen/sp_14" />
 
                         <Switch
+                            android:id="@+id/btn_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_next" />
+                            android:thumb="@drawable/switch_ios_thumb"
+                            android:track="@drawable/switch_ios_track_selector" />
                     </LinearLayout>
 
                     <View
@@ -130,7 +132,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:minHeight="@dimen/dp_48"
+                        android:minHeight="@dimen/dp_60"
                         android:padding="@dimen/dp_10">
 
                         <TextView
@@ -160,7 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:minHeight="@dimen/dp_48"
+                        android:minHeight="@dimen/dp_60"
                         android:padding="@dimen/dp_10">
 
                         <TextView
@@ -188,7 +190,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:minHeight="@dimen/dp_48"
+                        android:minHeight="@dimen/dp_60"
                         android:padding="@dimen/dp_10">
 
                         <TextView
@@ -218,7 +220,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:minHeight="@dimen/dp_48"
+                        android:minHeight="@dimen/dp_60"
                         android:padding="@dimen/dp_10">
 
                         <TextView

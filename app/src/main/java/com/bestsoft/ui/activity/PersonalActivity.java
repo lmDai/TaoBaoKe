@@ -3,20 +3,33 @@ package com.bestsoft.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ali.auth.third.login.callback.LogoutCallback;
+import com.alibaba.baichuan.android.trade.adapter.login.AlibcLogin;
+import com.alibaba.baichuan.android.trade.callback.AlibcLoginCallback;
+import com.bestsoft.Constant;
+import com.bestsoft.MyApplication;
 import com.bestsoft.R;
-import com.bestsoft.base.BaseActivity;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.PersonalContract;
 import com.bestsoft.mvp.presenter.PersonalPresenter;
+import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.GlideUtil;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.KeyboardUtils;
+import com.bestsoft.utils.SpUtils;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -48,6 +61,8 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
     LinearLayout llCheckUpdate;
     @BindView(R.id.btn_logout)
     Button btnLogout;
+    @BindView(R.id.btn_switch)
+    Switch btnSwitch;
 
     @Override
     protected int getLayout() {
@@ -68,6 +83,26 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
     }
 
     @Override
+    protected void initEvent() {
+        super.initEvent();
+        btnSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //防止初始化的时候出发监听
+                if (!buttonView.isPressed()) {
+                    return;
+                }
+                if (isChecked) {
+                    login();
+                } else {
+                    logout();
+                }
+
+            }
+        });
+    }
+
+    @Override
     protected void initImmersionBar() {
         super.initImmersionBar();
         mImmersionBar.titleBar(R.id.toolbar)
@@ -75,7 +110,6 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
                 .statusBarDarkFont(true, 0.2f)
                 .init();
     }
-
 
     @OnClick({R.id.img_back, R.id.img_head, R.id.ll_share, R.id.ll_auth, R.id.ll_alypay, R.id.ll_center, R.id.ll_feedback, R.id.ll_check_update, R.id.btn_logout})
     public void onViewClicked(View view) {
@@ -99,14 +133,74 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
             case R.id.ll_check_update:
                 break;
             case R.id.btn_logout:
+                AppManager.getAppManager().finishAllActivity();
+                SpUtils.clear(mContext, Constant.isLOGIN);
+                ActivityUtils.startActivity(LoginActivity.class);
                 break;
         }
     }
 
     @Override
     public void setUserModel(UserModel userModel) {
+        MyApplication.mApplication.setUserModel(userModel);
+        btnSwitch.setChecked(userModel.getSettingtaobao() == 1);
         txtName.setText(userModel.getNickname());
         txtId.setText(userModel.getId());
         GlideUtil.loadCirclePic(mContext, userModel.getHeadimgurl(), imgHead);
+    }
+
+    @Override
+    public void userSettingTaobao(BaseNoDataResponse settingResult) {
+        ToastUtils.showShort(settingResult.getMsg());
+        if (settingResult.getErrorcode() == 0) {
+            userModel.setSettingtaobao(userModel.getSettingtaobao() == 1 ? 2 : 1);
+            MyApplication.mApplication.setUserModel(userModel);
+            btnSwitch.setChecked(userModel.getSettingtaobao() == 1);
+        }
+    }
+
+    public void login() {
+        final AlibcLogin alibcLogin = AlibcLogin.getInstance();
+        if (!alibcLogin.isLogin()) {
+            alibcLogin.showLogin(mContext, new AlibcLoginCallback() {
+                @Override
+                public void onSuccess() {
+                    //获取淘宝用户信息
+                    LogUtils.i("获取淘宝用户信息: " + AlibcLogin.getInstance().getSession());
+                    getMvpPresenter().userSettingTaobao(userModel.getId(), userModel.getUser_channel_id());
+                }
+
+                @Override
+                public void onFailure(int code, String msg) {
+                    ToastUtils.showShort(msg);
+                    btnSwitch.setChecked(false);
+                    userModel.setSettingtaobao(2);
+                    MyApplication.mApplication.setUserModel(userModel);
+                }
+            });
+        }else {
+            getMvpPresenter().userSettingTaobao(userModel.getId(), userModel.getUser_channel_id());
+        }
+    }
+
+    public void logout() {
+        AlibcLogin alibcLogin = AlibcLogin.getInstance();
+        alibcLogin.logout(mContext, new LogoutCallback() {
+            @Override
+            public void onSuccess() {
+                LogUtils.i("onSuccess: ");
+                getMvpPresenter().userSettingTaobao(userModel.getId(), userModel.getUser_channel_id());
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                LogUtils.i("code: " + code + msg);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

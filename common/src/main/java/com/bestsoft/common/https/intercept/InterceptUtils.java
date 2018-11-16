@@ -5,9 +5,9 @@ import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 
 import com.bestsoft.common.utils.Utils;
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.NetworkUtils;
-import com.blankj.utilcode.utils.PhoneUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 
 import java.io.IOException;
 import java.security.Permission;
@@ -111,14 +111,14 @@ public class InterceptUtils {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!NetworkUtils.isConnected(Utils.getContext())) {
+                if (!NetworkUtils.isConnected()) {
                     //无网络下强制使用缓存，无论缓存是否过期,此时该请求实际上不会被发送出去。
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
                 Response response = chain.proceed(request);
-                if (NetworkUtils.isConnected(Utils.getContext())) {
+                if (NetworkUtils.isConnected()) {
                     //有网络情况下，根据请求接口的设置，配置缓存。
                     // 这样在下次请求时，根据缓存决定是否真正发出请求。
                     String cacheControl = request.cacheControl().toString();
@@ -148,7 +148,7 @@ public class InterceptUtils {
         Map<String, Object> map = new HashMap<>();
         map.put("channel_id", "2");
         map.put("client", "Android");
-        map.put("device_id", checkPermission() ? PhoneUtils.getIMEI(Utils.getContext()) : "");
+        map.put("device_id", checkPermission() ? PhoneUtils.getIMEI() : "");
         return map;
     }
 
