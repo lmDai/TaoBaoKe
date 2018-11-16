@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bestsoft.R;
+import com.bestsoft.mvp.model.ShareInviteTempModel;
 import com.bestsoft.utils.GlideUtil;
 import com.blankj.utilcode.util.SizeUtils;
 
@@ -23,10 +24,10 @@ import java.util.List;
  * @description:
  **/
 public class ImgPagerAdapter extends PagerAdapter {
-    private List<String> mList = new ArrayList<>();
+    private List<ShareInviteTempModel> mList = new ArrayList<>();
     private Context mContext;
 
-    public ImgPagerAdapter(List<String> mList, Context mContext) {
+    public ImgPagerAdapter(List<ShareInviteTempModel> mList, Context mContext) {
         this.mList = mList;
         this.mContext = mContext;
     }
@@ -47,7 +48,7 @@ public class ImgPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_main, container, false);
         ImageView imageView = view.findViewById(R.id.iv);
-        GlideUtil.loadRoundImage(mContext, mList.get(position), SizeUtils.dp2px(10), imageView);
+        GlideUtil.loadRoundImage(mContext, mList.get(position).getUrl(), SizeUtils.dp2px(10), imageView);
         container.addView(view);
         return view;
     }

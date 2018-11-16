@@ -12,7 +12,14 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.common.https.BaseNoDataResponse;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.FeedBackContract;
+import com.bestsoft.mvp.presenter.FeedBackPresenter;
 import com.bestsoft.utils.KeyboardUtils;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,7 +27,8 @@ import butterknife.OnClick;
 /**
  * 用户反馈
  */
-public class FeedbackActivity extends BaseActivity {
+@CreatePresenterAnnotation(FeedBackPresenter.class)
+public class FeedbackActivity extends BaseMvpActivity<FeedBackContract.View, FeedBackPresenter> implements FeedBackContract.View {
 
 
     @BindView(R.id.img_back)
@@ -102,12 +110,26 @@ public class FeedbackActivity extends BaseActivity {
 
     @OnClick({R.id.img_back, R.id.btn_commit})
     public void onViewClicked(View view) {
+        String content=editContent.getText().toString();
+        String contact=editContact.getText().toString();
         switch (view.getId()) {
             case R.id.img_back:
                 finish();
                 break;
             case R.id.btn_commit:
+                getMvpPresenter().feedBack(content,contact,userModel.getId(),userModel.getUser_channel_id());
                 break;
         }
+    }
+
+    @Override
+    public void setFeedBackStatus(BaseNoDataResponse settingResult) {
+        ToastUtils.showShort(settingResult.getMsg());
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

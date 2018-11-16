@@ -1,6 +1,7 @@
 package com.bestsoft.mvp.presenter;
 
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.bean.VersionModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
@@ -39,6 +40,19 @@ public class PersonalPresenter extends PersonalContract.Presenter {
                     @Override
                     public void onSuccess(BaseNoDataResponse result) {
                         getView().userSettingTaobao(result);
+                    }
+                });
+    }
+
+    @Override
+    public void userVersion(String version, String user_id, String user_channel_id) {
+        PersonModule.getInstance(Utils.getContext()).userVersion(version, user_id, user_channel_id)
+                .compose(RxUtil.observableIO2Main(getView()))
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<VersionModel>(this, true, "检查更新...") {
+                    @Override
+                    public void onSuccess(VersionModel result) {
+                        getView().setUserVersion(result);
                     }
                 });
     }

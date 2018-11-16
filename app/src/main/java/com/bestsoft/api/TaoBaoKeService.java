@@ -7,6 +7,7 @@ import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.CodeModel;
 import com.bestsoft.bean.ExtractModel;
 import com.bestsoft.bean.IconModel;
+import com.bestsoft.bean.IncomeDetailModel;
 import com.bestsoft.bean.KeyWordModel;
 import com.bestsoft.bean.OrderConfirmModel;
 import com.bestsoft.bean.OrderModel;
@@ -16,18 +17,25 @@ import com.bestsoft.bean.TeamOrderModel;
 import com.bestsoft.bean.TeamProfitModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.bean.VersionModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePageResponse;
 import com.bestsoft.common.https.BaseResponse;
+import com.bestsoft.mvp.model.ShareInviteTempModel;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * @package: com.bestsoft.api
@@ -154,4 +162,31 @@ public interface TaoBaoKeService {
     @POST(TaoBaoKeApi.USER_SETTING_TAOBAO)
     @FormUrlEncoded
     Observable<BaseNoDataResponse> userSettingTaobao(@FieldMap Map<String, Object> map);
+
+    //设置淘宝授权
+    @POST(TaoBaoKeApi.USER_SETTING_ALIPAY)
+    @FormUrlEncoded
+    Observable<BaseNoDataResponse> userSettingAlipay(@FieldMap Map<String, Object> map);
+
+    //邀请分享图片
+    @POST(TaoBaoKeApi.SHARE_INVITE_TEMP)
+    @FormUrlEncoded
+    Observable<BaseResponse<List<ShareInviteTempModel>>> shareInviteTemp(@FieldMap Map<String, Object> map);
+
+    //会员反馈
+    @POST(TaoBaoKeApi.USER_FEED_BACK)
+    @FormUrlEncoded
+    Observable<BaseNoDataResponse> userFeedBack(@FieldMap Map<String, Object> map);
+
+    //会员明细列表
+    @POST(TaoBaoKeApi.USER_BILL)
+    @FormUrlEncoded
+    Observable<BasePageResponse<List<IncomeDetailModel>>> userBill(@FieldMap Map<String, Object> map);
+    //版本更新信息
+    @POST(TaoBaoKeApi.USER_VERSION)
+    @FormUrlEncoded
+    Observable<BaseResponse<VersionModel>> userVersion(@FieldMap Map<String, Object> map);
+    @Streaming
+    @GET
+    Observable<ResponseBody> executeDownload(@Header("Range") String range, @Url() String url);
 }

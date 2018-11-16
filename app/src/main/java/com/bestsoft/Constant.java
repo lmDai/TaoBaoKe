@@ -1,5 +1,7 @@
 package com.bestsoft;
 
+import android.os.Environment;
+
 /**
  * @package: com.bestsoft
  * @user:xhkj 常量
@@ -16,7 +18,8 @@ public class Constant {
     public static final int HOME_REFRESH = 0x001;//首页刷新
     public static final int HOME_END_REFRESH = 0x002;//首页结束
     public static final String REFRESH = "refresh";
-
+    public final static String APP_ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + MyApplication.getInstance().getPackageName();
+    public final static String DOWNLOAD_DIR = "/downlaod/";
     public interface viewType {
         int typeBanner = 1;         //轮播图
         int typeGv = 2;             //九宫格

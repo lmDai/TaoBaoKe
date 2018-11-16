@@ -29,7 +29,7 @@ import java.util.List;
  * @date:2018/11/13
  * @description:筛选弹框
  **/
-public class FiltPopuWindow extends PopupWindow {
+public class  FiltPopuWindow extends PopupWindow {
     public FiltPopuWindow(Context context, View view) {
         //这里可以修改popupwindow的宽高
         super(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

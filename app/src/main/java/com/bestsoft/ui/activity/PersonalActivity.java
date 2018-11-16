@@ -1,6 +1,12 @@
 package com.bestsoft.ui.activity;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -17,19 +23,30 @@ import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.bean.VersionModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.PersonalContract;
 import com.bestsoft.mvp.presenter.PersonalPresenter;
 import com.bestsoft.utils.AppManager;
+import com.bestsoft.utils.AppUpdateService;
+import com.bestsoft.utils.DialogListener;
+import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.GlideUtil;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.KeyboardUtils;
 import com.bestsoft.utils.SpUtils;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+import com.yanzhenjie.permission.Setting;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -131,6 +148,7 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
                 IntentUtils.get().goActivity(mContext, FeedbackActivity.class);
                 break;
             case R.id.ll_check_update:
+                getMvpPresenter().userVersion(AppUtils.getAppVersionName(), userModel.getId(), userModel.getUser_channel_id());
                 break;
             case R.id.btn_logout:
                 AppManager.getAppManager().finishAllActivity();
@@ -159,6 +177,29 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
         }
     }
 
+    @Override
+    public void setUserVersion(VersionModel version) {
+        DialogUtils.showPromptDialog(mContext, version.getContent(), "提示", "立即更新", "暂不更新", new DialogListener() {
+            @Override
+            public void onClick(boolean confirm) {
+                if (confirm) {
+                    if (PermissionUtils.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        String downloadUrl = version.getAddress();
+                        Intent intent = new Intent(mContext, AppUpdateService.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("download_url", downloadUrl);
+                        bundle.putInt("download_id", 10);
+                        bundle.putString("download_file", downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1));
+                        intent.putExtras(bundle);
+                        startService(intent);
+                    } else {
+                        ToastUtils.showShort("请在设置-应用中打开存储权限");
+                    }
+                }
+            }
+        });
+    }
+
     public void login() {
         final AlibcLogin alibcLogin = AlibcLogin.getInstance();
         if (!alibcLogin.isLogin()) {
@@ -178,7 +219,7 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
                     MyApplication.mApplication.setUserModel(userModel);
                 }
             });
-        }else {
+        } else {
             getMvpPresenter().userSettingTaobao(userModel.getId(), userModel.getUser_channel_id());
         }
     }

@@ -72,6 +72,7 @@ public abstract class SpinerPopWindow<T> extends PopupWindow {
         ColorDrawable dw = new ColorDrawable(0x60000000);
         setBackgroundDrawable(dw);
         setOutsideTouchable(true);
+        setFocusable(true);
         recyclerView = view.findViewById(R.id.select);
         view.findViewById(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
             @Override

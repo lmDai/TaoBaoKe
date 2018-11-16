@@ -18,6 +18,15 @@ public class BasePageResponse<T> {
      */
 
     private String next;
+    private String total_income;
+
+    public String getTotal_income() {
+        return total_income;
+    }
+
+    public void setTotal_income(String total_income) {
+        this.total_income = total_income;
+    }
 
     public int getErrorcode() {
         return errorcode;

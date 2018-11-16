@@ -86,6 +86,9 @@ public abstract class BaseMvpFragment<V extends IBaseView, P extends BasePresent
     public void showProgress(String message) {
         if (mLoadingDialog != null) {
             mLoadingDialog.setMessage(message).show();
+        }else {
+            mLoadingDialog = new LoadingDialog(mContext);
+            mLoadingDialog.setMessage(message).show();
         }
     }
 
@@ -93,6 +96,7 @@ public abstract class BaseMvpFragment<V extends IBaseView, P extends BasePresent
     public void hideProgress() {
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
+            mLoadingDialog=null;
         }
     }
 

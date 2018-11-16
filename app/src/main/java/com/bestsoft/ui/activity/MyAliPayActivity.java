@@ -11,8 +11,15 @@ import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.common.https.BaseNoDataResponse;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.MyAlipayContract;
+import com.bestsoft.mvp.presenter.MyAlipayPresenter;
 import com.bestsoft.ui.widget.ClearEditText;
 import com.bestsoft.utils.KeyboardUtils;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,7 +27,8 @@ import butterknife.OnClick;
 /**
  * 我的支付宝
  */
-public class MyAliPayActivity extends BaseActivity {
+@CreatePresenterAnnotation(MyAlipayPresenter.class)
+public class MyAliPayActivity extends BaseMvpActivity<MyAlipayContract.View, MyAlipayPresenter> implements MyAlipayContract.View {
 
 
     @BindView(R.id.img_back)
@@ -102,12 +110,26 @@ public class MyAliPayActivity extends BaseActivity {
 
     @OnClick({R.id.img_back, R.id.btn_save})
     public void onViewClicked(View view) {
+        String account = editId.getText().toString();
+        String name = editName.getText().toString();
         switch (view.getId()) {
             case R.id.img_back:
                 finish();
                 break;
             case R.id.btn_save:
+                getMvpPresenter().userSettingAliPay(account, name, userModel.getId(), userModel.getUser_channel_id());
                 break;
         }
+    }
+
+    @Override
+    public void userSettingAlipay(BaseNoDataResponse settingResult) {
+        ToastUtils.showShort(settingResult.getMsg());
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

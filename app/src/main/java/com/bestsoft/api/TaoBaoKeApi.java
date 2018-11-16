@@ -53,4 +53,14 @@ public class TaoBaoKeApi {
     public final static String USER_EXTRACT = "app/user/extract";
     //淘宝设置授权
     public final static String USER_SETTING_TAOBAO = "app/user/setting-taobao";
+    //设置支付宝账号
+    public final static String USER_SETTING_ALIPAY = "app/user/setting-alipay";
+    //邀请分享图片
+    public final static String SHARE_INVITE_TEMP = "app/shareinvite/temp";
+    //会员反馈
+    public final static String USER_FEED_BACK = "app/user/feedback";
+    //会员明细列表
+    public final static String USER_BILL = "app/user/bill";
+    //版本更新信息
+    public final static String USER_VERSION="app/user/verison";
 }

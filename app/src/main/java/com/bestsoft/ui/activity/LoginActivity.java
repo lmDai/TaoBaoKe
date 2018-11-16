@@ -71,7 +71,7 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
     protected void initView(Bundle savedInstanceState) {
         txtCannotLogin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         txtCannotLogin.getPaint().setAntiAlias(true);//抗锯齿
-        requestPermission(Permission.READ_PHONE_STATE);
+        requestPermission(Permission.READ_PHONE_STATE,Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE);
         if ((boolean) SpUtils.getParam(mContext, Constant.isLOGIN, false)) {
             IntentUtils.get().goActivityKill(mContext, MainActivity.class);
         }
