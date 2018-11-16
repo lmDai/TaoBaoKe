@@ -5,6 +5,7 @@ import android.content.Context;
 import com.ali.auth.third.core.model.User;
 import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.ExtractModel;
 import com.bestsoft.bean.ProductModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseResponse;
@@ -37,18 +38,19 @@ public class PersonModel {
         return musicModel;
     }
 
-
-    /**
-     * 会员信息
-     *
-     * @param channel_id
-     * @return
-     */
     public Observable<BaseResponse<UserModel>> getUserInfo(String user_id, String user_channel_id) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("user_id", user_id);
         requestMap.put("user_channel_id", user_channel_id);
         Observable<BaseResponse<UserModel>> detail = mApiService.getUserInfo(requestMap);
         return detail;
+    }
+
+    public Observable<BaseResponse<ExtractModel>> userExtract(String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<ExtractModel>> userExtract = mApiService.userExtract(requestMap);
+        return userExtract;
     }
 }

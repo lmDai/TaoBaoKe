@@ -1,6 +1,7 @@
 package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,9 @@ import com.bestsoft.base.BaseActivity;
 import com.bestsoft.ui.adapter.BasePagerAdapter;
 import com.bestsoft.ui.fragment.CircleCenterFragment;
 import com.bestsoft.utils.AppManager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +40,9 @@ public class HairCircleCenterActivity extends BaseActivity {
     TextView txtTitle;
     @BindView(R.id.img_message)
     ImageView imgMessage;
-
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout refreshLayout;
+    private BasePagerAdapter myAdapter;
 
     @Override
     protected int getLayout() {
@@ -48,13 +54,23 @@ public class HairCircleCenterActivity extends BaseActivity {
         txtTitle.setText(mContext.getString(R.string.title_invite));
         List<String> mTitleList = new ArrayList<>();
         List<Fragment> mFragments = new ArrayList<>();
-        mTitleList.add("商品推荐");
         mTitleList.add("营销素材");
         mTitleList.add("新手必发");
-        mFragments.add(new CircleCenterFragment());
-        mFragments.add(new CircleCenterFragment());
-        mFragments.add(new CircleCenterFragment());
+        mFragments.add(new CircleCenterFragment().newInstance(2));
+        mFragments.add(new CircleCenterFragment().newInstance(1));
         initTabViewPager(mFragments, mTitleList);
+    }
+
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                ((CircleCenterFragment) myAdapter.getItem(viewpager.getCurrentItem())).lazyFetchData();
+                refreshLayout.finishRefresh();
+            }
+        });
     }
 
     @Override
@@ -66,7 +82,7 @@ public class HairCircleCenterActivity extends BaseActivity {
 
     private void initTabViewPager(List<Fragment> mFragments, List<String> mTitleList) {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
+        myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
         viewpager.setAdapter(myAdapter);
         // 左右预加载页面的个数
         viewpager.setOffscreenPageLimit(4);
@@ -96,10 +112,15 @@ public class HairCircleCenterActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.img_me:
                 finish();
-                AppManager.getAppManager().removeActivity(this);
                 break;
             case R.id.img_message:
+                refreshLayout.autoRefresh();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

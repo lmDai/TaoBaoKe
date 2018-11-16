@@ -1,9 +1,11 @@
 package com.bestsoft.api;
 
 import com.bestsoft.bean.AdvertModel;
+import com.bestsoft.bean.ArticleModel;
 import com.bestsoft.bean.ChartModel;
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.ExtractModel;
 import com.bestsoft.bean.IconModel;
 import com.bestsoft.bean.KeyWordModel;
 import com.bestsoft.bean.OrderConfirmModel;
@@ -135,4 +137,12 @@ public interface TaoBaoKeService {
     @FormUrlEncoded
     @POST(TaoBaoKeApi.ICON_PAGE)
     Observable<BaseResponse<List<IconModel>>> homeIconpage(@FieldMap Map<String, Object> map);
+    //分享文章列表
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.SHARE_ARTICLE)
+    Observable<BaseResponse<List<ArticleModel>>> shareAticle(@FieldMap Map<String, Object> map);
+    //会员提现页面数据
+    @FormUrlEncoded
+    @POST(TaoBaoKeApi.USER_EXTRACT)
+    Observable<BaseResponse<ExtractModel>> userExtract(@FieldMap Map<String, Object> map);
 }

@@ -46,5 +46,9 @@ public class TaoBaoKeApi {
     //首页广告
     public final static String ADVERT_HOME = "app/advert/homepage";
     //首页图标
-    public final static String ICON_PAGE="app/icon/home-page";
+    public final static String ICON_PAGE = "app/icon/home-page";
+    //分享文章列表
+    public final static String SHARE_ARTICLE = "app/share/article";
+    //会员提现页面数据
+    public final static String USER_EXTRACT = "app/user/extract";
 }

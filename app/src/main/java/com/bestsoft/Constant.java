@@ -7,7 +7,7 @@ package com.bestsoft;
  * @description:
  **/
 public class Constant {
-    public static final int PAGE_SIZE = 20;//每页条数
+    public static final int PAGE_SIZE = 10;//每页条数
     public static final int MY_WALLET = 0;
     public static final int ZHI_FU_BAO = 1;
     public static final String channel_id = "2";

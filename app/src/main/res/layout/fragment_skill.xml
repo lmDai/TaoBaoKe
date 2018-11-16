@@ -14,14 +14,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center|top"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_toolbar"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dp_60">
 
@@ -140,14 +140,14 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_36"
                         android:src="@drawable/ic_send" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="@dimen/dp_10"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="1dp" />
 
                 <LinearLayout
                     android:id="@+id/ll_core_member"
@@ -186,7 +186,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_36"
                         android:src="@drawable/ic_core_member" />
 
                 </LinearLayout>

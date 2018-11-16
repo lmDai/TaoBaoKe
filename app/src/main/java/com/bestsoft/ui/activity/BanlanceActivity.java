@@ -7,17 +7,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bestsoft.R;
-import com.bestsoft.base.BaseActivity;
+import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.bean.ExtractModel;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.ExtractContract;
+import com.bestsoft.mvp.presenter.ExtractPresenter;
 import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.IntentUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * 余额
  */
-public class BanlanceActivity extends BaseActivity {
+@CreatePresenterAnnotation(ExtractPresenter.class)
+public class BanlanceActivity extends BaseMvpActivity<ExtractContract.View, ExtractPresenter> implements ExtractContract.View {
 
 
     @BindView(R.id.img_back)
@@ -28,6 +34,14 @@ public class BanlanceActivity extends BaseActivity {
     TextView txtRight;
     @BindView(R.id.btn_logout)
     Button btnLogout;
+    @BindView(R.id.txt_balance)
+    TextView txtBalance;
+    @BindView(R.id.txt_own_commission)
+    TextView txtOwnCommission;
+    @BindView(R.id.txt_fans_commission)
+    TextView txtFansCommission;
+    @BindView(R.id.txt_wait_commission)
+    TextView txtWaitCommission;
 
     @Override
     protected int getLayout() {
@@ -39,6 +53,7 @@ public class BanlanceActivity extends BaseActivity {
         txtRight.setVisibility(View.VISIBLE);
         txtRight.setText("明细");
         txtTitle.setText(mContext.getString(R.string.title_balance));
+        getMvpPresenter().getUserExtract(userModel.getId(), userModel.getUser_channel_id());
     }
 
     @Override
@@ -55,7 +70,6 @@ public class BanlanceActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
-                AppManager.getAppManager().removeActivity(this);
                 finish();
                 break;
             case R.id.txt_right:
@@ -65,5 +79,24 @@ public class BanlanceActivity extends BaseActivity {
                 IntentUtils.get().goActivity(mContext, WithdrawActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public void setUserExtract(ExtractModel models) {
+        txtBalance.setText("¥" + models.getBalance());
+        txtOwnCommission.setText(models.getOwn_commission());
+        txtFansCommission.setText(models.getFans_commission());
+        txtWaitCommission.setText(models.getWait_commission());
+
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -22,7 +22,6 @@ import java.util.List;
  * @date:2018/10/29
  * @description: 注册
  **/
-@CreatePresenterAnnotation(ProductListPresenter.class)
 public class ProductListPresenter extends ProductListContract.Presenter {
     private String currentPage = "1";
 
