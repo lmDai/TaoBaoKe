@@ -154,11 +154,11 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
         Map<String, String> exParams = new HashMap<>();
         exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
         AlibcBasePage alibcBasePage = null;
-        if (type == 0) {//立即领券
-            alibcBasePage = new AlibcPage(result.getCouponurl());
-        } else if (type == 1) {//立即购买
-            alibcBasePage = new AlibcDetailPage(itemId);
-        }
+//        if (type == 0) {//立即领券
+        alibcBasePage = new AlibcPage(result.getCouponurl());
+//        } else if (type == 1) {//立即购买
+//            alibcBasePage = new AlibcDetailPage(itemId);
+//        }
         //设置页面打开方式
         AlibcShowParams showParams = new AlibcShowParams(OpenType.Native, false);
         AlibcTaokeParams taokeParams = new AlibcTaokeParams(userModel.getTaobao_pid(), userModel.getTaobao_pid(), null);

@@ -62,5 +62,13 @@ public class TaoBaoKeApi {
     //会员明细列表
     public final static String USER_BILL = "app/user/bill";
     //版本更新信息
-    public final static String USER_VERSION="app/user/verison";
+    public final static String USER_VERSION = "app/user/verison";
+    //会员提交升级申请
+    public final static String UPGRADE_APPLY = "app/upgrade/apply";
+    //升级支付
+    public final static String UPGRADE_PAY = "app/upgrade/pay";
+    //第三方登录
+    public final static String THIRD_LOGIN = "app/user/third-login";
+    //会员提现申请
+    public final static String WITHDRAW_APPLY="app/order/withdraw-apply";
 }

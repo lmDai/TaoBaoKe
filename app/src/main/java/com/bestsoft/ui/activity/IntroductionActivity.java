@@ -11,6 +11,7 @@ import com.bestsoft.base.BaseActivity;
 import com.bestsoft.bean.IntroductionModel;
 import com.bestsoft.ui.adapter.IntroductionAdapter;
 import com.bestsoft.utils.RecyclerViewUtils;
+import com.bestsoft.utils.TextFontUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 介绍
@@ -35,6 +38,12 @@ public class IntroductionActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.txt_right)
+    TextView txtRight;
+//    @BindView(R.id.txt_about)
+//    TextView txtAbout;
+//    @BindView(R.id.txt_know)
+//    TextView txtKnow;
     private IntroductionAdapter introductionAdapter;
 
     @Override
@@ -44,10 +53,13 @@ public class IntroductionActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        txtTitle.setText(mContext.getString(R.string.app_name));
         introductionAdapter = new IntroductionAdapter(R.layout.item_introduction);
         RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
         recyclerView.setAdapter(introductionAdapter);
         initData();
+//        TextFontUtils.setTextTypeHaiPai(mContext, txtAbout);
+//        TextFontUtils.setTextTypeHaiPai(mContext, txtKnow);
     }
 
     private void initData() {
@@ -83,4 +95,15 @@ public class IntroductionActivity extends BaseActivity {
                 .init();
     }
 
+
+
+    @OnClick(R.id.img_back)
+    public void onViewClicked() {
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

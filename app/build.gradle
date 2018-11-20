@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
+apply from: '../MobSDK.gradle'
 def ext = rootProject.ext
 def version = ext.versions
 def appPackage = ext.appID
@@ -75,7 +76,7 @@ dependencies {
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
     implementation 'org.greenrobot:greendao:3.2.2'
     //支付
-    implementation 'com.alibaba.alipay:alipaySingle:20160825@jar'
+//    implementation 'com.alibaba.alipay:alipaySingle:20160825@jar'
 
     //登陆
     implementation 'com.ali.auth.sdk:alibabauth_core:1.1.4@jar'

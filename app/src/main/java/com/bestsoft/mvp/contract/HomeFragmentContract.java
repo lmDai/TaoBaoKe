@@ -8,6 +8,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.IconModel;
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
@@ -29,7 +30,7 @@ public interface HomeFragmentContract {
         void setClassfiy(List<ClassfyModel> classfiy);
 
         void setAdvert(List<AdvertModel> model);
-
+        void setUserModel(UserModel userModel);
         void setIconPage(List<IconModel> iconPage);
     }
 
@@ -54,7 +55,7 @@ public interface HomeFragmentContract {
         public abstract void getAdvert(String user_id, String user_channel_id);//广告
 
         public abstract void getIconpage(String user_id, String user_channel_id);
-
+        public abstract void getUserInfo(String user_id, String user_channel_id);
     }
 
 

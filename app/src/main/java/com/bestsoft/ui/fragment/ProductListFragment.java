@@ -71,7 +71,7 @@ public class ProductListFragment extends BaseMvpFragment<ProductListContract.Vie
             key = bundle.getString(KEY);
         }
         productAdapter = new ProductAdapter(R.layout.item_product, userModel.getLevel());
-        RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
+        RecyclerViewUtils.initHeaderRecyclerView(recyclerView, mContext);
         recyclerView.setAdapter(productAdapter);
         View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_product_list, null, false);
         productAdapter.addHeaderView(headerView);

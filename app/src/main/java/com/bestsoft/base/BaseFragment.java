@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.utils.TextFontUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -33,6 +35,7 @@ public abstract class BaseFragment extends RxFragment {
     private boolean hasFetchData; // 标识已经触发过懒加载数据
     protected ImmersionBar mImmersionBar;
     protected UserModel userModel;
+    private TextView txtTitle;
 
     @Override
     public void onAttach(Context context) {
@@ -62,7 +65,9 @@ public abstract class BaseFragment extends RxFragment {
         }
         unbinder = ButterKnife.bind(this, rootView);
         initView(inflater);
-
+        txtTitle = rootView.findViewById(R.id.txt_title);
+        if (txtTitle != null)
+            TextFontUtils.setTextTypeDTr(mContext, txtTitle);
         return rootView;
     }
 

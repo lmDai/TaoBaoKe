@@ -6,6 +6,7 @@ import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.LoginContract;
+import com.bestsoft.mvp.contract.PhoneLoginContract;
 import com.bestsoft.mvp.model.LoginModel;
 
 /**
@@ -17,26 +18,14 @@ import com.bestsoft.mvp.model.LoginModel;
 public class LoginPresenter extends LoginContract.Presenter {
 
     @Override
-    public void login(String phone, String code) {
-        LoginModel.getInstance(Utils.getContext()).login(phone, code)
+    public void thirdLogin(String type, String openid, String user_id, String user_channel_id) {
+        LoginModel.getInstance(Utils.getContext()).thirdLogin(type, openid, user_id, user_channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
                 .subscribe(new ProgressObserver<UserModel>(this, true, "登录中...") {
                     @Override
                     public void onSuccess(UserModel result) {
-                        getView().loginSuccess(result);
-                    }
-                });
-    }
-    @Override
-    public void sendSmsCode(String phone, int type, String user_channel_id) {
-        LoginModel.getInstance(Utils.getContext()).sendSmsCode(phone, type, user_channel_id)
-                .compose(RxUtil.observableIO2Main(getView()))
-                .compose(RxUtil.handNoResponseResult())
-                .subscribe(new ProgressObserver<BaseNoDataResponse>(this, true, "发送中...") {
-                    @Override
-                    public void onSuccess(BaseNoDataResponse result) {
-                        getView().sendCodeSuccess(result);//发送验证码成功
+                        getView().loginSuccess(result);//发送验证码成功
                     }
                 });
     }

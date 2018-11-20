@@ -53,7 +53,7 @@ public class RetrofitManager {
         if (mRetrofitHashMap.containsKey(baseUrl)) {
             retrofit = mRetrofitHashMap.get(baseUrl);
         } else {
-            retrofit = createRetrofit(baseUrl);
+            retrofit = createRetrofit(baseUrl,0);
         }
         return retrofit;
     }
@@ -63,7 +63,7 @@ public class RetrofitManager {
      *
      * @return Retrofit
      */
-    private Retrofit createRetrofit(String baseUrl) {
+    private Retrofit createRetrofit(String baseUrl, int type) {
         File cacheFile = new File(Utils.getContext().getExternalCacheDir(), "bestcache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
         OkHttpClient httpClient = new OkHttpClient().newBuilder()
@@ -77,13 +77,21 @@ public class RetrofitManager {
                 .cache(cache)
                 .retryOnConnectionFailure(true)
                 .build();
-
-        return new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(httpClient)
-                .build();
+        if (type == 0) {
+            return new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(httpClient)
+                    .build();
+        } else {
+            return new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+//                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(httpClient)
+                    .build();
+        }
     }
 
     /**
@@ -91,6 +99,14 @@ public class RetrofitManager {
      */
     public <T> T getRetrofitService(Class<T> cls) {
 
-        return createRetrofit(BaseApi.getBaseUrl()).create(cls);
+        return createRetrofit(BaseApi.getBaseUrl(), 0).create(cls);
+    }
+
+    /**
+     * 根据各模块业务接口 获取不同的retrofit service接口对象
+     */
+    public <T> T getRetrofitService(Class<T> cls, int type) {
+
+        return createRetrofit(BaseApi.getBaseUrl(), type).create(cls);
     }
 }

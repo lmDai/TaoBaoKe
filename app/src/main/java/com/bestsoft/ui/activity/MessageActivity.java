@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MessageActivity extends BaseActivity {
 
@@ -80,4 +82,14 @@ public class MessageActivity extends BaseActivity {
                 .init();
     }
 
+
+    @OnClick(R.id.img_back)
+    public void onViewClicked() {
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

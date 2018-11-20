@@ -50,7 +50,9 @@ public class KeyboardUtils {
         MaterialRippleLayout.on(view)
                 .rippleColor(Color.parseColor("#999999"))
                 .rippleAlpha(0.2f)
-                .rippleHover(true)
+                .rippleDelayClick(false)
+                .rippleOverlay(false)
+                .rippleHover(false)
                 .create();
     }
 

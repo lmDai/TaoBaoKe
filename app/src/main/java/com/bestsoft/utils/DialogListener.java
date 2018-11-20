@@ -6,6 +6,7 @@ package com.bestsoft.utils;
  * @date:2018/10/30
  * @description:
  **/
-public interface DialogListener {
+public  interface DialogListener {
     void onClick(boolean confirm);
+
 }

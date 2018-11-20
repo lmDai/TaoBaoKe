@@ -4,18 +4,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.bestsoft.R;
+import com.bestsoft.api.TaoBaoKeApi;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.common.https.BaseApi;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.UpgradeContract;
 import com.bestsoft.mvp.presenter.UpgradePresenter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
+import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.SpacesItemDecoration;
-import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -99,14 +103,36 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
         refreshLayout.finishRefresh(false);
     }
 
+    @Override
+    public void showPayPage(String page) {
+        Bundle bundle = new Bundle();
+        bundle.putString("link", BaseApi.getBaseUrl() + TaoBaoKeApi.UPGRADE_PAY + "?orderId=" + page);
+        bundle.putInt("type", 1);
+        IntentUtils.get().goActivity(mContext, WebViewActivity.class, bundle);
 
-    @OnClick(R.id.btn_upgrade)
-    public void onViewClicked() {
-        ToastUtils.showShort("点击按钮");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.btn_upgrade, R.id.img_me})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_upgrade:
+                getMvpPresenter().getUpgradeApply(userModel.getId(), userModel.getUser_channel_id());
+                break;
+            case R.id.img_me:
+                finish();
+                break;
+        }
     }
 }

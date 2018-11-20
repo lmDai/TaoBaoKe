@@ -1,6 +1,7 @@
 package com.bestsoft.api;
 
 import com.bestsoft.bean.AdvertModel;
+import com.bestsoft.bean.ApplyModel;
 import com.bestsoft.bean.ArticleModel;
 import com.bestsoft.bean.ChartModel;
 import com.bestsoft.bean.ClassfyModel;
@@ -18,6 +19,7 @@ import com.bestsoft.bean.TeamProfitModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.bean.VersionModel;
+import com.bestsoft.bean.WithDrawModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePageResponse;
 import com.bestsoft.common.https.BaseResponse;
@@ -27,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -34,6 +37,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
@@ -189,4 +193,19 @@ public interface TaoBaoKeService {
     @Streaming
     @GET
     Observable<ResponseBody> executeDownload(@Header("Range") String range, @Url() String url);
+
+    //版本更新信息
+    @POST(TaoBaoKeApi.UPGRADE_APPLY)
+    @FormUrlEncoded
+    Observable<BaseResponse<ApplyModel>> upgradeApply(@FieldMap Map<String, Object> map);
+    @GET(TaoBaoKeApi.UPGRADE_PAY)
+    Observable<ResponseBody> upgradePay(@Query("orderId") String orderId);
+    //第三方登录
+    @POST(TaoBaoKeApi.THIRD_LOGIN)
+    @FormUrlEncoded
+    Observable<BaseResponse<UserModel>> thirdLogin(@FieldMap Map<String, Object> map);
+    //会员提现申请
+    @POST(TaoBaoKeApi.WITHDRAW_APPLY)
+    @FormUrlEncoded
+    Observable<BaseResponse<WithDrawModel>> withdrawApply(@FieldMap Map<String, Object> map);
 }

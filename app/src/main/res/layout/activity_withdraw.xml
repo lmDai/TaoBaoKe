@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -46,6 +47,7 @@
                         android:textSize="@dimen/sp_42" />
 
                     <EditText
+                        android:id="@+id/edit_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -65,10 +67,11 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/txt_amount_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="可提现的金额12.12元，全部提现"
-                        android:textSize="@dimen/sp_14" />
+                        android:textSize="@dimen/sp_14"
+                        tools:text="可提现的金额12.12元，全部提现" />
 
 
                     <View
@@ -87,7 +90,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20">
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -112,11 +116,13 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/img_wechat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_question_mark" />
+                        android:src="@drawable/ic_weixin_pay" />
 
                     <TextView
+                        android:id="@+id/txt_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -144,6 +150,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/btn_selector"
+                    android:enabled="false"
                     android:text="确认提现"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/sp_18" />

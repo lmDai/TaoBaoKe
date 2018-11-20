@@ -16,8 +16,8 @@ import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
-import com.bestsoft.mvp.contract.LoginContract;
-import com.bestsoft.mvp.presenter.LoginPresenter;
+import com.bestsoft.mvp.contract.PhoneLoginContract;
+import com.bestsoft.mvp.presenter.PhoneLoginPresenter;
 import com.bestsoft.ui.widget.ClearEditText;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.SpUtils;
@@ -34,8 +34,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
-@CreatePresenterAnnotation(LoginPresenter.class)
-public class PhoneLoginActivity extends BaseMvpActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
+@CreatePresenterAnnotation(PhoneLoginPresenter.class)
+public class PhoneLoginActivity extends BaseMvpActivity<PhoneLoginContract.View, PhoneLoginPresenter> implements PhoneLoginContract.View {
 
     @BindView(R.id.img_back)
     ImageView imgBack;

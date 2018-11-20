@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/txt_info_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -34,9 +34,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_centerVertical="true"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txt_minute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="一分钟了解"
@@ -44,6 +46,7 @@
                     android:textSize="@dimen/sp_22" />
 
                 <TextView
+                    android:id="@+id/txt_app_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_home_right"
@@ -55,6 +58,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_toRightOf="@+id/ll_know"
                 android:src="@drawable/ic_clock" />

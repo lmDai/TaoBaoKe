@@ -1,14 +1,21 @@
 package com.bestsoft.ui.fragment;
 
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bestsoft.R;
-import com.bestsoft.base.BaseFragment;
+import com.bestsoft.base.BaseMvpFragment;
+import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
+import com.bestsoft.mvp.contract.SkillContract;
+import com.bestsoft.mvp.presenter.SkillPresenter;
 import com.bestsoft.ui.activity.BanlanceActivity;
 import com.bestsoft.ui.activity.HairCircleCenterActivity;
 import com.bestsoft.ui.activity.MemberActivity;
@@ -16,8 +23,10 @@ import com.bestsoft.ui.activity.MessageActivity;
 import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.activity.WithdrawActivity;
 import com.bestsoft.utils.IntentUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -27,7 +36,8 @@ import butterknife.Unbinder;
  * @date:2018/10/31
  * @description:
  **/
-public class SkillFragment extends BaseFragment {
+@CreatePresenterAnnotation(SkillPresenter.class)
+public class SkillFragment extends BaseMvpFragment<SkillContract.View, SkillPresenter> implements SkillContract.View {
     @BindView(R.id.img_me)
     ImageView imgMe;
     @BindView(R.id.txt_title)
@@ -41,6 +51,19 @@ public class SkillFragment extends BaseFragment {
     @BindView(R.id.ll_core_member)
     LinearLayout llCoreMember;
     Unbinder unbinder;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.txt_price)
+    TextView txtPrice;
+    @BindView(R.id.txt_balance)
+    TextView txtBalance;
+    @BindView(R.id.img_next)
+    ImageView imgNext;
+    @BindView(R.id.ll_center)
+    LinearLayout llCenter;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout refreshLayout;
+
 
     @Override
     protected int getLayout() {
@@ -51,6 +74,7 @@ public class SkillFragment extends BaseFragment {
     protected void initView(LayoutInflater inflater) {
         super.initView(inflater);
         txtTitle.setText(mContext.getString(R.string.title_up_skill));
+        getMvpPresenter().getUserInfo(userModel.getId(), userModel.getUser_channel_id());
     }
 
     @Override
@@ -83,4 +107,11 @@ public class SkillFragment extends BaseFragment {
                 break;
         }
     }
+
+    @Override
+    public void setUserModel(UserModel userModel) {
+        txtPrice.setText(userModel.getTotal_income() + "");
+        txtBalance.setText("¥" + userModel.getBalance());
+    }
+
 }

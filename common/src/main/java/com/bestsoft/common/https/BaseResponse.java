@@ -9,6 +9,7 @@ package com.bestsoft.common.https;
 public class BaseResponse<T> {
     public static final int SUCCESS = 0;
     public static final int FAILURE = 1;
+    public static final int NO_LOGIN = 2;
 
     private int errorcode;
     private String msg;

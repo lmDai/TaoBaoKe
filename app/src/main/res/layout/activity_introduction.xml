@@ -17,7 +17,69 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false" />
+
+        <!--<android.support.v4.widget.NestedScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="gone">-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/bg_introduction"-->
+                    <!--android:focusable="true"-->
+                    <!--android:focusableInTouchMode="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:visibility="gone">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="-20dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/txt_about"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="巨折是什么？"-->
+                            <!--android:textColor="@color/colorBlack"-->
+                            <!--android:textSize="@dimen/sp_36" />-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/txt_know"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="用一分钟时间了解"-->
+
+                            <!--android:textColor="@color/colorBlack"-->
+                            <!--android:textSize="@dimen/sp_26" />-->
+
+
+                    <!--</LinearLayout>-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="-20dp"-->
+                        <!--android:src="@drawable/ic_introduction" />-->
+
+                <!--</LinearLayout>-->
+
+
+            <!--</LinearLayout>-->
+
+        <!--</android.support.v4.widget.NestedScrollView>-->
+
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </android.support.design.widget.CoordinatorLayout>

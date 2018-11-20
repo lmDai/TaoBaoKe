@@ -13,14 +13,10 @@ import com.bestsoft.common.https.IBaseView;
  **/
 public interface LoginContract {
     interface View extends IBaseView {
-        void sendCodeSuccess(BaseNoDataResponse result);//验证码发送成功
-
         void loginSuccess(UserModel userModel);
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void login(String phone, String code);
-
-        public abstract void sendSmsCode(String phone, int type, String user_channel_id);
+        public abstract void thirdLogin(String type, String openid, String user_id, String user_channel_id);
     }
 }

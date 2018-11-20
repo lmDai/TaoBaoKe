@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.base.BaseMvpActivity;
@@ -23,16 +24,27 @@ import com.bestsoft.ui.adapter.ImgPagerAdapter;
 import com.bestsoft.ui.adapter.RuleAdapter;
 import com.bestsoft.ui.widget.GallyPageTransformer;
 import com.bestsoft.utils.AppManager;
+import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.RecyclerViewUtils;
+import com.bestsoft.utils.ShareDialogListener;
+import com.blankj.utilcode.util.LogUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.tencent.qzone.QZone;
+import cn.sharesdk.wechat.friends.Wechat;
+import cn.sharesdk.wechat.moments.WechatMoments;
 
 /**
  * 邀请粉丝
@@ -62,6 +74,8 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
     TextView txtInviteCode;
     private RuleAdapter ruleAdapter;
     private int pagerWidth;
+    private int i = 0;
+    private List<ShareInviteTempModel> settingResult;
 
     @Override
     protected int getLayout() {
@@ -83,11 +97,6 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
         viewPagerTheme.setLayoutParams(lp);
         viewPagerTheme.setPageMargin(-20);
         viewPagerTheme.setPageTransformer(true, new GallyPageTransformer());
-        List<String> imageViews = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            imageViews.add("https://img.alicdn.com/imgextra/i2/1634291101/O1CN011K0IXB8UKZjVRqG_!!1634291101.jpg");
-        }
-
         ruleAdapter = new RuleAdapter(R.layout.item_rule);
         RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
         recyclerView.setAdapter(ruleAdapter);
@@ -127,6 +136,7 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
 
             @Override
             public void onPageSelected(int i) {
+                InviteActivity.this.i = i;
                 txtPosition.setText("选择主题" + (i + 1) + "/");
             }
 
@@ -137,7 +147,7 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
         });
     }
 
-    @OnClick({R.id.img_me, R.id.img_message})
+    @OnClick({R.id.img_me, R.id.img_message, R.id.btn_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_me:
@@ -147,11 +157,62 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
             case R.id.img_message:
                 refreshLayout.autoRefresh();
                 break;
+            case R.id.btn_share:
+                DialogUtils.showDialogShare(mContext, new ShareDialogListener() {
+                    @Override
+                    public void onClick(boolean confirm, int type) {
+                        if (confirm) {
+                            Platform.ShareParams sp = new Platform.ShareParams();
+                            sp.setTitle(null);
+                            sp.setTitleUrl(settingResult.get(i).getUrl()); // 标题的超链接
+                            sp.setText(null);
+                            sp.setImageUrl(settingResult.get(i).getUrl());
+                            sp.setSite(null);
+                            sp.setSiteUrl(null);
+                            Platform platform = null;
+                            switch (type) {
+                                case 1:
+                                    platform = ShareSDK.getPlatform(WechatMoments.NAME);
+                                    break;
+                                case 2:
+                                    platform = ShareSDK.getPlatform(Wechat.NAME);
+                                    break;
+                                case 3:
+                                    platform = ShareSDK.getPlatform(QQ.NAME);
+                                    break;
+                                case 4:
+                                    platform = ShareSDK.getPlatform(QZone.NAME);
+                                    break;
+                            }
+                            // 设置分享事件回调（注：回调放在不能保证在主线程调用，不可以在里面直接处理UI操作）
+                            platform.setPlatformActionListener(new PlatformActionListener() {
+                                public void onError(Platform arg0, int arg1, Throwable arg2) {
+                                    //失败的回调，arg:平台对象，arg1:表示当前的动作，arg2:异常信息
+                                    LogUtils.i("onError");
+                                }
+
+                                public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
+                                    //分享成功的回调
+                                    LogUtils.i("onComplete", JSON.toJSONString(arg2));
+                                }
+
+                                public void onCancel(Platform arg0, int arg1) {
+                                    //取消分享的回调
+                                    LogUtils.i("onCancel");
+                                }
+                            });
+                            // 执行图文分享
+                            platform.share(sp);
+                        }
+                    }
+                });
+                break;
         }
     }
 
     @Override
     public void shareInviteTemp(List<ShareInviteTempModel> settingResult) {
+        this.settingResult=settingResult;
         txtTotal.setText(String.valueOf(settingResult.size()));
         refreshLayout.finishRefresh();
         viewPagerTheme.setAdapter(new ImgPagerAdapter(settingResult, this));

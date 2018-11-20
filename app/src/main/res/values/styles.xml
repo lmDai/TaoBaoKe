@@ -53,4 +53,27 @@
         <item name="android:windowEnterAnimation">@anim/pop_arrow_in</item>
         <item name="android:windowExitAnimation">@anim/pop_arrow_out</item>
     </style>
+
+    <style name="person_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">@dimen/dp_56</item>
+        <item name="android:padding">@dimen/dp_10</item>
+        <item name="android:background">@drawable/bg_item_person_selector</item>
+    </style>
+
+    <style name="person_item_2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dp_8</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/line_color</item>
+    </style>
 </resources>

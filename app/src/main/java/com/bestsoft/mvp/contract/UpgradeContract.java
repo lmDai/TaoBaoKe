@@ -15,9 +15,14 @@ public interface UpgradeContract {
         void setUpgrade(UpgradeModel models);
 
         void showError(Throwable throwable);
+
+        void showPayPage(String page);
+
     }
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void getUserUpgrade(String user_id, String user_channel_id);
+        public abstract void getUpgradeApply(String user_id,String user_channel_id);
+        public abstract void getUpgradePay(String orderId);
     }
 }

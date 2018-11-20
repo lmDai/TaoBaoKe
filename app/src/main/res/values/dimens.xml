@@ -49,5 +49,9 @@
     <dimen name="sp_8">8sp</dimen>
     <dimen name="dp_160">160dp</dimen>
     <dimen name="dp_225">225dp</dimen>
+    <dimen name="dp_56">56dp</dimen>
+    <dimen name="dp_29">29dp</dimen>
+    <dimen name="dp_44">44dp</dimen>
+    <dimen name="dp_22">22dp</dimen>
 
 </resources>

@@ -21,25 +21,33 @@ import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.LoginContract;
+import com.bestsoft.mvp.contract.PhoneLoginContract;
 import com.bestsoft.mvp.presenter.LoginPresenter;
+import com.bestsoft.mvp.presenter.PhoneLoginPresenter;
 import com.bestsoft.utils.DialogListener;
 import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.RuntimeRationale;
 import com.bestsoft.utils.SpUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 import com.yanzhenjie.permission.Setting;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 import io.reactivex.annotations.NonNull;
 
 @CreatePresenterAnnotation(LoginPresenter.class)
-public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginContract.Presenter> implements LoginContract.View {
+public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
     @BindView(R.id.txt_title)
     TextView txtTitle;
@@ -71,7 +79,7 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
     protected void initView(Bundle savedInstanceState) {
         txtCannotLogin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         txtCannotLogin.getPaint().setAntiAlias(true);//抗锯齿
-        requestPermission(Permission.READ_PHONE_STATE,Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE);
+        requestPermission(Permission.READ_PHONE_STATE, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE);
         if ((boolean) SpUtils.getParam(mContext, Constant.isLOGIN, false)) {
             IntentUtils.get().goActivityKill(mContext, MainActivity.class);
         }
@@ -157,16 +165,27 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_wechat_login:
-                DialogUtils.showPromptDialog(mContext, "你还没有注册或者未绑定微信", "提示", "去注册", "知道了", new DialogListener() {
-                    @Override
-                    public void onClick(boolean confirm) {
-                        if (confirm)
-                            //todo 跳转注册页面
-                            IntentUtils.get().goActivity(mContext, InputInvateInfoActivity.class);
-                    }
-                });
+                showDialog();
                 break;
             case R.id.txt_qq:
+                Platform plat = ShareSDK.getPlatform(QQ.NAME);
+                plat.authorize();
+                plat.setPlatformActionListener(new PlatformActionListener() {
+                    @Override
+                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                        LogUtils.i("onComplete" + platform);
+                    }
+
+                    @Override
+                    public void onError(Platform platform, int i, Throwable throwable) {
+                        LogUtils.i("onError" + platform);
+                    }
+
+                    @Override
+                    public void onCancel(Platform platform, int i) {
+                        LogUtils.i("onCancel" + platform);
+                    }
+                });
                 break;
             case R.id.txt_phone:
                 IntentUtils.get().goActivity(mContext, PhoneLoginActivity.class);//手机号登录
@@ -192,12 +211,18 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginCont
     }
 
     @Override
-    public void sendCodeSuccess(BaseNoDataResponse result) {
+    public void loginSuccess(UserModel userModel) {
 
     }
 
-    @Override
-    public void loginSuccess(UserModel userModel) {
-
+    public void showDialog() {
+        DialogUtils.showPromptDialog(mContext, "你还没有注册或者未绑定微信", "提示", "去注册", "知道了", new DialogListener() {
+            @Override
+            public void onClick(boolean confirm) {
+                if (confirm)
+                    //todo 跳转注册页面
+                    IntentUtils.get().goActivity(mContext, InputInvateInfoActivity.class);
+            }
+        });
     }
 }

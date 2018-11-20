@@ -23,47 +23,61 @@
         android:minHeight="@dimen/dp_48">
 
         <TextView
+            android:id="@+id/txt_share_wechat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_zhanwei_potential_img"
+            android:drawableTop="@drawable/ic_share_wechat"
             android:drawablePadding="@dimen/dp_5"
             android:gravity="center"
-            android:text="微信朋友" />
+            android:text="微信朋友"
+            android:textColor="#747474"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/txt_share_wechat_circle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_zhanwei_potential_img"
+            android:drawableTop="@drawable/ic_share_wechat_circle"
             android:drawablePadding="@dimen/dp_5"
             android:gravity="center"
-            android:text="微信朋友" />
+            android:text="朋友圈"
+            android:textColor="#747474"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/txt_share_qq"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_zhanwei_potential_img"
+            android:drawableTop="@drawable/ic_share_qq"
             android:drawablePadding="@dimen/dp_5"
             android:gravity="center"
-            android:text="微信朋友" />
+            android:text="QQ好友"
+            android:textColor="#747474"
+            android:textSize="@dimen/sp_12" />
 
         <TextView
+            android:id="@+id/txt_share_qzone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_zhanwei_potential_img"
+            android:drawableTop="@drawable/ic_share_qzone"
             android:drawablePadding="@dimen/dp_5"
             android:gravity="center"
-            android:text="微信朋友" />
+            android:text="QQ空间"
+            android:textColor="#747474"
+            android:textSize="@dimen/sp_12" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/sp_10"
+        android:background="@drawable/bg_share_cancle"
         android:text="取消"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sp_14" />

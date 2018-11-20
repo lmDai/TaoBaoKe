@@ -31,6 +31,6 @@ public class CircleCenterAdapter extends BaseQuickAdapter<ArticleModel, BaseView
         helper.setText(R.id.txt_name, item.getName())
                 .setText(R.id.txt_create_at, item.getCreate_at())
                 .setText(R.id.txt_content, item.getContent())
-                .addOnClickListener(R.id.txt_share);
+                .addOnClickListener(R.id.ll_share);
     }
 }

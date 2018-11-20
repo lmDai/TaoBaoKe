@@ -3,7 +3,9 @@
     android:id="@+id/recycler_entrance"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="none"
-    android:layout_margin="5dp" />
+    android:nestedScrollingEnabled="false"
+    android:overScrollMode="never"
+    android:paddingBottom="@dimen/dp_20"
+    android:scrollbars="none" />
 
 

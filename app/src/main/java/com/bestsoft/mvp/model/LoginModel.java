@@ -74,4 +74,14 @@ public class LoginModel {
         Observable<BaseResponse<UserModel>> loinModel = mApiService.login(requestMap);
         return loinModel;
     }
+
+    public Observable<BaseResponse<UserModel>> thirdLogin(String type, String openid, String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("type", type);
+        requestMap.put("openid", openid);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<UserModel>> thirdLogin = mApiService.thirdLogin(requestMap);
+        return thirdLogin;
+    }
 }

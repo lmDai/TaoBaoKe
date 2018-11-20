@@ -40,6 +40,7 @@ public class BanlanceActivity extends BaseMvpActivity<ExtractContract.View, Extr
     TextView txtFansCommission;
     @BindView(R.id.txt_wait_commission)
     TextView txtWaitCommission;
+    private ExtractModel models;
 
     @Override
     protected int getLayout() {
@@ -81,6 +82,7 @@ public class BanlanceActivity extends BaseMvpActivity<ExtractContract.View, Extr
 
     @Override
     public void setUserExtract(ExtractModel models) {
+        this.models = models;
         txtBalance.setText("¥" + models.getBalance());
         txtOwnCommission.setText(models.getOwn_commission());
         txtFansCommission.setText(models.getFans_commission());

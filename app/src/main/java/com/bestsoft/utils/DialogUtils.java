@@ -44,20 +44,22 @@ public class DialogUtils {
         }).setTitle(title).setPositiveButton(positive).show();
     }
 
-    public static void showDialogPayWay(Context mContext, DialogListener listener) {
+    public static void showDialogPayWay(Context mContext, ShareDialogListener listener, String index) {
         new PayWayDialog(mContext, R.style.common_dialog, new PayWayDialog.OnCloseListener() {
             @Override
-            public void onClick(Dialog dialog, boolean confirm) {
-                listener.onClick(confirm);
+            public void onClick(Dialog dialog, boolean confirm, int type) {
+                listener.onClick(confirm, type);
             }
-        }).show();
+        }, index).show();
     }
-    public static void showDialogShare(Context mContext, DialogListener listener) {
+
+    public static void showDialogShare(Context mContext, ShareDialogListener listener) {
         new ShareDialog(mContext, R.style.common_dialog, new ShareDialog.OnCloseListener() {
             @Override
-            public void onClick(Dialog dialog, boolean confirm) {
-                listener.onClick(confirm);
+            public void onClick(Dialog dialog, boolean confirm, int type) {
+                listener.onClick(confirm, type);
             }
+
         }).show();
     }
 }

@@ -89,13 +89,13 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
     @Override
     protected void initView(Bundle savedInstanceState) {
         txtTitle.setText(mContext.getString(R.string.title_personal));
-        KeyboardUtils.setRipper(llShare);
-        KeyboardUtils.setRipper(llAuth);
-        KeyboardUtils.setRipper(llCenter);
-        KeyboardUtils.setRipper(llAlypay);
-        KeyboardUtils.setRipper(llCheckUpdate);
-        KeyboardUtils.setRipper(llFeedback);
-        KeyboardUtils.setRipper(btnLogout);
+//        KeyboardUtils.setRipper(llShare);
+//        KeyboardUtils.setRipper(llAuth);
+//        KeyboardUtils.setRipper(llCenter);
+//        KeyboardUtils.setRipper(llAlypay);
+//        KeyboardUtils.setRipper(llCheckUpdate);
+//        KeyboardUtils.setRipper(llFeedback);
+//        KeyboardUtils.setRipper(btnLogout);
         getMvpPresenter().getUserInfo(userModel.getId(), userModel.getUser_channel_id());
     }
 

@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bestsoft.R;
 
@@ -25,6 +27,16 @@ import butterknife.OnClick;
 public class ShareDialog extends Dialog {
 
 
+    @BindView(R.id.txt_share_wechat)
+    TextView txtShareWechat;
+    @BindView(R.id.txt_share_wechat_circle)
+    TextView txtShareWechatCircle;
+    @BindView(R.id.txt_share_qq)
+    TextView txtShareQq;
+    @BindView(R.id.txt_share_qzone)
+    TextView txtShareQzone;
+    @BindView(R.id.dialog_zhifubao)
+    LinearLayout dialogZhifubao;
     private OnCloseListener listener;
     @BindView(R.id.btn_close)
     Button btnClose;
@@ -51,16 +63,38 @@ public class ShareDialog extends Dialog {
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         lp.y = 0;//设置Dialog距离底部的距离
         dialogWindow.setAttributes(lp);
-
     }
 
-
-    @OnClick({R.id.btn_close})
-    public void onClick(View view) {
+    @OnClick({R.id.btn_close, R.id.txt_share_wechat, R.id.txt_share_wechat_circle, R.id.txt_share_qq, R.id.txt_share_qzone})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_close:
                 if (listener != null) {
-                    listener.onClick(this, false);
+                    listener.onClick(this, false, 0);
+                }
+                this.dismiss();
+                break;
+            case R.id.txt_share_wechat:
+                if (listener != null) {
+                    listener.onClick(this, true, 1);
+                }
+                this.dismiss();
+                break;
+            case R.id.txt_share_wechat_circle:
+                if (listener != null) {
+                    listener.onClick(this, true, 2);
+                }
+                this.dismiss();
+                break;
+            case R.id.txt_share_qq:
+                if (listener != null) {
+                    listener.onClick(this, true, 3);
+                }
+                this.dismiss();
+                break;
+            case R.id.txt_share_qzone:
+                if (listener != null) {
+                    listener.onClick(this, true, 4);
                 }
                 this.dismiss();
                 break;
@@ -69,6 +103,6 @@ public class ShareDialog extends Dialog {
 
 
     public interface OnCloseListener {
-        void onClick(Dialog dialog, boolean confirm);
+        void onClick(Dialog dialog, boolean confirm, int type);
     }
 }

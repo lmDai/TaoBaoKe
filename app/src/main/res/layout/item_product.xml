@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
+        android:padding="@dimen/dp_10">
 
         <ImageView
             android:id="@+id/img_pic"
-            android:layout_width="@dimen/dp_120"
-            android:layout_height="@dimen/dp_120"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
             android:scaleType="fitXY"
             android:src="@drawable/ic_zhanwei_product" />
 
@@ -36,13 +35,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_tag"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingTop="@dimen/dp_2"
-                    android:paddingRight="@dimen/dp_8"
-                    android:paddingBottom="@dimen/dp_2"
+                    android:paddingLeft="@dimen/dp_6"
+                    android:paddingTop="@dimen/dp_1"
+                    android:paddingRight="@dimen/dp_6"
+                    android:paddingBottom="@dimen/dp_1"
                     android:text="天猫"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_10" />
+                    android:textSize="@dimen/sp_8" />
 
                 <TextView
                     android:id="@+id/txt_title"
@@ -51,7 +50,7 @@
                     android:layout_marginLeft="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     android:singleLine="true"
-                    android:text="Nico旗舰店 干湿两用清透丝"
+                    tools:text="Nico旗舰店 干湿两用清透丝"
                     android:textColor="@color/item_color_title"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
@@ -72,7 +71,7 @@
                     android:paddingBottom="@dimen/dp_2"
                     android:text="10元优惠券"
                     android:textColor="@color/item_color_stroke"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_10" />
 
                 <TextView
                     android:id="@+id/txt_sale"
@@ -82,7 +81,7 @@
                     android:layout_weight="1"
                     android:text="299人已买"
                     android:textColor="@color/item_color_hint"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_10" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,7 +93,7 @@
                     android:paddingBottom="@dimen/dp_2"
                     android:text="收藏"
                     android:textColor="@color/item_color_stroke"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_10" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,7 +108,7 @@
                     android:paddingTop="@dimen/dp_6"
                     android:text="¥"
                     android:textColor="@color/item_color_stroke"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_10" />
 
                 <TextView
                     android:id="@+id/txt_end_price"
@@ -117,16 +116,16 @@
                     android:layout_height="wrap_content"
                     android:text="20"
                     android:textColor="@color/item_color_stroke"
-                    android:textSize="@dimen/sp_20" />
+                    android:textSize="@dimen/sp_18" />
 
                 <TextView
                     android:id="@+id/txt_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_8"
                     android:text="¥60.00"
                     android:textColor="@color/item_color_hint"
-                    android:textSize="@dimen/sp_10" />
+                    android:textSize="@dimen/sp_8" />
             </LinearLayout>
 
             <LinearLayout
@@ -142,9 +141,9 @@
                     android:paddingTop="@dimen/dp_2"
                     android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_2"
-                    tools:text="预计赚¥2.56"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_10" />
+                    android:textSize="@dimen/sp_8"
+                    tools:text="预计赚¥2.56" />
 
                 <TextView
                     android:id="@+id/txt_upgrade"
@@ -156,9 +155,9 @@
                     android:paddingTop="@dimen/dp_2"
                     android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_2"
-                    tools:text="升级赚¥2.56 "
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_10" />
+                    android:textSize="@dimen/sp_8"
+                    tools:text="升级赚¥2.56 " />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

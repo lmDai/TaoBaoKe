@@ -4,10 +4,12 @@ import android.content.Context;
 
 import com.bestsoft.Constant;
 import com.bestsoft.api.TaoBaoKeService;
+import com.bestsoft.bean.ApplyModel;
 import com.bestsoft.bean.ExtractModel;
 import com.bestsoft.bean.IncomeDetailModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.bean.VersionModel;
+import com.bestsoft.bean.WithDrawModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePageResponse;
 import com.bestsoft.common.https.BaseResponse;
@@ -111,5 +113,15 @@ public class PersonModule {
         requestMap.put("user_channel_id", user_channel_id);
         Observable<BaseResponse<VersionModel>> userVersion = mApiService.userVersion(requestMap);
         return userVersion;
+    }
+
+    public Observable<BaseResponse<WithDrawModel>> withdrawApply(String amount, String type, String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        requestMap.put("amount", amount);
+        requestMap.put("type", type);
+        Observable<BaseResponse<WithDrawModel>> withdrawApply = mApiService.withdrawApply(requestMap);
+        return withdrawApply;
     }
 }

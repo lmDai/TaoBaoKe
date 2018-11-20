@@ -21,9 +21,12 @@ import java.util.List;
 public class RecyclerViewUtils {
     public static void initLinerLayoutRecyclerView(RecyclerView recyclerView, Context mContext) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.addItemDecoration(new SpacesItemDecoration(SizeUtils.dp2px(mContext, 10)));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(SizeUtils.dp2px(mContext, 4)));
     }
-
+    public static void initHeaderRecyclerView(RecyclerView recyclerView, Context mContext) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.addItemDecoration(new HeaderItemDecoration(SizeUtils.dp2px(mContext, 4)));
+    }
     public static void initLinerLayoutRecyclerViewPadding(RecyclerView recyclerView, Context mContext) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }

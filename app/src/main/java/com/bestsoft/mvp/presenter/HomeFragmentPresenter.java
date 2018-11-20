@@ -18,11 +18,13 @@ import com.bestsoft.R;
 import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.IconModel;
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
 import com.bestsoft.mvp.contract.HomeFragmentContract;
 import com.bestsoft.mvp.model.MainModel;
+import com.bestsoft.mvp.model.PersonModule;
 import com.bestsoft.ui.activity.IntroductionActivity;
 import com.bestsoft.ui.adapter.BaseDelegateAdapter;
 import com.bestsoft.ui.adapter.FastEntranceAdapter;
@@ -243,6 +245,20 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
                     public void onSuccess(List<IconModel> result) {
                         getView().setIconPage(result);
                     }
+                });
+    }
+
+    @Override
+    public void getUserInfo(String user_id, String user_channel_id) {
+        PersonModule.getInstance(Utils.getContext()).getUserInfo(user_id, user_channel_id)
+                .compose(RxUtil.observableIO2Main(getView()))
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<UserModel>(this, true, "加载中...") {
+                    @Override
+                    public void onSuccess(UserModel result) {
+                        getView().setUserModel(result);
+                    }
+
                 });
     }
 
