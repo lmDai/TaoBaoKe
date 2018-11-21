@@ -106,8 +106,9 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
 
     private void initData() {
         List<RuleModel> modelList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            modelList.add(new RuleModel());
+        final String[] proName = mContext.getResources().getStringArray(R.array.rule);
+        for (int a = 0; a < proName.length; a++) {
+            modelList.add(new RuleModel(proName[a]));
         }
         ruleAdapter.setNewData(modelList);
     }
@@ -163,12 +164,8 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
                     public void onClick(boolean confirm, int type) {
                         if (confirm) {
                             Platform.ShareParams sp = new Platform.ShareParams();
-                            sp.setTitle(null);
-                            sp.setTitleUrl(settingResult.get(i).getUrl()); // 标题的超链接
-                            sp.setText(null);
                             sp.setImageUrl(settingResult.get(i).getUrl());
-                            sp.setSite(null);
-                            sp.setSiteUrl(null);
+                            sp.setShareType(Platform.SHARE_IMAGE);
                             Platform platform = null;
                             switch (type) {
                                 case 1:
@@ -188,7 +185,7 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
                             platform.setPlatformActionListener(new PlatformActionListener() {
                                 public void onError(Platform arg0, int arg1, Throwable arg2) {
                                     //失败的回调，arg:平台对象，arg1:表示当前的动作，arg2:异常信息
-                                    LogUtils.i("onError");
+                                    LogUtils.i("onError" + arg2.getMessage());
                                 }
 
                                 public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
@@ -212,7 +209,7 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
 
     @Override
     public void shareInviteTemp(List<ShareInviteTempModel> settingResult) {
-        this.settingResult=settingResult;
+        this.settingResult = settingResult;
         txtTotal.setText(String.valueOf(settingResult.size()));
         refreshLayout.finishRefresh();
         viewPagerTheme.setAdapter(new ImgPagerAdapter(settingResult, this));

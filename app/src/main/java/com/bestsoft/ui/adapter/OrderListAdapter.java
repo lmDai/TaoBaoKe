@@ -1,11 +1,14 @@
 package com.bestsoft.ui.adapter;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bestsoft.R;
 import com.bestsoft.bean.OrderModel;
+import com.bestsoft.utils.GlideUtil;
 import com.bestsoft.utils.MagicTextViewUtil;
+import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -25,6 +28,8 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderModel, BaseViewHolde
 
     @Override
     protected void convert(BaseViewHolder helper, OrderModel item) {
+        ImageView imageView = helper.getView(R.id.img_pic);
+        GlideUtil.loadRoundImage(mContext, item.getItem_pic(), SizeUtils.px2dp(mContext, 4), imageView);
         helper.getView(R.id.ll_bottom).setVisibility(type == 0 ? View.GONE : View.VISIBLE);
         TextView mTextView = helper.getView(R.id.txt_title);
         MagicTextViewUtil.getInstance(mTextView)

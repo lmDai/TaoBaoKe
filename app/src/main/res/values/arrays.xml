@@ -37,5 +37,12 @@
         <item>足迹</item>
         <item>我的淘宝</item>
     </string-array>
-
+    <!--发现页图片对应的位子-->
+    <string-array name="rule">
+        <item>好友通过你的二维码下载app,并在24小时内登录巨折app领取新人红包，则算邀请成功；</item>
+        <item>邀请成功的好友将成为你的粉丝；</item>
+        <item>你成为超级会员后，你的粉丝通过巨折网购或者分享商品每成交一单，你都可以获得一定的金额奖励；</item>
+        <item>禁止通过作弊手段进行虚假邀请注册骗取奖励，如有发现，将取消其奖励并酌情出发；</item>
+        <item>本活动最终解释权归巨折所有</item>
+    </string-array>
 </resources>

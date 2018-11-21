@@ -13,9 +13,15 @@ import android.widget.TextView;
 import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.https.rxUtils.RxEvent;
 import com.bestsoft.utils.TextFontUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -51,6 +57,7 @@ public abstract class BaseFragment extends RxFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -69,6 +76,19 @@ public abstract class BaseFragment extends RxFragment {
         if (txtTitle != null)
             TextFontUtils.setTextTypeDTr(mContext, txtTitle);
         return rootView;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshData(RxEvent messageEvent) {
+        if (messageEvent.getCode() == 1) {
+            LogUtils.i("user_level");
+            initView();
+            LogUtils.i("user_level"+userModel.getLevel());
+        }
+    }
+
+    protected void initView() {
+        userModel = MyApplication.mApplication.getUser();
     }
 
     @Override
@@ -151,6 +171,7 @@ public abstract class BaseFragment extends RxFragment {
             unbinder.unbind();
         if (mImmersionBar != null)
             mImmersionBar.destroy();
+        EventBus.getDefault().unregister(this);
     }
 
 

@@ -7,4 +7,17 @@ package com.bestsoft.bean;
  * @description:
  **/
 public class RuleModel {
+    private String rule;
+
+    public RuleModel(String rule) {
+        this.rule = rule;
+    }
+
+    public String getRule() {
+        return rule;
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
+    }
 }

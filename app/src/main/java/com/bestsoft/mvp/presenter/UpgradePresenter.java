@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.bestsoft.bean.ApplyModel;
 import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
 import com.bestsoft.common.utils.Utils;
@@ -27,6 +28,21 @@ import okhttp3.ResponseBody;
  * @description: 会员升级
  **/
 public class UpgradePresenter extends UpgradeContract.Presenter {
+
+    @Override
+    public void getUserInfo(String user_id, String user_channel_id) {
+        PersonModule.getInstance(Utils.getContext()).getUserInfo(user_id, user_channel_id)
+                .compose(RxUtil.observableIO2Main(getView()))
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<UserModel>(this, false, "加载中...") {
+                    @Override
+                    public void onSuccess(UserModel result) {
+                        getView().setUserModel(result);
+                    }
+
+                });
+    }
+
     @Override
     public void getUserUpgrade(String user_id, String user_channel_id) {
         MemberModule.getInstance(Utils.getContext()).userUpgrade(user_id, user_channel_id)

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,19 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @CreatePresenterAnnotation(SearchDetailsPresenter.class)
 public class SearchDetailActivity extends BaseMvpActivity<SearchDetailsContract.View, SearchDetailsPresenter> implements SearchDetailsContract.View {
 
-    @BindView(R.id.img_back)
-    ImageView imgBack;
-    @BindView(R.id.txt_title)
-    TextView txtTitle;
-    @BindView(R.id.txt_right)
-    TextView txtRight;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     @BindView(R.id.choose_comprehensive)
     TextView chooseComprehensive;
     @BindView(R.id.choose_post_coupon)
@@ -49,6 +44,14 @@ public class SearchDetailActivity extends BaseMvpActivity<SearchDetailsContract.
     DropdownButton chooseVoucherDenomination;
     @BindView(R.id.recycler_product)
     RecyclerView recyclerProduct;
+    @BindView(R.id.img_back)
+    ImageView imgBack;
+    @BindView(R.id.edit_search)
+    EditText editSearch;
+    @BindView(R.id.txt_search)
+    TextView txtSearch;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private String keyWord;
     private String sort = "";
     private ProductAdapter productAdapter;
@@ -72,7 +75,8 @@ public class SearchDetailActivity extends BaseMvpActivity<SearchDetailsContract.
     protected void initView(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getBundleExtra("bundle");
         keyWord = bundle.getString("keyword");
-        txtTitle.setText(keyWord);
+        editSearch.setText(keyWord);
+        txtSearch.setVisibility(View.GONE);
         productAdapter = new ProductAdapter(R.layout.item_product, userModel.getLevel());
         RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerProduct, mContext);
         recyclerProduct.setAdapter(productAdapter);
@@ -167,5 +171,12 @@ public class SearchDetailActivity extends BaseMvpActivity<SearchDetailsContract.
                 initData(true);
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

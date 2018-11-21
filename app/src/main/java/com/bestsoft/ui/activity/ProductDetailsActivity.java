@@ -28,6 +28,7 @@ import com.bestsoft.mvp.contract.ProductDetailsContract;
 import com.bestsoft.mvp.presenter.ProductDetailsPresenter;
 import com.bestsoft.ui.widget.GlideImageLoader;
 import com.bestsoft.utils.GlideUtil;
+import com.bestsoft.utils.IntentUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.youth.banner.Banner;
@@ -151,36 +152,32 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
 
     public void openTaoBao() {
         //提供给三方传递配置参数
-        Map<String, String> exParams = new HashMap<>();
-        exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
-        AlibcBasePage alibcBasePage = null;
-//        if (type == 0) {//立即领券
-        alibcBasePage = new AlibcPage(result.getCouponurl());
-//        } else if (type == 1) {//立即购买
-//            alibcBasePage = new AlibcDetailPage(itemId);
-//        }
-        //设置页面打开方式
-        AlibcShowParams showParams = new AlibcShowParams(OpenType.Native, false);
-        AlibcTaokeParams taokeParams = new AlibcTaokeParams(userModel.getTaobao_pid(), userModel.getTaobao_pid(), null);
-        //使用百川sdk提供默认的Activity打开detail
-        AlibcTrade.show(mContext, alibcBasePage, showParams, taokeParams, exParams,
-                new AlibcTradeCallback() {
-                    @Override
-                    public void onTradeSuccess(TradeResult tradeResult) {
-                        //打开电商组件，用户操作中成功信息回调。tradeResult：成功信息（结果类型：加购，支付；支付结果）
-                        Log.i("single", "onTradeSuccess");
-                        Log.i("single", String.valueOf(tradeResult.payResult.paySuccessOrders));
-                        if (orderConfirmModel != null) {
-                            getMvpPresenter().oderPayConfirm(orderConfirmModel.getOrder_id(), String.valueOf(tradeResult.payResult.paySuccessOrders), userModel.getId(), userModel.getUser_channel_id());
+        if (result != null) {
+            Map<String, String> exParams = new HashMap<>();
+            exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
+            AlibcBasePage alibcBasePage = null;
+            alibcBasePage = new AlibcPage(result.getCouponurl());
+            //设置页面打开方式
+            AlibcShowParams showParams = new AlibcShowParams(OpenType.Native, false);
+            AlibcTaokeParams taokeParams = new AlibcTaokeParams(userModel.getTaobao_pid(), userModel.getTaobao_pid(), null);
+            //使用百川sdk提供默认的Activity打开detail
+            AlibcTrade.show(mContext, alibcBasePage, showParams, taokeParams, exParams,
+                    new AlibcTradeCallback() {
+                        @Override
+                        public void onTradeSuccess(TradeResult tradeResult) {
+                            //打开电商组件，用户操作中成功信息回调。tradeResult：成功信息（结果类型：加购，支付；支付结果）
+                            if (orderConfirmModel != null) {
+                                getMvpPresenter().oderPayConfirm(orderConfirmModel.getOrder_id(), String.valueOf(tradeResult.payResult.paySuccessOrders), userModel.getId(), userModel.getUser_channel_id());
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int code, String msg) {
-                        //打开电商组件，用户操作中错误信息回调。code：错误码；msg：错误信息
-                        Log.i("single", "onFailure" + msg + code);
-                    }
-                });
+                        @Override
+                        public void onFailure(int code, String msg) {
+                            //打开电商组件，用户操作中错误信息回调。code：错误码；msg：错误信息
+                            Log.i("single", "onFailure" + msg + code);
+                        }
+                    });
+        }
     }
 
     @OnClick({R.id.img_back, R.id.txt_confirm, R.id.btn_buy, R.id.btn_share})
@@ -201,6 +198,10 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
                         , result.getCouponmoney());
                 break;
             case R.id.btn_share:
+
+                Bundle bundle = new Bundle();
+                bundle.putString("item_id", itemId);
+                IntentUtils.get().goActivity(mContext, ProductDetails2Activity.class, bundle);
                 break;
         }
     }

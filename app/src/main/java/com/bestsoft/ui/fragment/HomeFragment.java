@@ -314,7 +314,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
 
     @Override
     public void setUserModel(UserModel userModel) {
-        txtTitle.setText("¥" + userModel.getBalance());
+        txtTitle.setText("¥" + userModel.getTotal_income());
     }
 
     @Override

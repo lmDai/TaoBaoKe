@@ -41,16 +41,16 @@ public class ProductAdapter extends BaseQuickAdapter<ProductModel, BaseViewHolde
                 .setText(R.id.txt_end_price, item.getItem_end_price())
                 .setText(R.id.txt_sale, item.getItem_sale() + "人已买")
                 .setText(R.id.txt_couponmoney, item.getCouponmoney() + "元优惠券");
-        if (level == 1) {
-            txtEstimate.setVisibility(View.GONE);
-            txtUpgrade.setVisibility(View.GONE);
-        } else if (level == 3) {
-            txtEstimate.setText("预计赚¥" + item.getEstimate());
-            txtUpgrade.setVisibility(View.GONE);
-        } else {
+//        if (level == 1) {
+//            txtEstimate.setVisibility(View.GONE);
+//            txtUpgrade.setVisibility(View.GONE);
+//        } else if (level == 3) {
+//            txtEstimate.setText("预计赚¥" + item.getEstimate());
+//            txtUpgrade.setVisibility(View.GONE);
+//        } else {
             txtEstimate.setText("预计赚¥" + item.getEstimate());
             txtUpgrade.setText("升级赚¥" + item.getUpgrade());
-        }
+//        }
 
     }
 }

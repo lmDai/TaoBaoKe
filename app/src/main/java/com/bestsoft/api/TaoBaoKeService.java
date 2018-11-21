@@ -7,6 +7,7 @@ import com.bestsoft.bean.ChartModel;
 import com.bestsoft.bean.ClassfyModel;
 import com.bestsoft.bean.CodeModel;
 import com.bestsoft.bean.ExtractModel;
+import com.bestsoft.bean.GoodsShareModel;
 import com.bestsoft.bean.IconModel;
 import com.bestsoft.bean.IncomeDetailModel;
 import com.bestsoft.bean.KeyWordModel;
@@ -187,10 +188,12 @@ public interface TaoBaoKeService {
     @POST(TaoBaoKeApi.USER_BILL)
     @FormUrlEncoded
     Observable<BasePageResponse<List<IncomeDetailModel>>> userBill(@FieldMap Map<String, Object> map);
+
     //版本更新信息
     @POST(TaoBaoKeApi.USER_VERSION)
     @FormUrlEncoded
     Observable<BaseResponse<VersionModel>> userVersion(@FieldMap Map<String, Object> map);
+
     @Streaming
     @GET
     Observable<ResponseBody> executeDownload(@Header("Range") String range, @Url() String url);
@@ -199,14 +202,27 @@ public interface TaoBaoKeService {
     @POST(TaoBaoKeApi.UPGRADE_APPLY)
     @FormUrlEncoded
     Observable<BaseResponse<ApplyModel>> upgradeApply(@FieldMap Map<String, Object> map);
+
     @GET(TaoBaoKeApi.UPGRADE_PAY)
     Observable<ResponseBody> upgradePay(@Query("orderId") String orderId);
+
     //第三方登录
     @POST(TaoBaoKeApi.THIRD_LOGIN)
     @FormUrlEncoded
     Observable<ThirdLoginModel> thirdLogin(@FieldMap Map<String, Object> map);
+
     //会员提现申请
     @POST(TaoBaoKeApi.WITHDRAW_APPLY)
     @FormUrlEncoded
     Observable<BaseResponse<WithDrawModel>> withdrawApply(@FieldMap Map<String, Object> map);
+
+    //商品分享
+    @POST(TaoBaoKeApi.GOODS_SHARE)
+    @FormUrlEncoded
+    Observable<BaseResponse<GoodsShareModel>> goodsShare(@FieldMap Map<String, Object> map);
+
+    //商品分享
+    @POST(TaoBaoKeApi.BIND_THIRD)
+    @FormUrlEncoded
+    Observable<BaseResponse<String>> bindThrid(@FieldMap Map<String, Object> map);
 }

@@ -1,5 +1,6 @@
 package com.bestsoft.ui.adapter;
 
+import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,9 +33,23 @@ public class TeamDataListAdapter extends BaseQuickAdapter<TeamOrderModel, BaseVi
                 .append(R.drawable.ic_order_tag)
                 .append(item.getItem_title())
                 .show();
+        TextView mtxt_order_status = helper.getView(R.id.txt_order_status);
+        switch (item.getOrder_status()) {
+            case 2:
+                mtxt_order_status.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_round_green));
+                break;
+            case 5:
+                mtxt_order_status.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_round_gray));
+                break;
+            case 4:
+                mtxt_order_status.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_round_orange));
+                break;
+
+        }
         helper.setText(R.id.txt_time, item.getCreate_at() + " 创建")
                 .setText(R.id.txt_commission, item.getCommission())
                 .setText(R.id.txt_payment_amount, "¥" + item.getPayment_amount())
-                .setText(R.id.txt_order_status, item.getOrder_status());
+                .setText(R.id.txt_order_status, item.getOrder_status_name());
+
     }
 }

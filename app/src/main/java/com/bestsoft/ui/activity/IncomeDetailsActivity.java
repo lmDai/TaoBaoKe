@@ -110,7 +110,6 @@ public class IncomeDetailsActivity extends BaseMvpActivity<InComeListContract.Vi
                 list.add("全部");
                 list.add("佣金流水");
                 list.add("提现流水");
-                list.add("余额流水");
                 if (incomPopWindow == null) {
                     incomPopWindow = new IncomPopWindow(mContext, list, new IncomPopWindow.TagClickListener() {
                         @Override

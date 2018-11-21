@@ -173,7 +173,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="com.ali.auth.third.ui.LoginActivity"
+        <activity
+            android:name=".ui.activity.ProductDetails2Activity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.ali.auth.third.ui.LoginActivity"
 
             android:theme="@style/AlibcLoginTheme"
 

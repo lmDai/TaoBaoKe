@@ -5,6 +5,7 @@ import android.content.Context;
 import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.AdvertModel;
 import com.bestsoft.bean.ClassfyModel;
+import com.bestsoft.bean.GoodsShareModel;
 import com.bestsoft.bean.IconModel;
 import com.bestsoft.bean.KeyWordModel;
 import com.bestsoft.bean.OrderConfirmModel;
@@ -160,5 +161,13 @@ public class MainModel {
         requestMap.put("user_channel_id", user_channel_id);
         Observable<BaseResponse<List<IconModel>>> homeIconpage = mApiService.homeIconpage(requestMap);
         return homeIconpage;
+    }
+    public Observable<BaseResponse<GoodsShareModel>> goodsShare(String item_id,String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("item_id", item_id);
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseResponse<GoodsShareModel>> goodsShare = mApiService.goodsShare(requestMap);
+        return goodsShare;
     }
 }

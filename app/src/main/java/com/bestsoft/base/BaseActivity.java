@@ -3,6 +3,7 @@ package com.bestsoft.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -10,11 +11,17 @@ import android.widget.TextView;
 import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.https.rxUtils.RxEvent;
 import com.bestsoft.utils.AppManager;
 import com.bestsoft.utils.KeyboardUtils;
 import com.bestsoft.utils.TextFontUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -50,6 +57,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         if (txtTitle != null)
             TextFontUtils.setTextTypeDTr(mContext, txtTitle);
         initEvent();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -85,6 +93,15 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         if (mImmersionBar != null)
             mImmersionBar.destroy();  //在BaseActivity里销毁
         AppManager.getAppManager().finishActivity(this);
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshData(RxEvent messageEvent) {
+        if (messageEvent.getCode() == 1) {
+            init();
+            LogUtils.i("user_level"+userModel.getLevel());
+        }
     }
 
     protected void initImmersionBar() {

@@ -7,9 +7,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bestsoft.Constant;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseActivity;
 import com.bestsoft.bean.WithDrawModel;
+import com.bestsoft.common.https.rxUtils.RxEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +58,7 @@ public class ApplyActivity extends BaseActivity {
         } else if (withDrawModel.getType().equals("2")) {
             txtType.setText("微信");
         }
+        EventBus.getDefault().post(new RxEvent(Constant.WITH_DRAW, Constant.UPDATE_USER));
     }
 
     @Override

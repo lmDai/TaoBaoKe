@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -41,6 +43,9 @@ public class SearchActivity extends BaseMvpActivity<SearchContract.View, SearchP
     FlowTagLayout tagHotSearch;
     @BindView(R.id.tag_history)
     FlowTagLayout tagHistory;
+    @BindView(R.id.txt_search)
+    TextView txtSearch;
+
 
     @Override
     protected int getLayout() {
@@ -94,7 +99,7 @@ public class SearchActivity extends BaseMvpActivity<SearchContract.View, SearchP
             public void tagClick(int position) {
                 List<KeyWordModel> historys = KeyWordDaoOpe.queryAll(mContext);
                 if (!historys.contains(models.get(position)))
-                KeyWordDaoOpe.saveData(mContext, models.get(position));
+                    KeyWordDaoOpe.saveData(mContext, models.get(position));
                 showSearchHistory();
                 editSearch.setText(dataList.get(position));
                 editSearch.setSelection(editSearch.getText().length());
@@ -131,13 +136,32 @@ public class SearchActivity extends BaseMvpActivity<SearchContract.View, SearchP
     }
 
 
-    @OnClick(R.id.img_back)
-    public void onViewClicked() {
-        finish();
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.img_back, R.id.txt_search})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                finish();
+                break;
+            case R.id.txt_search:
+                if (!TextUtils.isEmpty(editSearch.getText().toString())) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("keyword", editSearch.getText().toString());
+                    IntentUtils.get().goActivity(mContext, SearchDetailActivity.class, bundle);
+                }
+                break;
+        }
     }
 }

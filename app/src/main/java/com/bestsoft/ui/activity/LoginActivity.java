@@ -32,6 +32,7 @@ import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.IntentUtils;
 import com.bestsoft.utils.RuntimeRationale;
 import com.bestsoft.utils.SpUtils;
+import com.bestsoft.utils.TextFontUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
@@ -55,8 +56,8 @@ import io.reactivex.annotations.NonNull;
 @CreatePresenterAnnotation(LoginPresenter.class)
 public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
-    @BindView(R.id.txt_title)
-    TextView txtTitle;
+    @BindView(R.id.txt_info)
+    TextView txtInfo;
     @BindView(R.id.btn_wechat_login)
     Button btnWechatLogin;
     @BindView(R.id.txt_cannot_login)
@@ -93,6 +94,7 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
         if ((boolean) SpUtils.getParam(mContext, Constant.isLOGIN, false)) {
             IntentUtils.get().goActivityKill(mContext, MainActivity.class);
         }
+        TextFontUtils.setTextTypeRTW(mContext, txtInfo);
     }
 
     /**

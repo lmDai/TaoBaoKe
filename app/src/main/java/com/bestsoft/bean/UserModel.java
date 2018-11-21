@@ -24,9 +24,9 @@ public class UserModel {
     private String nickname;
     private int level;
     private String taobao_pid;
-    private int total_income;
-    private int balance;
-    private int discount;
+    private double total_income;
+    private double balance;
+    private double discount;
     private String invite_code;
     private String user_channel_id;
     /**
@@ -103,7 +103,7 @@ public class UserModel {
         this.taobao_pid = taobao_pid;
     }
 
-    public int getTotal_income() {
+    public double getTotal_income() {
         return total_income;
     }
 
@@ -111,7 +111,7 @@ public class UserModel {
         this.total_income = total_income;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -119,7 +119,7 @@ public class UserModel {
         this.balance = balance;
     }
 
-    public int getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 

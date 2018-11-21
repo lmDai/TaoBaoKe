@@ -9,6 +9,7 @@
     android:layout_marginRight="@dimen/dp_32"
     android:background="@drawable/bg_round_white_30"
     android:elevation="@dimen/dp_6"
+    android:translationZ="@dimen/dp_10"
     android:layout_marginTop="-5dp"
     android:gravity="center"
     android:minHeight="@dimen/dp_20"
@@ -20,7 +21,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:drawableRight="@drawable/ic_search"
-
         android:hint="搜到你意想不到的优惠"
         android:padding="@dimen/dp_14"
         android:textColor="@color/text_toolbar_title"

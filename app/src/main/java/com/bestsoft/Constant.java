@@ -17,9 +17,11 @@ public class Constant {
     public final static String isLOGIN = "is_login";//是否登录
     public static final int HOME_REFRESH = 0x001;//首页刷新
     public static final int HOME_END_REFRESH = 0x002;//首页结束
-    public static final String REFRESH = "refresh";
+    public static final String UPDATE_USER = "update_user";
     public final static String APP_ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + MyApplication.getInstance().getPackageName();
     public final static String DOWNLOAD_DIR = "/downlaod/";
+    public static final int WITH_DRAW = 2;
+
     public interface viewType {
         int typeBanner = 1;         //轮播图
         int typeGv = 2;             //九宫格

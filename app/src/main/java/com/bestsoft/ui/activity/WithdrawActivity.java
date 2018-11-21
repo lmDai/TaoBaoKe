@@ -61,7 +61,7 @@ public class WithdrawActivity extends BaseMvpActivity<WithDrawContract.View, Wit
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private String amount;
-    private String type = "2";
+    private String type = "1";
 
 
     @Override
@@ -94,10 +94,13 @@ public class WithdrawActivity extends BaseMvpActivity<WithDrawContract.View, Wit
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
-                    if (Double.valueOf(s.toString()) < 1) {
-                        MagicTextViewUtil.getInstance(txtAmountInfo)
-                                .append("提现最低金额为1元", ContextCompat.getColor(mContext, R.color.color_FF0000))
-                                .show();
+//                    if (Double.valueOf(s.toString()) < 1) {
+//                        MagicTextViewUtil.getInstance(txtAmountInfo)
+//                                .append("提现最低金额为1元", ContextCompat.getColor(mContext, R.color.color_FF0000))
+//                                .show();
+//                        return;
+//                    }
+                    if (Double.valueOf(s.toString()) <= 0) {
                         return;
                     }
                     if (Double.valueOf(s.toString()) > userModel.getBalance()) {
@@ -163,22 +166,22 @@ public class WithdrawActivity extends BaseMvpActivity<WithDrawContract.View, Wit
                 });
                 break;
             case R.id.ll_way:
-                DialogUtils.showDialogPayWay(mContext, new ShareDialogListener() {
-                    @Override
-                    public void onClick(boolean confirm, int type) {
-                        if (confirm) {
-                            WithdrawActivity.this.type = type + "";
-                            if (type == 2) {
-                                imgWechat.setImageResource(R.drawable.ic_weixin_pay);
-                                txtInfo.setText("微信");
-                            } else {
-                                txtInfo.setText("支付宝");
-                                imgWechat.setImageResource(R.drawable.ic_alipay);
-                            }
-                        }
-                    }
-
-                }, type);
+//                DialogUtils.showDialogPayWay(mContext, new ShareDialogListener() {
+//                    @Override
+//                    public void onClick(boolean confirm, int type) {
+//                        if (confirm) {
+//                            WithdrawActivity.this.type = type + "";
+//                            if (type == 2) {
+//                                imgWechat.setImageResource(R.drawable.ic_weixin_pay);
+//                                txtInfo.setText("微信");
+//                            } else {
+//                                txtInfo.setText("支付宝");
+//                                imgWechat.setImageResource(R.drawable.ic_alipay);
+//                            }
+//                        }
+//                    }
+//
+//                }, type);
                 break;
             case R.id.btn_withdraw:
                 getMvpPresenter().withDrawApply(amount, type, userModel.getId(), userModel.getUser_channel_id());

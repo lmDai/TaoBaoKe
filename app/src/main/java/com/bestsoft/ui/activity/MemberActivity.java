@@ -1,6 +1,7 @@
 package com.bestsoft.ui.activity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bestsoft.Constant;
+import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.api.TaoBaoKeApi;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseApi;
+import com.bestsoft.common.https.rxUtils.RxEvent;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.UpgradeContract;
 import com.bestsoft.mvp.presenter.UpgradePresenter;
@@ -23,9 +28,12 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -56,6 +64,7 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
         return R.layout.activity_member;
     }
 
+
     @Override
     protected void initView(Bundle savedInstanceState) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -69,6 +78,7 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
         FastEntranceAdapter adapter = new FastEntranceAdapter(fruitList);
         recyclerEntrance.setAdapter(adapter);
         getMvpPresenter().getUserUpgrade(userModel.getId(), userModel.getUser_channel_id());
+
     }
 
     @Override
@@ -76,6 +86,13 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
         super.initImmersionBar();
         mImmersionBar.statusBarDarkFont(true, 0.2f)
                 .init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMvpPresenter().getUserInfo(userModel.getId(), userModel.getUser_channel_id());
+        getMvpPresenter().getUserUpgrade(userModel.getId(), userModel.getUser_channel_id());
     }
 
     @Override
@@ -113,8 +130,15 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
     }
 
     @Override
+    public void setUserModel(UserModel userModel) {
+        MyApplication.mApplication.setUserModel(userModel);
+        EventBus.getDefault().post(new RxEvent(1, Constant.UPDATE_USER));
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

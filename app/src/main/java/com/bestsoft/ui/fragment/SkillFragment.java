@@ -10,9 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bestsoft.Constant;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpFragment;
 import com.bestsoft.bean.UserModel;
+import com.bestsoft.common.https.rxUtils.RxEvent;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.SkillContract;
 import com.bestsoft.mvp.presenter.SkillPresenter;
@@ -24,6 +26,10 @@ import com.bestsoft.ui.activity.PersonalActivity;
 import com.bestsoft.ui.activity.WithdrawActivity;
 import com.bestsoft.utils.IntentUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +70,10 @@ public class SkillFragment extends BaseMvpFragment<SkillContract.View, SkillPres
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected int getLayout() {
@@ -82,6 +92,13 @@ public class SkillFragment extends BaseMvpFragment<SkillContract.View, SkillPres
         super.initImmersionBar();
         mImmersionBar.titleBar(R.id.toolbar)
                 .init();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshData(RxEvent messageEvent) {
+        if (messageEvent.getCode() == Constant.WITH_DRAW) {
+            getMvpPresenter().getUserInfo(userModel.getId(), userModel.getUser_channel_id());
+        }
     }
 
     @OnClick({R.id.img_me, R.id.ll_core_member, R.id.ll_center, R.id.img_message, R.id.txt_withdraw, R.id.rl_balance})
@@ -114,4 +131,8 @@ public class SkillFragment extends BaseMvpFragment<SkillContract.View, SkillPres
         txtBalance.setText("¥" + userModel.getBalance());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

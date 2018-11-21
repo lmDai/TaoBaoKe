@@ -1,6 +1,7 @@
 package com.bestsoft.mvp.contract;
 
 import com.bestsoft.bean.UpgradeModel;
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
 
@@ -17,12 +18,13 @@ public interface UpgradeContract {
         void showError(Throwable throwable);
 
         void showPayPage(String page);
-
+        void setUserModel(UserModel userModel);
     }
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void getUserUpgrade(String user_id, String user_channel_id);
         public abstract void getUpgradeApply(String user_id,String user_channel_id);
         public abstract void getUpgradePay(String orderId);
+        public abstract void getUserInfo(String user_id, String user_channel_id);
     }
 }

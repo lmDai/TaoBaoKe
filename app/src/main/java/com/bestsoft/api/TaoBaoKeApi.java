@@ -71,4 +71,8 @@ public class TaoBaoKeApi {
     public final static String THIRD_LOGIN = "app/user/third-login";
     //会员提现申请
     public final static String WITHDRAW_APPLY="app/order/withdraw-apply";
+    //商品分享
+    public final static String GOODS_SHARE="app/goods/share";
+    //第三方绑定
+    public final static String BIND_THIRD="app/user/binding-third";
 }

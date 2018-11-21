@@ -18,6 +18,8 @@ public class RuleAdapter extends BaseQuickAdapter<RuleModel, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, RuleModel item) {
-        helper.setText(R.id.txt_position, helper.getAdapterPosition() + 1 + "");
+        helper.setText(R.id.txt_position, helper.getAdapterPosition() + 1 + "")
+                .setText(R.id.txt_rule, item.getRule());
+
     }
 }

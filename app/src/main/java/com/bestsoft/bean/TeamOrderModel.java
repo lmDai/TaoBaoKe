@@ -19,13 +19,22 @@ public class TeamOrderModel {
     private String create_at;//下单时间
     private String commission;//佣金
     private String payment_amount;//支付金额
-    private String order_status;
+    private int order_status;
+    private String order_status_name;
 
-    public String getOrder_status() {
+    public String getOrder_status_name() {
+        return order_status_name;
+    }
+
+    public void setOrder_status_name(String order_status_name) {
+        this.order_status_name = order_status_name;
+    }
+
+    public int getOrder_status() {
         return order_status;
     }
 
-    public void setOrder_status(String order_status) {
+    public void setOrder_status(int order_status) {
         this.order_status = order_status;
     }
 
