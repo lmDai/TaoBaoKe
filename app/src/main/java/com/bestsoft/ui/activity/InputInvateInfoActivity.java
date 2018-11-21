@@ -42,7 +42,6 @@ public class InputInvateInfoActivity extends BaseMvpActivity<InputInvateInfoCont
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        KeyboardUtils.setRipper(btnNext);
     }
 
     @Override

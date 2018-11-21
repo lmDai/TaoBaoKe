@@ -34,8 +34,6 @@ public class MyTeamActivity extends BaseMvpActivity<ChartDataContract.View, Char
 
     @BindView(R.id.line_chart)
     LineChart lineChart;
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
     @BindView(R.id.img_back)
     ImageView imgBack;
     @BindView(R.id.txt_title)
@@ -52,7 +50,7 @@ public class MyTeamActivity extends BaseMvpActivity<ChartDataContract.View, Char
     TextView txtDirectCount;
     @BindView(R.id.txt_indirect_count)
     TextView txtIndirectCount;
-    private PotentialFanAdapter potentialFanAdapter;
+
 
     @Override
     protected int getLayout() {
@@ -73,20 +71,10 @@ public class MyTeamActivity extends BaseMvpActivity<ChartDataContract.View, Char
         toolbar.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_toolbar));
 
         ChartUtils.initChart(lineChart);
-        potentialFanAdapter = new PotentialFanAdapter(R.layout.item_potential_fan);
-        RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
-        recyclerView.setAdapter(potentialFanAdapter);
-        initData();
+
         getMvpPresenter().getUserChart(userModel.getId(), userModel.getUser_channel_id());
     }
 
-    private void initData() {
-        List<PotentialFanModel> modelList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            modelList.add(new PotentialFanModel());
-        }
-        potentialFanAdapter.setNewData(modelList);
-    }
 
 //    private List<Entry> getData(List<>) {
 //        List<Entry> values = new ArrayList<>();

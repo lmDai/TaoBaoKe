@@ -1,5 +1,6 @@
 package com.bestsoft.mvp.contract;
 
+import com.bestsoft.bean.ThirdLoginModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePresenter;
@@ -13,7 +14,7 @@ import com.bestsoft.common.https.IBaseView;
  **/
 public interface LoginContract {
     interface View extends IBaseView {
-        void loginSuccess(UserModel userModel);
+        void loginSuccess(ThirdLoginModel userModel);
     }
 
     abstract class Presenter extends BasePresenter<View> {

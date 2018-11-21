@@ -16,6 +16,6 @@ public interface RegisterContract {
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void userRegister(String phone, String smscode, String user_chanel_id, String pid);
+        public abstract void userRegister(String nickName, String headimgurl, String openid, String type, String phone, String smscode, String user_chanel_id, String pid);
     }
 }

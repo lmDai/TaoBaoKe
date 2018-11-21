@@ -1,6 +1,7 @@
 package com.bestsoft.ui.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -145,7 +146,7 @@ public class ProductListFragment extends BaseMvpFragment<ProductListContract.Vie
                 classfiy.add(new SelectModel("8", "优惠券领取量(从低到高)", false));
                 classfiy.add(new SelectModel("13", "优惠券领取量(从高到低)", false));
                 listPopu = new ListPopu(mContext, classfiy, R.layout.item_filter);
-                listPopu.showPopupWindow(headerView);
+                listPopu.showAsDropDown(headerView);
                 listPopu.setOnItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(Object obj, int position) {

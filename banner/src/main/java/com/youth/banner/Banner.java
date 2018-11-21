@@ -404,7 +404,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         for (int i = 0; i < count; i++) {
             ImageView imageView = new ImageView(context);
             imageView.setScaleType(ScaleType.CENTER_CROP);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mIndicatorWidth, mIndicatorHeight);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.leftMargin = mIndicatorMargin;
             params.rightMargin = mIndicatorMargin;
             if (i == 0) {

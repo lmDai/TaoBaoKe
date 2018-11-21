@@ -1,5 +1,6 @@
 package com.bestsoft.mvp.presenter;
 
+import com.bestsoft.bean.ThirdLoginModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.ProgressObserver;
@@ -21,11 +22,11 @@ public class LoginPresenter extends LoginContract.Presenter {
     public void thirdLogin(String type, String openid, String user_id, String user_channel_id) {
         LoginModel.getInstance(Utils.getContext()).thirdLogin(type, openid, user_id, user_channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
-                .compose(RxUtil.hanResult())
-                .subscribe(new ProgressObserver<UserModel>(this, true, "登录中...") {
+                .compose(RxUtil.handNoResponseResult())
+                .subscribe(new ProgressObserver<ThirdLoginModel>(this, true, "登录中...") {
                     @Override
-                    public void onSuccess(UserModel result) {
-                        getView().loginSuccess(result);//发送验证码成功
+                    public void onSuccess(ThirdLoginModel result) {
+                        getView().loginSuccess(result);
                     }
                 });
     }

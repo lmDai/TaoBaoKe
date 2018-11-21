@@ -13,10 +13,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.bestsoft.Constant;
 import com.bestsoft.MainActivity;
+import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
+import com.bestsoft.bean.ThirdLoginModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
@@ -36,7 +39,9 @@ import com.yanzhenjie.permission.Permission;
 import com.yanzhenjie.permission.Setting;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,6 +49,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 import io.reactivex.annotations.NonNull;
 
 @CreatePresenterAnnotation(LoginPresenter.class)
@@ -69,6 +75,10 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
     ImageButton imgDown;
     @BindView(R.id.ll_arrow)
     LinearLayout llArrow;
+    public static String type = "";//wechat，qq
+    public static String unionid = "";
+    public static String nickName = "";
+    public static String headimgurl = "";
 
     @Override
     protected int getLayout() {
@@ -161,24 +171,42 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                 .init();
     }
 
-    @OnClick({R.id.btn_wechat_login, R.id.txt_qq, R.id.txt_phone, R.id.txt_other, R.id.img_down})
+    @OnClick({R.id.btn_wechat_login, R.id.ll_qq, R.id.ll_phone, R.id.txt_other, R.id.img_down})
     public void onViewClicked(View view) {
+        Platform plat = null;
         switch (view.getId()) {
             case R.id.btn_wechat_login:
-                showDialog();
-                break;
-            case R.id.txt_qq:
-                Platform plat = ShareSDK.getPlatform(QQ.NAME);
-                plat.authorize();
+                plat = ShareSDK.getPlatform(Wechat.NAME);
+                if (plat.isAuthValid()) {
+                    plat.removeAccount(true);
+                }
+                plat.SSOSetting(true);
                 plat.setPlatformActionListener(new PlatformActionListener() {
                     @Override
                     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                        LogUtils.i("onComplete" + platform);
+                        LogUtils.i("onComplete" + platform.getDb().getUserId() + hashMap.get("nickname") + hashMap.get("figureurl"));
+                        unionid = platform.getDb().getUserId();
+                        nickName = platform.getDb().getUserName();//获取用户名字
+                        headimgurl = platform.getDb().getUserIcon(); //获取用户头像
+
+                        type = "wechat";
+                        LoginActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (userModel != null) {
+                                    getMvpPresenter().thirdLogin(type, unionid, userModel.getId(), userModel.getUser_channel_id());
+                                } else {
+                                    getMvpPresenter().thirdLogin(type, unionid, "", "");
+
+                                }
+                            }
+                        });
+
                     }
 
                     @Override
                     public void onError(Platform platform, int i, Throwable throwable) {
-                        LogUtils.i("onError" + platform);
+                        LogUtils.i("onError" + platform + throwable.getMessage());
                     }
 
                     @Override
@@ -186,8 +214,50 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                         LogUtils.i("onCancel" + platform);
                     }
                 });
+                plat.showUser(null);
                 break;
-            case R.id.txt_phone:
+            case R.id.ll_qq:
+                plat = ShareSDK.getPlatform(QQ.NAME);
+                if (plat.isAuthValid()) {
+                    plat.removeAccount(true);
+                }
+                plat.SSOSetting(true);
+                plat.setPlatformActionListener(new PlatformActionListener() {
+                    @Override
+                    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                        LogUtils.i("onComplete" + platform.getDb().getUserId() + hashMap.get("nickname") + hashMap.get("figureurl"));
+                        unionid = platform.getDb().getUserId();
+                        nickName = (String) hashMap.get("nickname");
+                        headimgurl = (String) hashMap.get("figureurl_qq_2");
+                        type = "QQ";
+                        LoginActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (userModel != null) {
+                                    getMvpPresenter().thirdLogin(type, unionid, userModel.getId(), userModel.getUser_channel_id());
+                                } else {
+                                    getMvpPresenter().thirdLogin(type, unionid, "", "");
+
+                                }
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onError(Platform platform, int i, Throwable throwable) {
+                        LogUtils.i("onError" + platform + throwable.getMessage());
+                    }
+
+                    @Override
+                    public void onCancel(Platform platform, int i) {
+                        LogUtils.i("onCancel" + platform);
+                    }
+                });
+                plat.showUser(null);
+
+                break;
+            case R.id.ll_phone:
                 IntentUtils.get().goActivity(mContext, PhoneLoginActivity.class);//手机号登录
                 break;
             case R.id.txt_other:
@@ -211,11 +281,19 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
     }
 
     @Override
-    public void loginSuccess(UserModel userModel) {
+    public void loginSuccess(ThirdLoginModel userModel) {
+        if (userModel.getErrorcode() == 2) {
+            showRegisterDialog();
+        } else if (userModel.getErrorcode() == 0) {
+            SpUtils.setParam(mContext, Constant.isLOGIN, true);
+            UserModel user = JSON.parseObject(JSON.toJSONString(userModel.getData()), UserModel.class);
+            MyApplication.mApplication.setUserModel(user);
+            IntentUtils.get().goActivityKill(mContext, MainActivity.class);//手机号登录
+        }
 
     }
 
-    public void showDialog() {
+    public void showRegisterDialog() {
         DialogUtils.showPromptDialog(mContext, "你还没有注册或者未绑定微信", "提示", "去注册", "知道了", new DialogListener() {
             @Override
             public void onClick(boolean confirm) {
@@ -224,5 +302,6 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                     IntentUtils.get().goActivity(mContext, InputInvateInfoActivity.class);
             }
         });
+
     }
 }

@@ -36,6 +36,11 @@ public class InputCodeActivity extends BaseMvpActivity<RegisterContract.View, Re
     VerifyCodeView verifyCodeView;
     private String phone;//手机号
     private CodeModel codeModel;
+    private String nickName = LoginActivity.nickName;
+    private String headimgurl = LoginActivity.headimgurl;
+    private String openid = LoginActivity.unionid;
+    private String type = LoginActivity.type;//注册方式WeChat，QQ  普通注册为空''
+
 
     @Override
     protected int getLayout() {
@@ -97,7 +102,7 @@ public class InputCodeActivity extends BaseMvpActivity<RegisterContract.View, Re
                     ToastUtils.showShort("邀请码不正确");
                     return;
                 }
-                getMvpPresenter().userRegister(phone, verifyCodeView.getEditContent(), codeModel.getUser_channel_id()
+                getMvpPresenter().userRegister(nickName, headimgurl, openid, type, phone, verifyCodeView.getEditContent(), codeModel.getUser_channel_id()
                         , codeModel.getPid());
                 break;
         }

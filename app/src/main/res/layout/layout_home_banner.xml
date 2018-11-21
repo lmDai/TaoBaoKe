@@ -12,10 +12,8 @@
         android:layout_height="@dimen/dp_100"
         android:layout_marginTop="@dimen/dp_10"
         app:banner_layout="@layout/banner_custom_viewpager"
-        app:indicator_drawable_selected="@color/item_fan_in"
-        app:indicator_drawable_unselected="@android:color/white"
-        app:indicator_height="@dimen/dp_4"
-        app:indicator_margin="@dimen/dp_4"
-        app:indicator_width="@dimen/dp_20" />
+        app:indicator_drawable_selected="@drawable/bg_indecator_selected"
+        app:indicator_drawable_unselected="@drawable/bg_indecator_unselected"
+        app:indicator_margin="@dimen/dp_4" />
 
 </LinearLayout>

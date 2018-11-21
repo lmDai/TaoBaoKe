@@ -16,8 +16,8 @@ import com.bestsoft.mvp.model.LoginModel;
 public class RegisterPresenter extends RegisterContract.Presenter {
 
     @Override
-    public void userRegister(String phone, String smscode, String user_chanel_id, String pid) {
-        LoginModel.getInstance(Utils.getContext()).userRegister(phone, smscode, user_chanel_id, pid)
+    public void userRegister(String nickName,String headimgurl,String openid,String type,String phone, String smscode, String user_chanel_id, String pid) {
+        LoginModel.getInstance(Utils.getContext()).userRegister(nickName,headimgurl,openid,type,phone, smscode, user_chanel_id, pid)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.handNoResponseResult())
                 .subscribe(new ProgressObserver<BaseNoDataResponse>(this, true, "请稍后...") {

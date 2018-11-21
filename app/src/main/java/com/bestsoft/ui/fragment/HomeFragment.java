@@ -199,27 +199,35 @@ public class HomeFragment extends BaseMvpFragment<HomeFragmentContract.View, Hom
      * 显示筛选框
      */
     public void showFilterPopu() {
-        FiltPopuWindow mFilter = new FiltPopuWindow.Builder(mContext, new FiltPopuWindow.Builder.OnCloseListener() {
+        appBarLayout.setExpanded(false, false);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
-            public void onClick(FiltPopuWindow popupWindow, ClassfyModel confirm) {
-                if (popupWindow.isShowing()) popupWindow.dismiss();
-                if (classfiy.contains(confirm))
-                    viewpager.setCurrentItem(classfiy.indexOf(confirm));
-            }
-        }).setColumnCount(4)//设置列数，测试2.3.4.5没问题
-                .setDataSource(classfiy)
-                .setColorBg(R.color.color_f8f8f8)
-                //所有的属性设置必须在build之前，不然无效
-                .build()
-                .createPop();
-        mFilter.showAsDropDown(tabs);
-        mFilter.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                btnSelect.setImageResource(R.drawable.ic_more_classify);
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                if (Math.abs(i) >= appBarLayout.getTotalScrollRange()) {
+                    FiltPopuWindow mFilter = new FiltPopuWindow.Builder(mContext, new FiltPopuWindow.Builder.OnCloseListener() {
+                        @Override
+                        public void onClick(FiltPopuWindow popupWindow, ClassfyModel confirm) {
+                            if (popupWindow.isShowing()) popupWindow.dismiss();
+                            if (classfiy.contains(confirm))
+                                viewpager.setCurrentItem(classfiy.indexOf(confirm));
+                        }
+                    }).setColumnCount(4)//设置列数，测试2.3.4.5没问题
+                            .setDataSource(classfiy)
+                            .setColorBg(R.color.colorWhite)
+                            //所有的属性设置必须在build之前，不然无效
+                            .build()
+                            .createPop();
+                    mFilter.showAsDropDown(tabs);
+                    mFilter.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            btnSelect.setImageResource(R.drawable.ic_more_classify);
+                        }
+                    });
+                    appBarLayout.removeOnOffsetChangedListener(this);
+                }
             }
         });
-
     }
 
 

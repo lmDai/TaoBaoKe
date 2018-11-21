@@ -221,7 +221,7 @@ public abstract class SpinerPopWindow<T> extends PopupWindow {
      */
     public void showPopupWindow(View parent) {
         if (!this.isShowing()) {
-            this.showAsDropDown(parent, 0, 30);
+            this.showAsDropDown(parent, 0, 0);
         } else {
             this.dismiss();
         }

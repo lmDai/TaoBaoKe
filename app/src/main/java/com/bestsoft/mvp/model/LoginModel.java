@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bestsoft.api.TaoBaoKeService;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.ThirdLoginModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BaseResponse;
@@ -57,12 +58,15 @@ public class LoginModel {
         return codeInfo;
     }
 
-    public Observable<BaseNoDataResponse> userRegister(String phone, String smscode, String user_chanel_id, String pid) {
+    public Observable<BaseNoDataResponse> userRegister(String nickName,String headimgurl,String openid,String type,String phone, String smscode, String user_chanel_id, String pid) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("phone", phone);
         requestMap.put("smscode", smscode);
         requestMap.put("user_channel_id", user_chanel_id);
-        requestMap.put("pid", pid);
+        requestMap.put("nickname", nickName);
+        requestMap.put("headimgurl", headimgurl);
+        requestMap.put("openid", openid);
+        requestMap.put("type", type);
         Observable<BaseNoDataResponse> register = mApiService.userRegister(requestMap);
         return register;
     }
@@ -75,13 +79,13 @@ public class LoginModel {
         return loinModel;
     }
 
-    public Observable<BaseResponse<UserModel>> thirdLogin(String type, String openid, String user_id, String user_channel_id) {
+    public Observable<ThirdLoginModel> thirdLogin(String type, String openid, String user_id, String user_channel_id) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("type", type);
         requestMap.put("openid", openid);
         requestMap.put("user_id", user_id);
         requestMap.put("user_channel_id", user_channel_id);
-        Observable<BaseResponse<UserModel>> thirdLogin = mApiService.thirdLogin(requestMap);
+        Observable<ThirdLoginModel> thirdLogin = mApiService.thirdLogin(requestMap);
         return thirdLogin;
     }
 }

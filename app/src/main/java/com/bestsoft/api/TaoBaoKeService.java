@@ -16,6 +16,7 @@ import com.bestsoft.bean.ProductModel;
 import com.bestsoft.bean.ProfitModel;
 import com.bestsoft.bean.TeamOrderModel;
 import com.bestsoft.bean.TeamProfitModel;
+import com.bestsoft.bean.ThirdLoginModel;
 import com.bestsoft.bean.UpgradeModel;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.bean.VersionModel;
@@ -203,7 +204,7 @@ public interface TaoBaoKeService {
     //第三方登录
     @POST(TaoBaoKeApi.THIRD_LOGIN)
     @FormUrlEncoded
-    Observable<BaseResponse<UserModel>> thirdLogin(@FieldMap Map<String, Object> map);
+    Observable<ThirdLoginModel> thirdLogin(@FieldMap Map<String, Object> map);
     //会员提现申请
     @POST(TaoBaoKeApi.WITHDRAW_APPLY)
     @FormUrlEncoded

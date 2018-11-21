@@ -1,8 +1,10 @@
 package com.bestsoft.ui.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,17 +32,19 @@ import java.util.List;
  * @date:2018/11/13
  * @description:筛选弹框
  **/
-public class  FiltPopuWindow extends PopupWindow {
+public class FiltPopuWindow extends PopupWindow {
     public FiltPopuWindow(Context context, View view) {
         //这里可以修改popupwindow的宽高
-        super(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        super(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         setContentView(view);
         initViews();
     }
 
     private void initViews() {
         setAnimationStyle(R.style.popwin_anim_style);
-        //setBackgroundDrawable(new ColorDrawable(0x00000000));
+        ColorDrawable dw = new ColorDrawable(0x60000000);
+        setBackgroundDrawable(dw);
+
         setFocusable(true);
         setOutsideTouchable(true);
     }
@@ -51,7 +56,7 @@ public class  FiltPopuWindow extends PopupWindow {
         private GridLayout rootGridLayout;
         private LinearLayout contextll;
         //背景颜色
-        private int colorBg = Color.parseColor("#F8F8F8");
+        private int colorBg = Color.parseColor("#FFFFFF");
         private int tabTextSize = 14;//SP
 
         private OnCloseListener listener;
@@ -106,7 +111,6 @@ public class  FiltPopuWindow extends PopupWindow {
                 public void onClick(View v) {
                     if (mFiltPopuWindow != null) {
                         mFiltPopuWindow.dismiss();
-                        //点击外部消失
                     }
                 }
             });
