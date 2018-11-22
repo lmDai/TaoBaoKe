@@ -77,7 +77,7 @@ public interface TaoBaoKeService {
     //会员注册
     @POST(TaoBaoKeApi.USER_REGISTER)
     @FormUrlEncoded
-    Observable<BaseNoDataResponse> userRegister(@FieldMap Map<String, Object> map);
+    Observable<BaseResponse<UserModel>> userRegister(@FieldMap Map<String, Object> map);
 
     //类目商品列表
     @POST(TaoBaoKeApi.HAO_LIST)
@@ -225,4 +225,9 @@ public interface TaoBaoKeService {
     @POST(TaoBaoKeApi.BIND_THIRD)
     @FormUrlEncoded
     Observable<BaseResponse<String>> bindThrid(@FieldMap Map<String, Object> map);
+
+    //解绑支付宝
+    @POST(TaoBaoKeApi.UNTYING_ALIPAY)
+    @FormUrlEncoded
+    Observable<BaseNoDataResponse> untyingAlipay(@FieldMap Map<String, Object> map);
 }

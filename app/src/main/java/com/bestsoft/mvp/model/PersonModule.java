@@ -124,4 +124,12 @@ public class PersonModule {
         Observable<BaseResponse<WithDrawModel>> withdrawApply = mApiService.withdrawApply(requestMap);
         return withdrawApply;
     }
+
+    public Observable<BaseNoDataResponse> untyingAlipay(String user_id, String user_channel_id) {
+        Map<String, Object> requestMap = InterceptUtils.getRequstMap();
+        requestMap.put("user_id", user_id);
+        requestMap.put("user_channel_id", user_channel_id);
+        Observable<BaseNoDataResponse> untyingAlipay = mApiService.untyingAlipay(requestMap);
+        return untyingAlipay;
+    }
 }

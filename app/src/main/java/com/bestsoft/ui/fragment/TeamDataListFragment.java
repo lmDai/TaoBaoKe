@@ -67,7 +67,7 @@ public class TeamDataListFragment extends BaseMvpFragment<TeamOrderContract.View
         teamDataAdapter = new TeamDataListAdapter(R.layout.item_team_data);
         if (order_type == 1)
             addHeader();//添加头部
-        RecyclerViewUtils.initLinerLayoutRecyclerViewPadding(recyclerView, mContext);
+        RecyclerViewUtils.initHeaderRecyclerView(recyclerView, mContext);
         recyclerView.setAdapter(teamDataAdapter);
     }
 

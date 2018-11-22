@@ -2,27 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_search"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/dp_100"
     android:layout_gravity="center|top"
-    android:layout_marginBottom="@dimen/dp_10"
-    android:layout_marginLeft="@dimen/dp_32"
-    android:layout_marginRight="@dimen/dp_32"
-    android:background="@drawable/bg_round_white_30"
-    android:elevation="@dimen/dp_6"
-    android:translationZ="@dimen/dp_10"
-    android:layout_marginTop="-5dp"
+    android:layout_marginTop="-30dp"
+
+    android:background="@drawable/bg_edit_search"
     android:gravity="center"
-    android:minHeight="@dimen/dp_20"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingBottom="-30dp">
 
     <TextView
         android:id="@+id/txt_search"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:drawableRight="@drawable/ic_search"
+        android:gravity="center|start"
         android:hint="搜到你意想不到的优惠"
-        android:padding="@dimen/dp_14"
+        android:paddingLeft="@dimen/dp_44"
+        android:paddingRight="@dimen/dp_44"
+        android:paddingBottom="@dimen/dp_5"
         android:textColor="@color/text_toolbar_title"
         android:textSize="@dimen/sp_18" />
 

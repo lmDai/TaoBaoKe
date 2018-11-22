@@ -101,6 +101,7 @@
                             android:textSize="@dimen/sp_18" />
 
                         <Button
+                            android:id="@+id/btn_copy"
                             android:layout_width="@dimen/dp_60"
                             android:layout_height="@dimen/dp_28"
                             android:layout_marginLeft="@dimen/dp_10"

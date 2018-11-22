@@ -1,5 +1,6 @@
 package com.bestsoft.mvp.contract;
 
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.BasePresenter;
 import com.bestsoft.common.https.IBaseView;
@@ -12,7 +13,7 @@ import com.bestsoft.common.https.IBaseView;
  **/
 public interface RegisterContract {
     interface View extends IBaseView {
-        void registerSuccess(BaseNoDataResponse result);
+        void registerSuccess(UserModel result);
     }
 
     abstract class Presenter extends BasePresenter<View> {

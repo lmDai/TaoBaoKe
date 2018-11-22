@@ -75,4 +75,6 @@ public class TaoBaoKeApi {
     public final static String GOODS_SHARE="app/goods/share";
     //第三方绑定
     public final static String BIND_THIRD="app/user/binding-third";
+    //解绑支付宝
+    public final static String UNTYING_ALIPAY="app/user/untying-alipay";
 }

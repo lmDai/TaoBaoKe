@@ -1,6 +1,8 @@
 package com.bestsoft.ui.adapter;
 
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.widget.LinearLayout;
 
 import com.bestsoft.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -23,6 +25,12 @@ public class FastEntranceAdapter extends BaseQuickAdapter<String, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
+        LinearLayout linearLayout = helper.getView(R.id.ll_new_seed_item);
+        if (item.equals("0")) {
+            linearLayout.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_fast_entrace_1));
+        } else {
+            linearLayout.setBackground(ContextCompat.getDrawable(mContext, R.drawable.bg_fast_entrace_2));
+        }
 
     }
 }

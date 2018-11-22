@@ -58,6 +58,8 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
     RecyclerView recyclerEntrance;
     @BindView(R.id.txt_vip)
     TextView txtVip;
+    @BindView(R.id.txt_info)
+    TextView txtInfo;
 
     @Override
     protected int getLayout() {
@@ -113,6 +115,12 @@ public class MemberActivity extends BaseMvpActivity<UpgradeContract.View, Upgrad
         txtLevelName.setText(models.getLevel_name());
         btnUpgrade.setText("开通" + models.getUpgrade_level_name());
         txtVip.setText("升级至" + models.getUpgrade_level_name() + "每月权益预估");
+        if (userModel.getLevel() == 1) {
+            txtInfo.setVisibility(View.VISIBLE);
+            txtInfo.setText("（提示：未升级为" + models.getUpgrade_level_name() + "之前不显示订单）");
+        } else {
+            txtInfo.setVisibility(View.GONE);
+        }
     }
 
     @Override

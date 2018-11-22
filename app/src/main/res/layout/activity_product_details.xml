@@ -11,7 +11,7 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/dp_60"
+        android:paddingBottom="@dimen/dp_48"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlEnablePureScrollMode="true">
 
@@ -29,7 +29,7 @@
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_230"
+                    android:layout_height="@dimen/dp_260"
                     app:indicator_drawable_selected="@color/item_fan_in"
                     app:indicator_drawable_unselected="@android:color/white"
                     app:indicator_height="@dimen/dp_4"
@@ -340,33 +340,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorWhite"
-        android:padding="@dimen/dp_5">
+        android:background="@color/colorWhite">
 
         <LinearLayout
             android:layout_width="@dimen/dp_60"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/dp_2">
 
             <ImageView
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
                 android:src="@drawable/ic_zhanwei_potential_img" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="收藏"
-                android:textSize="@dimen/sp_14" />
+                android:text="首页"
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="@dimen/dp_60"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/dp_25"
@@ -384,7 +385,8 @@
         <Button
             android:id="@+id/btn_buy"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/bg_toolbar"
             android:text="立即购买"
@@ -393,7 +395,8 @@
         <Button
             android:id="@+id/btn_share"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/bg_share"
             android:text="分享赚钱"

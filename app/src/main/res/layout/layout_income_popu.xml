@@ -15,7 +15,7 @@
             android:id="@+id/tag_income"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:item_background="@drawable/tag_layer"
+            app:item_background="@drawable/bg_gray_stroke"
             app:item_bottomMargin="@dimen/dp_10"
             app:item_bottomPadding="@dimen/dp_8"
             app:item_leftMargin="@dimen/dp_6"

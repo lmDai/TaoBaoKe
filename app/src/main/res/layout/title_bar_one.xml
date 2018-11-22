@@ -13,7 +13,7 @@
         android:background="@drawable/bg_toolbar"
         app:contentInsetStart="0dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|start"
@@ -23,13 +23,15 @@
                 android:id="@+id/img_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_me" />
 
             <TextView
                 android:id="@+id/txt_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:cursorVisible="false"
@@ -43,7 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_10"
-                android:src="@drawable/ic_message" />
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_message"
+                android:visibility="gone" />
+        </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>

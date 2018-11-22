@@ -59,7 +59,7 @@ public class OrderListFragment extends BaseMvpFragment<OrderListContract.View, O
         }
         orderAdapter = new OrderListAdapter(R.layout.item_order, tag);
         addHeader();//添加头部
-        RecyclerViewUtils.initLinerLayoutRecyclerView(recyclerView, mContext);
+        RecyclerViewUtils.initHeaderRecyclerView(recyclerView, mContext);
         recyclerView.setAdapter(orderAdapter);
     }
 
@@ -98,5 +98,10 @@ public class OrderListFragment extends BaseMvpFragment<OrderListContract.View, O
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

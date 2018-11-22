@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ali.auth.third.login.callback.LogoutCallback;
+import com.ali.auth.third.ui.context.CallbackContext;
 import com.alibaba.baichuan.android.trade.adapter.login.AlibcLogin;
 import com.alibaba.baichuan.android.trade.callback.AlibcLoginCallback;
 import com.bestsoft.Constant;
@@ -25,6 +27,7 @@ import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.UserModel;
 import com.bestsoft.bean.VersionModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
+import com.bestsoft.common.https.rxUtils.RxEvent;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.PersonalContract;
 import com.bestsoft.mvp.presenter.PersonalPresenter;
@@ -45,6 +48,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 import com.yanzhenjie.permission.Setting;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -138,6 +143,7 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
             case R.id.ll_share:
                 break;
             case R.id.ll_auth:
+                login();
                 break;
             case R.id.ll_alypay:
                 IntentUtils.get().goActivity(mContext, MyAliPayActivity.class);
@@ -217,6 +223,7 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
                     btnSwitch.setChecked(false);
                     userModel.setSettingtaobao(2);
                     MyApplication.mApplication.setUserModel(userModel);
+                    EventBus.getDefault().post(new RxEvent(1, Constant.UPDATE_USER));
                 }
             });
         } else {
@@ -230,7 +237,7 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
             @Override
             public void onSuccess() {
                 LogUtils.i("onSuccess: ");
-                getMvpPresenter().userSettingTaobao(userModel.getId(), userModel.getUser_channel_id());
+//                getMvpPresenter().userSettingTaobao(userModel.getId(), userModel.getUser_channel_id());
             }
 
             @Override
@@ -243,5 +250,10 @@ public class PersonalActivity extends BaseMvpActivity<PersonalContract.View, Per
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        CallbackContext.onActivityResult(requestCode, resultCode, data);
     }
 }

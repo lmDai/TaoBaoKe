@@ -100,12 +100,8 @@ public class CircleCenterFragment extends BaseMvpFragment<ShareAticleContract.Vi
                         public void onClick(boolean confirm, int type) {
                             if (confirm) {
                                 Platform.ShareParams sp = new Platform.ShareParams();
-                                sp.setTitle(null);
-                                sp.setTitleUrl(circleAdapter.getData().get(position).getShare_img()); // 标题的超链接
-                                sp.setText(null);
                                 sp.setImageUrl(circleAdapter.getData().get(position).getShare_img());
-                                sp.setSite(null);
-                                sp.setSiteUrl(null);
+                                sp.setShareType(Platform.SHARE_IMAGE);
                                 Platform platform = null;
                                 switch (type) {
                                     case 1:

@@ -58,7 +58,7 @@ public class LoginModel {
         return codeInfo;
     }
 
-    public Observable<BaseNoDataResponse> userRegister(String nickName,String headimgurl,String openid,String type,String phone, String smscode, String user_chanel_id, String pid) {
+    public Observable<BaseResponse<UserModel>> userRegister(String nickName,String headimgurl,String openid,String type,String phone, String smscode, String user_chanel_id, String pid) {
         Map<String, Object> requestMap = InterceptUtils.getRequstMap();
         requestMap.put("phone", phone);
         requestMap.put("smscode", smscode);
@@ -67,7 +67,7 @@ public class LoginModel {
         requestMap.put("headimgurl", headimgurl);
         requestMap.put("openid", openid);
         requestMap.put("type", type);
-        Observable<BaseNoDataResponse> register = mApiService.userRegister(requestMap);
+        Observable<BaseResponse<UserModel>> register = mApiService.userRegister(requestMap);
         return register;
     }
 

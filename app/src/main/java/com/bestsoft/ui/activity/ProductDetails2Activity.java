@@ -140,6 +140,7 @@ public class ProductDetails2Activity extends BaseMvpActivity<GoodsShareContract.
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
+                finish();
                 break;
             case R.id.txt_copy:
                 ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);

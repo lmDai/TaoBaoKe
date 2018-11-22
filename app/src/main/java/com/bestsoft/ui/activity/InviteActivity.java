@@ -1,5 +1,7 @@
 package com.bestsoft.ui.activity;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
@@ -12,10 +14,8 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bestsoft.R;
-import com.bestsoft.base.BaseActivity;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.RuleModel;
-import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.ShareInviteContract;
 import com.bestsoft.mvp.model.ShareInviteTempModel;
@@ -28,6 +28,7 @@ import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.RecyclerViewUtils;
 import com.bestsoft.utils.ShareDialogListener;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -148,7 +149,7 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
         });
     }
 
-    @OnClick({R.id.img_me, R.id.img_message, R.id.btn_share})
+    @OnClick({R.id.img_me, R.id.img_message, R.id.btn_share, R.id.btn_copy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_me:
@@ -168,10 +169,10 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
                             sp.setShareType(Platform.SHARE_IMAGE);
                             Platform platform = null;
                             switch (type) {
-                                case 1:
+                                case 2:
                                     platform = ShareSDK.getPlatform(WechatMoments.NAME);
                                     break;
-                                case 2:
+                                case 1:
                                     platform = ShareSDK.getPlatform(Wechat.NAME);
                                     break;
                                 case 3:
@@ -203,6 +204,12 @@ public class InviteActivity extends BaseMvpActivity<ShareInviteContract.View, Sh
                         }
                     }
                 });
+                break;
+            case R.id.btn_copy:
+                ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                // 将文本内容放到系统剪贴板里。
+                cm.setText(userModel.getInvite_code());
+                ToastUtils.showShort("复制成功");
                 break;
         }
     }

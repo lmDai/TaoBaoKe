@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -349,23 +350,32 @@ public class GlideUtil {
      */
     public static void loadRoundImage(final Context context, String url,
                                       final int radius, final ImageView imageView) {
+//        Glide.with(context)
+//                .load(url)
+//                .asBitmap()
+//                .placeholder(R.drawable.ic_zhanwei_product)
+//                .error(R.drawable.ic_zhanwei_product)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+//                .into(new BitmapImageViewTarget(imageView) {
+//                    @Override
+//                    protected void setResource(Bitmap resource) {
+//                        super.setResource(resource);
+//
+//                        RoundedBitmapDrawable circularBitmapDrawable =
+//                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+//                        circularBitmapDrawable.setCornerRadius(radius); //设置圆角弧度
+//                        imageView.setImageDrawable(circularBitmapDrawable);
+//                    }
+//                });
         Glide.with(context)
                 .load(url)
-                .asBitmap()
                 .placeholder(R.drawable.ic_zhanwei_product)
                 .error(R.drawable.ic_zhanwei_product)
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
-                .into(new BitmapImageViewTarget(imageView) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        super.setResource(resource);
+                //.centerCrop() 千万不要加，加了就没有圆角效果了
+                .transform(new CenterCrop(context), new GlideRoundTransform(context, 10))
+                .into(imageView);
 
-                        RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                        circularBitmapDrawable.setCornerRadius(radius); //设置圆角弧度
-                        imageView.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
     }
 
     /**

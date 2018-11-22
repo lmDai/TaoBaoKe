@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bestsoft.utils.GlideUtil;
+import com.blankj.utilcode.util.SizeUtils;
 import com.youth.banner.loader.ImageLoader;
 
 /**
@@ -15,6 +16,6 @@ import com.youth.banner.loader.ImageLoader;
 public class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        GlideUtil.into(context.getApplicationContext(), (String) path, imageView);
+        GlideUtil.loadRoundImage(context, (String) path, SizeUtils.dp2px(10), imageView);
     }
 }

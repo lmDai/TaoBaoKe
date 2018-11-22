@@ -40,23 +40,26 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_round_white"
                         android:orientation="vertical">
-                        <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/recycler_home"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@drawable/bg_round_white"-->
-                        <!--android:overScrollMode="never" />-->
+
                         <include layout="@layout/layout_home_title" />
 
                         <include layout="@layout/layout_home_search" />
 
                         <include layout="@layout/layout_menu" />
 
-                        <include layout="@layout/layout_home_banner" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dp_20"
+                            android:paddingRight="@dimen/dp_20">
 
-                        <include layout="@layout/base_view_title" />
+                            <include layout="@layout/layout_home_banner" />
 
-                        <include layout="@layout/layout_home_entrace" />
+                            <include layout="@layout/base_view_title" />
+
+                            <include layout="@layout/layout_home_entrace" />
+                        </LinearLayout>
                     </LinearLayout>
                 </android.support.design.widget.CollapsingToolbarLayout>
 

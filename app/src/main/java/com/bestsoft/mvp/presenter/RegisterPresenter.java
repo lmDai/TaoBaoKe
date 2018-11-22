@@ -1,5 +1,6 @@
 package com.bestsoft.mvp.presenter;
 
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.https.ProgressObserver;
 import com.bestsoft.common.https.rxUtils.RxUtil;
@@ -19,10 +20,10 @@ public class RegisterPresenter extends RegisterContract.Presenter {
     public void userRegister(String nickName,String headimgurl,String openid,String type,String phone, String smscode, String user_chanel_id, String pid) {
         LoginModel.getInstance(Utils.getContext()).userRegister(nickName,headimgurl,openid,type,phone, smscode, user_chanel_id, pid)
                 .compose(RxUtil.observableIO2Main(getView()))
-                .compose(RxUtil.handNoResponseResult())
-                .subscribe(new ProgressObserver<BaseNoDataResponse>(this, true, "请稍后...") {
+                .compose(RxUtil.hanResult())
+                .subscribe(new ProgressObserver<UserModel>(this, true, "请稍后...") {
                     @Override
-                    public void onSuccess(BaseNoDataResponse result) {
+                    public void onSuccess(UserModel result) {
                         getView().registerSuccess(result);//注册成功
                     }
                 });

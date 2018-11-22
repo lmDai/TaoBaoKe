@@ -5,18 +5,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bestsoft.Constant;
 import com.bestsoft.MainActivity;
+import com.bestsoft.MyApplication;
 import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.CodeModel;
+import com.bestsoft.bean.UserModel;
 import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.RegisterContract;
 import com.bestsoft.mvp.presenter.RegisterPresenter;
 import com.bestsoft.ui.widget.VerifyCodeView;
 import com.bestsoft.utils.IntentUtils;
+import com.bestsoft.utils.SpUtils;
 import com.blankj.utilcode.util.ToastUtils;
-
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -109,11 +112,10 @@ public class InputCodeActivity extends BaseMvpActivity<RegisterContract.View, Re
     }
 
     @Override
-    public void registerSuccess(BaseNoDataResponse result) {
-        ToastUtils.showShort(result.getMsg());
-        if (result.getErrorcode() == 0) {
-            IntentUtils.get().goActivityKill(mContext, LoginActivity.class);
-        }
+    public void registerSuccess(UserModel result) {
+        SpUtils.setParam(mContext, Constant.isLOGIN, true);
+        MyApplication.mApplication.setUserModel(userModel);
+        IntentUtils.get().goActivityKill(mContext, MainActivity.class);//手机号登录
     }
 
     @Override

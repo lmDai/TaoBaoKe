@@ -182,17 +182,21 @@ public class ProductDetailsActivity extends BaseMvpActivity<ProductDetailsContra
 
     @OnClick({R.id.img_back, R.id.txt_confirm, R.id.btn_buy, R.id.btn_share})
     public void onViewClicked(View view) {
+        String pic = result.getItem_pic() == null ? "" : result.getItem_pic().get(0);
         switch (view.getId()) {
             case R.id.img_back:
                 finish();
                 break;
             case R.id.txt_confirm:
-                type = 0;
-                openTaoBao();
+//                type = 0;
+//                openTaoBao();
+
+                getMvpPresenter().orderConfirm(result.getItem_id(), pic, result.getItem_title(), result.getItem_price()
+                        , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
+                        , result.getCouponmoney());
                 break;
             case R.id.btn_buy:
-                type = 1;
-                String pic = result.getItem_pic() == null ? "" : result.getItem_pic().get(0);
+//                type = 1;
                 getMvpPresenter().orderConfirm(result.getItem_id(), pic, result.getItem_title(), result.getItem_price()
                         , result.getItem_end_price(), result.getTkrates(), result.getTkmoney() + "", userModel.getId(), userModel.getUser_channel_id()
                         , result.getCouponmoney());

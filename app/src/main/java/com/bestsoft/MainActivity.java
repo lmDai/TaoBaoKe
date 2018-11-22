@@ -11,10 +11,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bestsoft.base.BaseActivity;
+import com.bestsoft.ui.activity.MemberActivity;
 import com.bestsoft.ui.fragment.HomeFragment;
 import com.bestsoft.ui.fragment.OrderFragment;
 import com.bestsoft.ui.fragment.SkillFragment;
 import com.bestsoft.utils.AppManager;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.ArrayList;
@@ -81,6 +83,10 @@ public class MainActivity extends BaseActivity {
                 onPageSelected(0);
                 break;
             case R.id.txt_order:
+                if (userModel.getLevel() == 1) {
+                    ActivityUtils.startActivity(MemberActivity.class);
+                    return;
+                }
                 onPageSelected(1);
                 break;
             case R.id.txt_skill:

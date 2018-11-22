@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.youth.banner.Banner xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/banner"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:orientation="horizontal">
+    android:layout_height="@dimen/dp_120"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/bg_round_white"
+    app:banner_layout="@layout/banner_custom_viewpager"
+    app:indicator_drawable_selected="@drawable/bg_indecator_selected"
+    app:indicator_drawable_unselected="@drawable/bg_indecator_unselected"
+    app:indicator_margin="@dimen/dp_4" />
 
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
-        android:layout_marginTop="@dimen/dp_10"
-        app:banner_layout="@layout/banner_custom_viewpager"
-        app:indicator_drawable_selected="@drawable/bg_indecator_selected"
-        app:indicator_drawable_unselected="@drawable/bg_indecator_unselected"
-        app:indicator_margin="@dimen/dp_4" />
-
-</LinearLayout>

@@ -9,7 +9,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,12 +20,9 @@ import com.bestsoft.R;
 import com.bestsoft.base.BaseMvpActivity;
 import com.bestsoft.bean.ThirdLoginModel;
 import com.bestsoft.bean.UserModel;
-import com.bestsoft.common.https.BaseNoDataResponse;
 import com.bestsoft.common.mvp_senior.annotaions.CreatePresenterAnnotation;
 import com.bestsoft.mvp.contract.LoginContract;
-import com.bestsoft.mvp.contract.PhoneLoginContract;
 import com.bestsoft.mvp.presenter.LoginPresenter;
-import com.bestsoft.mvp.presenter.PhoneLoginPresenter;
 import com.bestsoft.utils.DialogListener;
 import com.bestsoft.utils.DialogUtils;
 import com.bestsoft.utils.IntentUtils;
@@ -40,11 +36,10 @@ import com.yanzhenjie.permission.Permission;
 import com.yanzhenjie.permission.Setting;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
@@ -56,30 +51,33 @@ import io.reactivex.annotations.NonNull;
 @CreatePresenterAnnotation(LoginPresenter.class)
 public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
+    @BindView(R.id.top_view)
+    View topView;
     @BindView(R.id.txt_info)
     TextView txtInfo;
+    @BindView(R.id.view_center)
+    View viewCenter;
     @BindView(R.id.btn_wechat_login)
     Button btnWechatLogin;
-    @BindView(R.id.txt_cannot_login)
-    TextView txtCannotLogin;
-    @BindView(R.id.ll_wechat)
-    LinearLayout llWechat;
-    @BindView(R.id.txt_qq)
-    TextView txtQq;
+    @BindView(R.id.txt_wechat)
+    TextView txtWechat;
+    @BindView(R.id.ll_wechat_login)
+    LinearLayout llWechatLogin;
     @BindView(R.id.txt_phone)
     TextView txtPhone;
+    @BindView(R.id.ll_phone)
+    LinearLayout llPhone;
+    @BindView(R.id.txt_qq)
+    TextView txtQq;
+    @BindView(R.id.ll_qq)
+    LinearLayout llQq;
     @BindView(R.id.ll_other)
     LinearLayout llOther;
-    @BindView(R.id.txt_other)
-    TextView txtOther;
-    @BindView(R.id.img_down)
-    ImageButton imgDown;
-    @BindView(R.id.ll_arrow)
-    LinearLayout llArrow;
     public static String type = "";//wechat，qq
     public static String unionid = "";
     public static String nickName = "";
     public static String headimgurl = "";
+
 
     @Override
     protected int getLayout() {
@@ -88,8 +86,7 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        txtCannotLogin.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-        txtCannotLogin.getPaint().setAntiAlias(true);//抗锯齿
+
         requestPermission(Permission.READ_PHONE_STATE, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE);
         if ((boolean) SpUtils.getParam(mContext, Constant.isLOGIN, false)) {
             IntentUtils.get().goActivityKill(mContext, MainActivity.class);
@@ -173,15 +170,15 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                 .init();
     }
 
-    @OnClick({R.id.btn_wechat_login, R.id.ll_qq, R.id.ll_phone, R.id.txt_other, R.id.img_down})
+    @OnClick({R.id.ll_wechat_login, R.id.ll_qq, R.id.ll_phone, R.id.btn_wechat_login})
     public void onViewClicked(View view) {
         Platform plat = null;
         switch (view.getId()) {
-            case R.id.btn_wechat_login:
+            case R.id.ll_wechat_login:
                 plat = ShareSDK.getPlatform(Wechat.NAME);
-                if (plat.isAuthValid()) {
-                    plat.removeAccount(true);
-                }
+//                if (plat.isAuthValid()) {
+//                    plat.removeAccount(true);
+//                }
                 plat.SSOSetting(true);
                 plat.setPlatformActionListener(new PlatformActionListener() {
                     @Override
@@ -220,9 +217,9 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                 break;
             case R.id.ll_qq:
                 plat = ShareSDK.getPlatform(QQ.NAME);
-                if (plat.isAuthValid()) {
-                    plat.removeAccount(true);
-                }
+//                if (plat.isAuthValid()) {
+//                    plat.removeAccount(true);
+//                }
                 plat.SSOSetting(true);
                 plat.setPlatformActionListener(new PlatformActionListener() {
                     @Override
@@ -239,11 +236,9 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                                     getMvpPresenter().thirdLogin(type, unionid, userModel.getId(), userModel.getUser_channel_id());
                                 } else {
                                     getMvpPresenter().thirdLogin(type, unionid, "", "");
-
                                 }
                             }
                         });
-
                     }
 
                     @Override
@@ -257,27 +252,12 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
                     }
                 });
                 plat.showUser(null);
-
                 break;
             case R.id.ll_phone:
                 IntentUtils.get().goActivity(mContext, PhoneLoginActivity.class);//手机号登录
                 break;
-            case R.id.txt_other:
-
-                break;
-            case R.id.img_down:
-                if (llWechat.getVisibility() == View.VISIBLE) {
-                    llWechat.setVisibility(View.GONE);
-                    llOther.setVisibility(View.VISIBLE);
-                    imgDown.setImageResource(R.drawable.ic_up);
-                    String html = "登录既代表你同意<u><font color='#FFC72F'>巨折使用条款</u>";
-                    txtOther.setText(Html.fromHtml(html));
-                } else {
-                    llWechat.setVisibility(View.VISIBLE);
-                    llOther.setVisibility(View.GONE);
-                    imgDown.setImageResource(R.drawable.ic_down);
-                    txtOther.setText("其他登录方式");
-                }
+            case R.id.btn_wechat_login:
+                IntentUtils.get().goActivity(mContext, InputInvateInfoActivity.class);//注册页面
                 break;
         }
     }
@@ -292,7 +272,6 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
             MyApplication.mApplication.setUserModel(user);
             IntentUtils.get().goActivityKill(mContext, MainActivity.class);//手机号登录
         }
-
     }
 
     public void showRegisterDialog() {
@@ -305,5 +284,12 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.View, LoginPres
             }
         });
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

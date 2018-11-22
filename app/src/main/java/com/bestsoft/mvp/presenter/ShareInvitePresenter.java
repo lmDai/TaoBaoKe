@@ -23,7 +23,7 @@ public class ShareInvitePresenter extends ShareInviteContract.Presenter {
         PersonModule.getInstance(Utils.getContext()).shareInviteTemp(user_id, user_channel_id)
                 .compose(RxUtil.observableIO2Main(getView()))
                 .compose(RxUtil.hanResult())
-                .subscribe(new ProgressObserver<List<ShareInviteTempModel>>(this, true, "请稍候...") {
+                .subscribe(new ProgressObserver<List<ShareInviteTempModel>>(this, false, "请稍候...") {
                     @Override
                     public void onSuccess(List<ShareInviteTempModel> result) {
                         getView().shareInviteTemp(result);
